@@ -10,22 +10,23 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.example.demo.model.Book;
+import com.example.demo.mapper.Booksql;
 
 @Mapper
 public interface BookMapper {
 
-	@Select("SELECT * FROM book WHERE BookId=#{id}")
+	@Select(Booksql.SELECT_BOOK)
 	Book getBook(@Param("id") String id);
 	
-	@Select("SELECT * FROM book")
+	@Select(Booksql.SELECT_BOOK_ALL)
 	List<Book> getBookList();
 	
-	@Insert("INSERT INTO book VALUES(#{id}, #{bookName}, #{author}, #{genre}, true, true, NULL, NULL, NULL, 3)")
+	@Insert(Booksql.INSERT_BOOK)
 	int insertBook(@Param("id") String id,@Param("bookName") String bookName, @Param("author") String Author, @Param("genre") int genre);
 	
-	@Update("UPDATE book SET BookId=#{id}, BookName=#{bookName},BookAuthor =#{author}, BookGenre = #{genre} WHERE BookId= #{id}")
+	@Update(Booksql.UPDATE_BOOK)
 	int updateBook(@Param("id") String id,@Param("bookName") String bookName, @Param("author") String Author, @Param("genre") int genre);
 	
-	@Delete("DELETE FROM book WHERE BookId=#{id}")
+	@Delete(Booksql.DELETE_BOOK)
 	int deleteBook(@Param("id") String id);
 }
