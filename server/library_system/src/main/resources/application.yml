@@ -6,4 +6,5 @@ spring:
     password: a123456
 
 mybatis:
+  type-aliases-package: com.example.demo.mapper
   mapper-locations: mapper/*.xml
