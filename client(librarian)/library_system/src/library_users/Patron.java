@@ -1,11 +1,10 @@
 package library_users;
 import java.util.ArrayList;
-import java.util.Date;
 
 // 도서관 이용자 : Patron
+// 도서관 이용자 클래스
+// @건아
 public class Patron extends Users{
-	// Patron 필드
-	// private Date birth;							// 생년월일
 	
 	private int borrowedCount;						// 대출한 도서 수
 	private ArrayList<String> borrowedBook;			// 대출한 도서 목록 (도서 id(String))
@@ -34,8 +33,6 @@ public class Patron extends Users{
 	}
 	
 	// 사용자 정보(상태) 가져오기 메소드 ==============================================================================
-	public String getName() 					{return name;}				// 이름 반환 
-	public String getId() 						{return id;}				// id 반환
 	public int getBorrowdNum() 					{return borrowedCount;}		// 대출한 도서 수 반환 
 	public int getReservedNum() 				{return reservedCount;}		// 예약한 도서 수 반환
 	public ArrayList<String> getBorrowedBook()	{return borrowedBook;}		// 대출한 도서 반환
