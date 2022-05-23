@@ -1,5 +1,7 @@
 package com.example.demo.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -13,5 +15,5 @@ public interface UserMapper {
 	User Login(@Param("userEmail") String userEmail, @Param("password") String password);
 	
 	@Select(Usersql.GET_BORROWED_LIST)
-	Book getBorrowedBook(@Param("userName") String userName);
+	List<Book> getBorrowedBook(@Param("userName") String userName);
 }
