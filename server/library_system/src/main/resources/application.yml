@@ -1,10 +1,17 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url:  jdbc:mysql://localhost:3306/librarysystem?serverTimezone=Asia/Seoul
+    url:  jdbc:mysql://librarydb.csajpcjqomkl.ap-northeast-2.rds.amazonaws.com:3306/librarySystem?serverTimezone=Asia/Seoul
     username: root
-    password: a123456
+    password: a123456789
 
 mybatis:
   type-aliases-package: com.example.demo.mapper
   mapper-locations: mapper/*.xml
+  
+server:
+  port: 5000
+  servlet:
+    encoding:
+      charset: UTF-8
+      force: true
