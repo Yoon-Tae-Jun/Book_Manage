@@ -10,10 +10,7 @@ public class GuiLibraryDesk extends JFrame{
 	
 	//컨포넌트
 	
-	// GUI test
-	public static void main(String[] args) {
-		new GuiLibraryDesk("cse Library");
-	}
+
 	
 	// main ------------------------------------------------------------------------------------------------------------
 	public GuiLibraryDesk(String libraryName) {
@@ -105,9 +102,9 @@ public class GuiLibraryDesk extends JFrame{
 		
 		return panel;
 	}
-	private JPanel west_box() {
-		
-	}
+//	private JPanel west_box() {
+//		
+//	}
 	// center_box --------------------------------------------------------------------------------------------------------
 	private JPanel center_box_B() {
 		int width = 780;
@@ -123,9 +120,9 @@ public class GuiLibraryDesk extends JFrame{
 		
 		return panel;
 	}
-	private JPanel center_box() {
-		
-	}
+//	private JPanel center_box() {
+//		
+//	}
 	// EmptyPanel --------------------------------------------------------------------------------------------------------
 	private JPanel EmptyPanel() {
 		JPanel panel = new JPanel();

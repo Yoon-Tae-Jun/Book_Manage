@@ -63,7 +63,7 @@ public class GuiLoginPage extends JFrame {
 		LeftBox.add(EmptyPanel());
 		LeftBox.add(EmptyPanel());
 		LeftBox.add(login_Button);
-		login_Button.addActionListener(new Login_EventListener(email_Text, password_Text, error_Text));
+		login_Button.addActionListener(new Login_EventListener(this ));
 		return LeftBox;
 	}
 	
@@ -105,7 +105,24 @@ public class GuiLoginPage extends JFrame {
 		EmptyPanel.setBackground(null);
 		return EmptyPanel;
 	}
+
 	
+	public String getLibraryName() {
+		return libraryName;
+	}
+
+	public JTextField getEmail_Text() {
+		return email_Text;
+	}
+
+	public JTextField getPassword_Text() {
+		return password_Text;
+	}
+
+	public JLabel getError_Text() {
+		return error_Text;
+	}
+
 
 
 }

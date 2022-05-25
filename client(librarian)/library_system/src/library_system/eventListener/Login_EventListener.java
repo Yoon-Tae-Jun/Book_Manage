@@ -15,18 +15,18 @@ import javax.swing.JTextField;
 import org.json.simple.JSONObject;
 
 import API.*;
+import library_system.LibraryDesk;
+import library_system.layout.GuiLibraryDesk;
+import library_system.layout.GuiLoginPage;
 import library_users.Users;
 
 public class Login_EventListener implements ActionListener {
 	
-	private JTextField email;
-	private JTextField password;
-	private JLabel error_Text;
-	public Login_EventListener(JTextField email, JTextField password, JLabel error_Text)
+
+	private GuiLoginPage mine;
+	public Login_EventListener(GuiLoginPage mine)
 	{
-		this.email = email;
-		this.password = password;
-		this.error_Text = error_Text;
+		this.mine = mine;
 	}
 	
 	@Override
@@ -41,25 +41,28 @@ public class Login_EventListener implements ActionListener {
 		
 		//파라메터 정보
 		HashMap<String, String> option = new HashMap<String, String>();
-		option.put("userEmail", email.getText());
-		option.put("password", password.getText());
+		option.put("userEmail", mine.getEmail_Text().getText());
+		option.put("password", mine.getPassword_Text().getText());
 		
 		try {
 			obj = api.POST("/login", option);
 		
 			int statusCode = Integer.parseInt(String.valueOf(obj.get("statusCode")));
+			System.out.println(statusCode);
 			if(statusCode == 200) {
 				JSONObject data = (JSONObject) obj.get("data");
 				user.setPw((String)data.get("password"));
 				user.setId((String)data.get("userEmail"));
 				user.setName((String)data.get("UserName"));
 				user.setUserType((String)data.get("userType"));
-				
+				mine.setVisible(false);
+				LibraryDesk ld = new LibraryDesk(user, mine.getLibraryName());
+				ld.run();
 			}
 			else {
 				System.out.println("login fail");
-				error_Text.setText("아이디나 비밀번호가 틀렸습니다.");
-				error_Text.setForeground(Color.RED);
+				mine.getError_Text().setText("아이디나 비밀번호가 틀렸습니다.");
+				mine.getError_Text().setForeground(Color.RED);
 			}
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block

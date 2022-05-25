@@ -1,6 +1,7 @@
 package library_system;
 import library_users.*;		// 사용자 관련 클래스들
 import library_books.*;		// 책 관련 클래스들
+import library_system.layout.GuiLibraryDesk;
 
 // 도서관리 프로그램 페이지
 public class LibraryDesk{

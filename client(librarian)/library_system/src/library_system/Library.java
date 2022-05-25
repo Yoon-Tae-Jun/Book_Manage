@@ -36,8 +36,8 @@ public class Library {
 				}
 		
 		// 2. 로그인 성공 후, 도서관리 프로그램(LibraryDesk) 실행
-		LibraryDesk ld = new LibraryDesk(userLogin, libraryName);
-		ld.run();
+		//LibraryDesk ld = new LibraryDesk(userLogin, libraryName);
+		//ld.run();
 	}
 
 	
