@@ -57,8 +57,11 @@ public class GuiLibraryDesk extends JFrame{
 		int width = 900;
 		int height = 60;
 		JPanel panel = new JPanel();
-		panel.setSize(new Dimension(width, height));						// 패널 너비 설정
+		//panel.setSize(new Dimension(width, height));						// 패널 너비 설정
+		panel.setPreferredSize(new Dimension(width, height));				// 패널 너비 설정
 		panel.setBackground(Color.YELLOW);											// 패널 배경 없애기
+		panel.setLayout(null);
+		panel.setLocation(0, 50);
 		panel.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, new Color(93, 93, 93)));	// 패널 테두리 설정
 		
 		// add()
@@ -72,9 +75,10 @@ public class GuiLibraryDesk extends JFrame{
 		JButton btn1 = new JButton(libraryName);
 		JButton btn2 = new JButton("사용자");
 		JPanel panel = new JPanel();
-		panel.setSize(new Dimension(width, height));						// 패널 너비 설정
+		//panel.setSize(new Dimension(width, height));						// 패널 너비 설정
+		panel.setPreferredSize(new Dimension(width, height));				// 패널 너비 설정
 		panel.setBackground(Color.PINK);											// 패널 배경 없애기
-		panel.setBorder(BorderFactory.createEmptyBorder(7, 7, 7, 7));	// 패널 여백 설정
+		panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));	// 패널 여백 설정
 		panel.setLayout(new GridLayout(1, 5));
 		
 		// add()
@@ -91,7 +95,8 @@ public class GuiLibraryDesk extends JFrame{
 		int width = 120;
 		int height = 460;
 		JPanel panel = new JPanel();
-		panel.setSize(new Dimension(width, height));						// 패널 너비 설정
+		//panel.setSize(new Dimension(width, height));						// 패널 크기 설정
+		panel.setPreferredSize(new Dimension(width, height));				// 패널 너비 설정
 		panel.setBackground(Color.BLUE);											// 패널 배경 없애기
 		panel.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, new Color(93, 93, 93)));	// 패널 테두리 설정
 		
@@ -108,7 +113,8 @@ public class GuiLibraryDesk extends JFrame{
 		int width = 780;
 		int height = 460;
 		JPanel panel = new JPanel();
-		panel.setSize(new Dimension(width, height));						// 패널 너비 설정
+		//panel.setSize(new Dimension(width, height));						// 패널 크기 설정
+		panel.setPreferredSize(new Dimension(width, height));				// 패널 너비 설정
 		panel.setBackground(Color.RED);											// 패널 배경 없애기
 		panel.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, new Color(93, 93, 93)));	// 패널 테두리 설정
 		
