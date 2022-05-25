@@ -13,7 +13,7 @@ public class GuiLoginPage extends JFrame {
 	private JButton login_Button = new JButton("로그인");
 	private JTextField email_Text = new JTextField("전자메일 또는 휴대폰", 30);
 	private JTextField password_Text = new JTextField("비밀번호", 20);
-	
+	private JLabel error_Text =new JLabel("어서오세요");
 	
 	//생성자
 	public GuiLoginPage(String libraryName) {
@@ -63,7 +63,7 @@ public class GuiLoginPage extends JFrame {
 		LeftBox.add(EmptyPanel());
 		LeftBox.add(EmptyPanel());
 		LeftBox.add(login_Button);
-		login_Button.addActionListener(new Login_EventListener(email_Text, password_Text));
+		login_Button.addActionListener(new Login_EventListener(email_Text, password_Text, error_Text));
 		return LeftBox;
 	}
 	
@@ -76,7 +76,7 @@ public class GuiLoginPage extends JFrame {
 		// add
 		CenterBox.add(LeftBox_1());
 		CenterBox.add(LeftBox_2());
-		CenterBox.add(new JLabel("어서오세요"));
+		CenterBox.add(error_Text);
 		CenterBox.add(email_Text);
 		CenterBox.add(password_Text);
 		CenterBox.add(LeftBox_3());

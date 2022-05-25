@@ -30,13 +30,25 @@ public class Users {
 	public String getUserType()					{return userType;}			// userType 반환
 	
 	// 사용자 정보 업데이트 메소드 ===================================================================================
-	public void updateId(String id)		{this.id = id;}
-	public void updatePw(String pw)		{this.pw = pw;}
-	
+
+	public void setId(String id) {
+		this.id = id;
+	}
+	public void setPw(String pw) {
+		this.pw = pw;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public void setUserType(String userType) {
+		this.userType = userType;
+	}
+
 	// 기타 메소드 ===============================================================================================
 	public static String numToUserType(int i) {
 		if (i == 1) return "Manager";
 		else if (i == 2) return "Librarian";
 		else return null;
 	}
+
 }

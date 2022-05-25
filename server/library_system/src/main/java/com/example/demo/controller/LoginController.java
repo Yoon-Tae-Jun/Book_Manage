@@ -27,6 +27,7 @@ public class LoginController {
 	
 	@PostMapping("/login")
 	public SingleResponse<User> login(@RequestParam("userEmail") String userEmail, @RequestParam("password") String password) {
+		System.out.println(userEmail+password);
 		User result = mapper.Login(userEmail, password);
 		if(result != null)
 		{
