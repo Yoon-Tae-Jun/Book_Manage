@@ -3,6 +3,8 @@ import library_users.*;
 import java.awt.*;
 import javax.swing.*;
 
+import library_system.layout.GuiLoginPage;
+
 import java.util.*;
 
 // 로그인 페이지
@@ -37,6 +39,7 @@ public class Library {
 		LibraryDesk ld = new LibraryDesk(userLogin, libraryName);
 		ld.run();
 	}
+
 	
 }
 
