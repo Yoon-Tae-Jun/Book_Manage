@@ -14,14 +14,12 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 public class Call_API {
-	private String URL;
+	final private String API_URL = "http://libraryserver-env.eba-yf973i6v.ap-northeast-2.elasticbeanstalk.com";
 	
-	public Call_API(String url) {
-		URL = url;
-	}
 	
 	public JSONObject GET(String parameter) throws IOException {
-		StringBuilder urlBuilder = new StringBuilder(URL+parameter);
+		
+		StringBuilder urlBuilder = new StringBuilder(API_URL+parameter);
 		URL url = new URL(urlBuilder.toString());
 		HttpURLConnection conn =(HttpURLConnection) url.openConnection();
         conn.setRequestMethod("POST");
@@ -57,7 +55,7 @@ public class Call_API {
 	}
 	
 	public JSONObject POST(String parameter,HashMap<String, String> option ) throws IOException {
-		StringBuilder urlBuilder = new StringBuilder(URL+parameter);
+		StringBuilder urlBuilder = new StringBuilder(API_URL+parameter);
 		URL url = new URL(urlBuilder.toString());
 		HttpURLConnection conn =(HttpURLConnection) url.openConnection();
         conn.setRequestMethod("POST");

@@ -1,7 +1,6 @@
 package com.example.demo.model;
 
 public class Book {
-
 	private String BookId;
 	private String BookName;
 	private String BookAuthor;
@@ -9,13 +8,21 @@ public class Book {
 	private boolean isLoan;
 	private boolean isReserve;
 	private String ownUser;
-	public Book(String bookId, String bookName, String bookAuthor, int bookGenre) {
+	private String ImageURL;
+
+	public Book(String BookId, String BookName, String BookAuthor, int BookGenre, boolean isLoan, boolean isReserve,
+			String ownUser, String ImageURL) {
 		super();
-		BookId = bookId;
-		BookName = bookName;
-		BookAuthor = bookAuthor;
-		BookGenre = bookGenre;
+		this.BookId = BookId;
+		this.BookName = BookName;
+		this.BookAuthor = BookAuthor;
+		this.BookGenre = BookGenre;
+		this.isLoan = isLoan;
+		this.isReserve = isReserve;
+		this.ownUser = ownUser;
+		this.ImageURL = ImageURL;
 	}
+	
 	public String getBookId() {
 		return BookId;
 	}
@@ -57,6 +64,12 @@ public class Book {
 	}
 	public void setOwnUser(String ownUser) {
 		this.ownUser = ownUser;
+	}
+	public String getImageURL() {
+		return ImageURL;
+	}
+	public void setImageURL(String imageURL) {
+		ImageURL = imageURL;
 	}
 	
 	

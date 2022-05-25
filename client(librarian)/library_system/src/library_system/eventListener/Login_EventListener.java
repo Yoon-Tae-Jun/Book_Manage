@@ -3,20 +3,13 @@ package library_system.eventListener;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.util.HashMap;
-import java.util.Set;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
 
 import org.json.simple.JSONObject;
 
 import API.*;
 import library_system.LibraryDesk;
-import library_system.layout.GuiLibraryDesk;
 import library_system.layout.GuiLoginPage;
 import library_users.Users;
 
@@ -31,12 +24,10 @@ public class Login_EventListener implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e){
-		JButton login_btn = (JButton)e.getSource();
 		Users user = new Users();
 		
 		//API 통신 관련 변수
-		String url = "http://libraryserver-env.eba-yf973i6v.ap-northeast-2.elasticbeanstalk.com";
-		Call_API api = new API.Call_API(url);
+		Call_API api = new API.Call_API();
 		JSONObject obj;
 		
 		//파라메터 정보
