@@ -91,7 +91,7 @@ public class GuiLoginPage extends JFrame {
 		CenterBox.setSize(new Dimension(width, height));												// 패널 너비, 높이 설정
 		CenterBox.setBackground(new Color(255, 255, 255));											// 패널 배경색 설정
 		CenterBox.setBorder(BorderFactory.createMatteBorder(3, 0, 0, 0, new Color(93, 93, 93)));		// 패널 border(top) 설정
-		CenterBox.setLocation((pWidth/2 - width/2), (pHeight/2 - height/2));							// 패널 위치 설정
+		CenterBox.setLocation((pWidth/2 - width/2), (pHeight/2 - height/2) -17);							// 패널 위치 설정
 		CenterBox.setLayout(new GridLayout(1, 1));
 		
 		// add
