@@ -23,6 +23,8 @@ public class GuiLibraryDesk extends JFrame{
 		setTitle(this.libraryName);							// 창 이름
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 	// 창 닫기
 		setSize(width, height);								// 창 크기
+		setMinimumSize(new Dimension(width, height));		// 창 최대 크기
+		setMaximumSize(new Dimension(width, height));		// 창 최소 크기
 		setLocationRelativeTo(null); 						// 창 생성 위치 : 화면 가운데
 		
 		// add()
@@ -39,50 +41,38 @@ public class GuiLibraryDesk extends JFrame{
 		int width = 900;
 		int height = 520;
 		JPanel panel = new JPanel();
-		panel.setSize(new Dimension(width, height));						// 패널 크기 설정
-		panel.setLocation((pWidth/2 - width/2), (pHeight/2 - height/2));	// 패널 위치 설정
-		panel.setBackground(new Color(255, 255, 255));						// 패널 배경색 설정
-		panel.setLayout(new BorderLayout());								// 패널 레이아웃 설정
-		panel.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, new Color(93, 93, 93)));	// 패널 테두리 설정
+		panel.setSize(new Dimension(width, height));							// 패널 크기 설정
+		panel.setLocation((pWidth/2 - width/2), (pHeight/2 - height/2)-17);		// 패널 위치 설정
+		panel.setBackground(new Color(93, 93, 93));								// 패널 배경색 설정
+		panel.setLayout(new BorderLayout(4 ,4));								// 패널 레이아웃 설정
+		panel.setBorder(BorderFactory.createMatteBorder(4, 4, 4, 4, new Color(93, 93, 93)));	// 패널 테두리 설정
 		
 		// add()
-		panel.add(north_box_B(), BorderLayout.NORTH);
-		panel.add(west_box_B(), BorderLayout.WEST);
-		panel.add(center_box_B(), BorderLayout.CENTER);
+		panel.add(north_box(), BorderLayout.NORTH);
+		panel.add(west_box(), BorderLayout.WEST);
+		panel.add(center_box(), BorderLayout.CENTER);
 		
 		return panel;
 	}
 	// north_box ---------------------------------------------------------------------------------------------------------
-	private JPanel north_box_B() {
-		int width = 900;
-		int height = 60;
-		JPanel panel = new JPanel();
-		//panel.setSize(new Dimension(width, height));						// 패널 너비 설정
-		panel.setPreferredSize(new Dimension(width, height));				// 패널 너비 설정
-		panel.setBackground(Color.YELLOW);											// 패널 배경 없애기
-		panel.setLayout(null);
-		panel.setLocation(0, 50);
-		panel.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, new Color(93, 93, 93)));	// 패널 테두리 설정
-		
-		// add()
-		panel.add(north_box());
-		
-		return panel;
-	}
 	private JPanel north_box() {
 		int width = 900;
 		int height = 60;
+		
 		JButton btn1 = new JButton(libraryName);
 		JButton btn2 = new JButton("사용자");
+		
 		JPanel panel = new JPanel();
-		//panel.setSize(new Dimension(width, height));						// 패널 너비 설정
-		panel.setPreferredSize(new Dimension(width, height));				// 패널 너비 설정
-		panel.setBackground(Color.PINK);											// 패널 배경 없애기
-		panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));	// 패널 여백 설정
-		panel.setLayout(new GridLayout(1, 5));
+		//panel.setSize(new Dimension(width, height));						// 패널 크기 설정
+		panel.setPreferredSize(new Dimension(width, height));				// 패널 크기 설정
+		panel.setBackground(Color.YELLOW);											// 패널 배경 설정
+		panel.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));	// 패널 여백 설정
+		panel.setLayout(new GridLayout(1, 7));
 		
 		// add()
 		panel.add(btn1);
+		panel.add(EmptyPanel());
+		panel.add(EmptyPanel());
 		panel.add(EmptyPanel());
 		panel.add(EmptyPanel());
 		panel.add(EmptyPanel());
@@ -91,40 +81,34 @@ public class GuiLibraryDesk extends JFrame{
 		return panel;
 	}
 	// west_box ----------------------------------------------------------------------------------------------------------
-	private JPanel west_box_B() {
+	private JPanel west_box() {
 		int width = 120;
 		int height = 460;
+		
 		JPanel panel = new JPanel();
 		//panel.setSize(new Dimension(width, height));						// 패널 크기 설정
-		panel.setPreferredSize(new Dimension(width, height));				// 패널 너비 설정
-		panel.setBackground(Color.BLUE);											// 패널 배경 없애기
-		panel.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, new Color(93, 93, 93)));	// 패널 테두리 설정
+		panel.setPreferredSize(new Dimension(width, height));				// 패널 크기 설정
+		panel.setBackground(Color.BLUE);											// 패널 배경 설정
+		panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));	// 패널 여백 설정
 		
 		// add()
-		panel.add(EmptyPanel());
 		
 		return panel;
-	}
-	private JPanel west_box() {
-		
 	}
 	// center_box --------------------------------------------------------------------------------------------------------
-	private JPanel center_box_B() {
+	private JPanel center_box() {
 		int width = 780;
 		int height = 460;
+		
 		JPanel panel = new JPanel();
 		//panel.setSize(new Dimension(width, height));						// 패널 크기 설정
-		panel.setPreferredSize(new Dimension(width, height));				// 패널 너비 설정
-		panel.setBackground(Color.RED);											// 패널 배경 없애기
-		panel.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, new Color(93, 93, 93)));	// 패널 테두리 설정
+		panel.setPreferredSize(new Dimension(width, height));				// 패널 크기 설정
+		panel.setBackground(Color.RED);											// 패널 배경 설정
+		panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));	// 패널 여백 설정
 		
 		// add()
-		panel.add(EmptyPanel());
 		
 		return panel;
-	}
-	private JPanel center_box() {
-		
 	}
 	// EmptyPanel --------------------------------------------------------------------------------------------------------
 	private JPanel EmptyPanel() {
