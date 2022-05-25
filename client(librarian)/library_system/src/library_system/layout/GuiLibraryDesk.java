@@ -44,12 +44,12 @@ public class GuiLibraryDesk extends JFrame{
 		panel.setSize(new Dimension(width, height));							// 패널 크기 설정
 		panel.setLocation((pWidth/2 - width/2), (pHeight/2 - height/2)-17);		// 패널 위치 설정
 		panel.setBackground(new Color(93, 93, 93));								// 패널 배경색 설정
-		panel.setLayout(new BorderLayout(4 ,4));								// 패널 레이아웃 설정
-		panel.setBorder(BorderFactory.createMatteBorder(4, 4, 4, 4, new Color(93, 93, 93)));	// 패널 테두리 설정
+		panel.setLayout(new BorderLayout(3 ,3));								// 패널 레이아웃 설정
+		panel.setBorder(BorderFactory.createMatteBorder(3, 3, 3, 3, new Color(93, 93, 93)));	// 패널 테두리 설정
 		
 		// add()
 		panel.add(north_box(), BorderLayout.NORTH);
-		panel.add(west_box(), BorderLayout.WEST);
+		panel.add(west_box_library(), BorderLayout.WEST);
 		panel.add(center_box(), BorderLayout.CENTER);
 		
 		return panel;
@@ -59,57 +59,119 @@ public class GuiLibraryDesk extends JFrame{
 		int width = 900;
 		int height = 60;
 		
-		JButton btn1 = new JButton(libraryName);
-		JButton btn2 = new JButton("사용자");
-		
 		JPanel panel = new JPanel();
-		//panel.setSize(new Dimension(width, height));						// 패널 크기 설정
 		panel.setPreferredSize(new Dimension(width, height));				// 패널 크기 설정
-		panel.setBackground(Color.YELLOW);											// 패널 배경 설정
-		panel.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));	// 패널 여백 설정
-		panel.setLayout(new GridLayout(1, 7));
+		panel.setBackground(Color.WHITE);											// 패널 배경 설정
+		panel.setBorder(BorderFactory.createEmptyBorder(13, 20, 13, 13));	// 패널 여백 설정
+		panel.setLayout(new BorderLayout());
 		
 		// add()
-		panel.add(btn1);
-		panel.add(EmptyPanel());
-		panel.add(EmptyPanel());
-		panel.add(EmptyPanel());
-		panel.add(EmptyPanel());
-		panel.add(EmptyPanel());
-		panel.add(btn2);
+		panel.add(north_left_box(), BorderLayout.WEST);
+		panel.add(north_right_box(), BorderLayout.EAST);
 		
 		return panel;
 	}
-	// west_box ----------------------------------------------------------------------------------------------------------
-	private JPanel west_box() {
-		int width = 120;
-		int height = 460;
+	private JPanel north_left_box() {
+		int width = 801;
+		int height = 60;
+		
+		JButton btn = new JButton(libraryName);
 		
 		JPanel panel = new JPanel();
-		//panel.setSize(new Dimension(width, height));						// 패널 크기 설정
 		panel.setPreferredSize(new Dimension(width, height));				// 패널 크기 설정
-		panel.setBackground(Color.BLUE);											// 패널 배경 설정
-		panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));	// 패널 여백 설정
+		panel.setBackground(null);											// 패널 배경 설정
+		panel.setLayout(new GridLayout(1, 5, 10, 0));
 		
 		// add()
+		panel.add(btn);
+		panel.add(EmptyPanel());
+		panel.add(EmptyPanel());
+		panel.add(EmptyPanel());
+		panel.add(EmptyPanel());
 		
+		return panel;
+	}
+	private JPanel north_right_box() {
+		int width = 60;
+		int height = 60;
+		
+		JButton btn = new JButton("내 계정");
+		
+		JPanel panel = new JPanel();
+		panel.setPreferredSize(new Dimension(width, height));				// 패널 크기 설정
+		panel.setBackground(null);											// 패널 배경 설정
+		panel.setLayout(new GridLayout(1, 1));
+		
+		// add()
+		panel.add(btn);
+				
+		return panel;
+	}
+	// west_box ----------------------------------------------------------------------------------------------------------
+	private JPanel west_box_library() {
+		int width = 150;
+		int height = 460;
+		
+		JButton btn1 = new JButton("1. 대출, 반납");
+		JButton btn2 = new JButton("2. 도서 관련");
+		JButton btn3 = new JButton("3. 사용자 조회");
+		JButton btn4 = new JButton("4. 사용자 수정");
+		
+		JPanel panel = new JPanel();
+		panel.setPreferredSize(new Dimension(width, height));				// 패널 크기 설정
+		panel.setBackground(Color.WHITE);											// 패널 배경 설정
+		panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));	// 패널 여백 설정
+		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 8));
+		
+		// add()
+		panel.add(btn1);
+		panel.add(btn2);
+		panel.add(btn3);
+		panel.add(btn4);
+		return panel;
+	}
+	private JPanel west_box_user() {
+		int width = 150;
+		int height = 460;
+		
+		JButton btn1 = new JButton("1. 사용자 관련 기능");
+		JButton btn2 = new JButton("2. 사용자 관련 기능");
+		JButton btn3 = new JButton("3. 사용자 관련 기능");
+		
+		JPanel panel = new JPanel();
+		panel.setPreferredSize(new Dimension(width, height));				// 패널 크기 설정
+		panel.setBackground(Color.WHITE);											// 패널 배경 설정
+		panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));	// 패널 여백 설정
+		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 8));
+		
+		// add()
+		panel.add(btn1);
+		panel.add(btn2);
+		panel.add(btn3);
 		return panel;
 	}
 	// center_box --------------------------------------------------------------------------------------------------------
 	private JPanel center_box() {
-		int width = 780;
+		int width = 750;
 		int height = 460;
 		
 		JPanel panel = new JPanel();
-		//panel.setSize(new Dimension(width, height));						// 패널 크기 설정
 		panel.setPreferredSize(new Dimension(width, height));				// 패널 크기 설정
-		panel.setBackground(Color.RED);											// 패널 배경 설정
+		panel.setBackground(Color.WHITE);											// 패널 배경 설정
 		panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));	// 패널 여백 설정
 		
 		// add()
 		
 		return panel;
 	}
+	// center_box : 대출, 반납 ---------------------------------------------------------------------------------------------
+	private JPanel cb_bookBorrowReturn() {
+		
+	}
+	// center_box : 도서 관련 ----------------------------------------------------------------------------------------------
+	// center_box : 사용자 조회 ---------------------------------------------------------------------------------------------
+	// center_box : 사용자 수정 ---------------------------------------------------------------------------------------------
+	
 	// EmptyPanel --------------------------------------------------------------------------------------------------------
 	private JPanel EmptyPanel() {
 		JPanel panel = new JPanel();
