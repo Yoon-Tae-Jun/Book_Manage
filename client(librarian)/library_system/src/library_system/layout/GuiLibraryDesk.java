@@ -50,7 +50,7 @@ public class GuiLibraryDesk extends JFrame{
 		// add()
 		panel.add(north_box(), BorderLayout.NORTH);
 		panel.add(west_box_library(), BorderLayout.WEST);
-		panel.add(center_box(), BorderLayout.CENTER);
+		panel.add(cb_borrowAndReturn(), BorderLayout.CENTER);
 		
 		return panel;
 	}
@@ -114,8 +114,7 @@ public class GuiLibraryDesk extends JFrame{
 		
 		JButton btn1 = new JButton("1. 대출, 반납");
 		JButton btn2 = new JButton("2. 도서 관련");
-		JButton btn3 = new JButton("3. 사용자 조회");
-		JButton btn4 = new JButton("4. 사용자 수정");
+		JButton btn3 = new JButton("3. 사용자 관련");
 		
 		JPanel panel = new JPanel();
 		panel.setPreferredSize(new Dimension(width, height));				// 패널 크기 설정
@@ -127,7 +126,6 @@ public class GuiLibraryDesk extends JFrame{
 		panel.add(btn1);
 		panel.add(btn2);
 		panel.add(btn3);
-		panel.add(btn4);
 		return panel;
 	}
 	private JPanel west_box_user() {
@@ -157,7 +155,7 @@ public class GuiLibraryDesk extends JFrame{
 		
 		JPanel panel = new JPanel();
 		panel.setPreferredSize(new Dimension(width, height));				// 패널 크기 설정
-		panel.setBackground(Color.WHITE);											// 패널 배경 설정
+		panel.setBackground(Color.WHITE);									// 패널 배경 설정
 		panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));	// 패널 여백 설정
 		
 		// add()
@@ -165,12 +163,177 @@ public class GuiLibraryDesk extends JFrame{
 		return panel;
 	}
 	// center_box : 대출, 반납 ---------------------------------------------------------------------------------------------
-	private JPanel cb_bookBorrowReturn() {
+	private JPanel cb_borrowAndReturn() {
+		int width = 750;
+		int height = 460;
 		
+		JPanel panel = new JPanel();
+		panel.setPreferredSize(new Dimension(width, height));				// 패널 크기 설정
+		panel.setBackground(Color.YELLOW);									// 패널 배경 설정
+		panel.setLayout(new BorderLayout());
+		
+		// add()
+		panel.add(EmptyPanel(), BorderLayout.WEST);
+		panel.add(cb_borrowAndReturn_right_box(), BorderLayout.EAST);
+		
+		return panel;
+	}
+	private JPanel cb_borrowAndReturn_right_box() {
+		int width = 300;
+		int height = 460;
+		
+		JPanel panel = new JPanel();
+		panel.setPreferredSize(new Dimension(width, height));				// 패널 크기 설정
+		panel.setBackground(Color.GREEN);									// 패널 배경 설정
+		panel.setLayout(new BorderLayout());
+		
+		// add()
+		panel.add(cb_bookInfos2(), BorderLayout.NORTH);
+		panel.add(cb_userInfos2(), BorderLayout.CENTER);
+		panel.add(cb_modifyButtons(), BorderLayout.SOUTH);
+		
+		return panel;
 	}
 	// center_box : 도서 관련 ----------------------------------------------------------------------------------------------
-	// center_box : 사용자 조회 ---------------------------------------------------------------------------------------------
-	// center_box : 사용자 수정 ---------------------------------------------------------------------------------------------
+	private JPanel cb_books() {
+		int width = 750;
+		int height = 460;
+		
+		JPanel panel = new JPanel();
+		panel.setPreferredSize(new Dimension(width, height));				// 패널 크기 설정
+		panel.setBackground(Color.YELLOW);									// 패널 배경 설정
+		panel.setLayout(new BorderLayout());
+		
+		// add()
+		panel.add(cb_searchBooks(), BorderLayout.WEST);
+		panel.add(cb_books_right_box(), BorderLayout.EAST);
+		
+		return panel;
+	}
+	private JPanel cb_books_right_box() {
+		int width = 300;
+		int height = 460;
+		
+		JPanel panel = new JPanel();
+		panel.setPreferredSize(new Dimension(width, height));				// 패널 크기 설정
+		panel.setBackground(Color.GREEN);									// 패널 배경 설정
+		panel.setLayout(new BorderLayout());
+		
+		// add()
+		panel.add(cb_bookInfos(), BorderLayout.CENTER);
+		panel.add(cb_modifyButtons(), BorderLayout.SOUTH);
+		
+		return panel;
+	}
+	// center_box : 사용자 관련 ---------------------------------------------------------------------------------------------
+	private JPanel cb_users() {
+		int width = 750;
+		int height = 460;
+		
+		JPanel panel = new JPanel();
+		panel.setPreferredSize(new Dimension(width, height));				// 패널 크기 설정
+		panel.setBackground(Color.YELLOW);									// 패널 배경 설정
+		panel.setLayout(new BorderLayout());
+		
+		// add()
+		panel.add(cb_searchUsers(), BorderLayout.WEST);
+		panel.add(cb_users_right_box(), BorderLayout.EAST);
+		
+		return panel;
+	}
+	private JPanel cb_users_right_box() {
+		int width = 300;
+		int height = 460;
+		
+		JPanel panel = new JPanel();
+		panel.setPreferredSize(new Dimension(width, height));				// 패널 크기 설정
+		panel.setBackground(Color.GREEN);									// 패널 배경 설정
+		panel.setLayout(new BorderLayout());
+		
+		// add()
+		panel.add(cb_userInfos(), BorderLayout.CENTER);
+		panel.add(cb_modifyButtons(), BorderLayout.SOUTH);
+		
+		return panel;
+	}
+	// center_box : 여러 패널들 ---------------------------------------------------------------------------------------------
+	private JPanel cb_modifyButtons() {
+		int width = 300;
+		int height = 60;
+		
+		JPanel panel = new JPanel();
+		panel.setPreferredSize(new Dimension(width, height));				// 패널 크기 설정
+		panel.setBackground(Color.ORANGE);									// 패널 배경 설정
+		panel.setLayout(new BorderLayout());
+		
+		return panel;
+	}
+	private JPanel cb_bookInfos() {
+		int width = 300;
+		int height = 400;
+		
+		JPanel panel = new JPanel();
+		panel.setPreferredSize(new Dimension(width, height));				// 패널 크기 설정
+		panel.setBackground(Color.PINK);									// 패널 배경 설정
+		panel.setLayout(new BorderLayout());
+		
+		return panel;
+	}
+	private JPanel cb_bookInfos2() {
+		int width = 300;
+		int height = 200;
+		
+		JPanel panel = new JPanel();
+		panel.setPreferredSize(new Dimension(width, height));				// 패널 크기 설정
+		panel.setBackground(Color.DARK_GRAY);									// 패널 배경 설정
+		panel.setLayout(new BorderLayout());
+		
+		return panel;
+	}
+	private JPanel cb_userInfos() {
+		int width = 300;
+		int height = 400;
+		
+		JPanel panel = new JPanel();
+		panel.setPreferredSize(new Dimension(width, height));				// 패널 크기 설정
+		panel.setBackground(Color.PINK);									// 패널 배경 설정
+		panel.setLayout(new BorderLayout());
+		
+		return panel;
+	}
+	private JPanel cb_userInfos2() {
+		int width = 300;
+		int height = 200;
+		
+		JPanel panel = new JPanel();
+		panel.setPreferredSize(new Dimension(width, height));				// 패널 크기 설정
+		panel.setBackground(Color.MAGENTA);									// 패널 배경 설정
+		panel.setLayout(new BorderLayout());
+		
+		return panel;
+	}
+	private JPanel cb_searchBooks() {
+		int width = 450;
+		int height = 460;
+		
+		JPanel panel = new JPanel();
+		panel.setPreferredSize(new Dimension(width, height));				// 패널 크기 설정
+		panel.setBackground(Color.BLUE);									// 패널 배경 설정
+		panel.setLayout(new BorderLayout());
+		
+		return panel;
+	}
+	private JPanel cb_searchUsers() {
+		int width = 450;
+		int height = 460;
+		
+		JPanel panel = new JPanel();
+		panel.setPreferredSize(new Dimension(width, height));				// 패널 크기 설정
+		panel.setBackground(Color.RED);									// 패널 배경 설정
+		panel.setLayout(new BorderLayout());
+		
+		return panel;
+	}
 	
 	// EmptyPanel --------------------------------------------------------------------------------------------------------
 	private JPanel EmptyPanel() {
