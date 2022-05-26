@@ -508,9 +508,24 @@ public class GuiLibraryDesk extends JFrame{
 		JPanel panel = new JPanel();
 		panel.setPreferredSize(new Dimension(width, height));			// 패널 크기 설정
 		panel.setBackground(Color.WHITE);						// 패널 배경 설정
-		panel.setLayout(new BorderLayout(0, 20));
+		panel.setLayout(new BorderLayout());
 		panel.setBorder(BorderFactory.createMatteBorder(3, 3, 3, 3, new Color(239, 237, 239)));	// 패널 테두리 설정
 		
+		// add()
+		panel.add(cb_searchBooks_center_table(), BorderLayout.CENTER);
+		
+		return panel;
+	}
+	private JScrollPane cb_searchBooks_center_table() {
+		String[] header = {"제목", "책 번호", "대출상태"};
+		String[][] contents = {
+			{"자료구조", "12340000", "Y"},
+			{"이산수학", "12340001", "N"},
+			{"자바", "12129999", "Y"}
+		};
+		JTable table = new JTable(contents, header);
+		
+		JScrollPane panel = new JScrollPane(table);
 		return panel;
 	}
 	// center_box : 사용자 검색 ---------------------------------------------------------------------------------------------
