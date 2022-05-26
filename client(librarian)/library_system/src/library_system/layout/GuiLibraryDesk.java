@@ -12,7 +12,7 @@ public class GuiLibraryDesk extends JFrame{
 	
 	// GUI test
 	public static void main(String[] args) {
-		new GuiLibraryDesk("cse Library");
+		new GuiLibraryDesk("CSE Library");
 	}
 	
 	// main ------------------------------------------------------------------------------------------------------------
@@ -240,7 +240,7 @@ public class GuiLibraryDesk extends JFrame{
 		
 		JPanel panel = new JPanel();
 		panel.setPreferredSize(new Dimension(width, height));				// 패널 크기 설정
-		panel.setBackground(Color.YELLOW);									// 패널 배경 설정
+		panel.setBackground(Color.WHITE);									// 패널 배경 설정
 		panel.setLayout(new BorderLayout());
 		
 		// add()
@@ -255,7 +255,7 @@ public class GuiLibraryDesk extends JFrame{
 		
 		JPanel panel = new JPanel();
 		panel.setPreferredSize(new Dimension(width, height));				// 패널 크기 설정
-		panel.setBackground(Color.GREEN);									// 패널 배경 설정
+		panel.setBackground(null);									// 패널 배경 설정
 		panel.setLayout(new BorderLayout());
 		
 		// add()
@@ -389,14 +389,88 @@ public class GuiLibraryDesk extends JFrame{
 		return panel;
 	}
 	// center_box : 사용자 정보 ---------------------------------------------------------------------------------------------
-	private JPanel cb_userInfos() {
-		int width = 291;
-		int height = 400;
+	private JScrollPane cb_userInfos() {
+		int width = 272;
+		int height = 500;
+		
+		JLabel la1 = new JLabel("사용자 기본 정보");
+		JLabel la2 = new JLabel("사용자 도서 대출 정보");
 		
 		JPanel panel = new JPanel();
 		panel.setPreferredSize(new Dimension(width, height));				// 패널 크기 설정
-		panel.setBackground(Color.PINK);									// 패널 배경 설정
-		panel.setLayout(new BorderLayout());
+		panel.setBackground(null);											// 패널 배경 설정
+		panel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 10));			// 레이아웃 설정
+		panel.setBorder(BorderFactory.createEmptyBorder(13, 10, 13, 10));		// 패널 여백 설정
+		
+		// add()
+		panel.add(la1);
+		panel.add(cb_userInfos_data());
+		panel.add(la2);
+		panel.add(cb_userInfos_books());
+		
+		JScrollPane scrolPanel = new JScrollPane(panel);
+		scrolPanel.setBorder(null);
+		return scrolPanel;
+	}
+	private JPanel cb_userInfos_data() {
+		// 책 정보 필드(String), 텍스트상자 크기(int)
+		String[] label = {"이름 :", "타입 :", "아이디 :", "비밀번호 :"};
+		int[] textfieldSize = {16, 16, 15, 14};
+		
+		// GridLayout 패널
+		JPanel panel = new JPanel();
+		panel.setBackground(null);
+		panel.setLayout(new GridLayout(label.length, 1));
+		
+		
+		// add()
+		for (int i=0; i<label.length; i++) {	// 사용자 기본 정보의 필드 수 만큼 반복
+			
+			// GridLayout 패널의 컴포넌트, FlowLayout 패널 
+			JPanel p = new JPanel();
+			p.setBackground(null);
+			p.setLayout(new FlowLayout(FlowLayout.LEFT));
+			
+			JLabel la = new JLabel(label[i]);
+			JTextField tf = new JTextField(textfieldSize[i]);
+			
+			p.add(la);
+			p.add(tf);
+			panel.add(p);
+		}
+		
+		return panel;
+	}
+	private JPanel cb_userInfos_books() {
+		// 책 상태 정보 필드(String), 텍스트상자 크기(int)
+		String[] label = {"대출도서(3) :", "예약도서(3) :", "연체도서(2) :"};
+		String[][] bookData = {
+				{"book_a", "book_b", "book_c"},		// 대출 도서
+				{"book_d", "book_e", "book_f"},		// 예약 도서
+				{"book_a", "book_b"}				// 연체 도서
+		};
+		
+		// GridLayout 패널
+		JPanel panel = new JPanel();
+		panel.setBackground(null);
+		panel.setLayout(new GridLayout(label.length, 1));
+		
+		
+		// add()
+		for (int i=0; i<label.length; i++) {	// 책 정보의 필드 수 만큼 반복
+			
+			// GridLayout 패널의 컴포넌트, FlowLayout 패널 
+			JPanel p = new JPanel();
+			p.setBackground(null);
+			p.setLayout(new FlowLayout(FlowLayout.LEFT));
+			
+			JLabel la = new JLabel(label[i]);
+			JComboBox cb = new JComboBox(bookData[i]);
+			
+			p.add(la);
+			p.add(cb);
+			panel.add(p);
+		}
 		
 		return panel;
 	}
@@ -535,13 +609,115 @@ public class GuiLibraryDesk extends JFrame{
 		
 		JPanel panel = new JPanel();
 		panel.setPreferredSize(new Dimension(width, height));				// 패널 크기 설정
-		panel.setBackground(Color.RED);									// 패널 배경 설정
-		panel.setLayout(new BorderLayout());
+		panel.setBackground(new Color(249, 247, 249));						// 패널 배경 설정
+		panel.setLayout(new BorderLayout(0, 15));
+		panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));	// 패널 여백 설정
 		
+		// add()
+		panel.add(cb_searchUsers_north(), BorderLayout.NORTH);
+		panel.add(cb_searchUsers_center(), BorderLayout.CENTER);
 		
 		return panel;
 	}
-	
+	private JPanel cb_searchUsers_north() {
+		int width = 410;
+		int height = 58; // 32 + 23 = 62
+		
+		JPanel panel = new JPanel();
+		panel.setPreferredSize(new Dimension(width, height));			// 패널 크기 설정
+		panel.setBackground(Color.WHITE);								// 패널 배경 설정
+		panel.setLayout(new BorderLayout());
+		panel.setBorder(BorderFactory.createMatteBorder(3, 3, 3, 3, new Color(239, 237, 239)));	// 패널 테두리 설정
+		
+		// add()
+		panel.add(cb_searchUsers_north_box1(), BorderLayout.WEST);
+		panel.add(cb_searchUsers_north_box2(), BorderLayout.EAST);
+		panel.add(cb_searchUsers_north_box3(), BorderLayout.SOUTH);
+		
+		return panel;
+	}
+	private JPanel cb_searchUsers_north_box1() {
+		int width = 215;
+		int height = 35;
+		
+		JLabel la = new JLabel("검색 :");
+		JTextField tf = new JTextField(12);
+		
+		JPanel panel = new JPanel();
+		panel.setPreferredSize(new Dimension(width, height));			// 패널 크기 설정
+		panel.setBackground(null);								// 패널 배경 설정
+		panel.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 0));
+		
+		// add()
+		panel.add(la);
+		panel.add(tf);
+		
+		return panel;
+	}
+	private JPanel cb_searchUsers_north_box2() {
+		int width = 195;
+		int height = 35;
+		
+		JButton btn = new JButton("검색");
+		
+		
+		JPanel panel = new JPanel();
+		panel.setPreferredSize(new Dimension(width, height));			// 패널 크기 설정
+		panel.setBackground(null);								// 패널 배경 설정
+		panel.setLayout(new FlowLayout(FlowLayout.RIGHT, 0, 0));
+		
+		// add()
+		panel.add(btn);
+		
+		return panel;
+	}
+	private JPanel cb_searchUsers_north_box3() {
+		int width = 410;
+		int height = 23;
+		
+		String[] bookinfo = {"이름", "타입", "아이디", "대출도서", "예약도서", "연체도서"};
+		JCheckBox[] ch = new JCheckBox[bookinfo.length];
+		
+		JPanel panel = new JPanel();
+		panel.setPreferredSize(new Dimension(width, height));			// 패널 크기 설정
+		panel.setBackground(new Color(239, 237, 239));								// 패널 배경 설정
+		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 7, 0));
+		
+		// add()
+		for(int i=0; i<bookinfo.length; i++) {
+			ch[i] = new JCheckBox(bookinfo[i]);
+			panel.add(ch[i]);
+		}
+		
+		return panel;
+	}
+	private JPanel cb_searchUsers_center() {
+		int width = 410;
+		int height = 338;
+		
+		JPanel panel = new JPanel();
+		panel.setPreferredSize(new Dimension(width, height));			// 패널 크기 설정
+		panel.setBackground(Color.WHITE);						// 패널 배경 설정
+		panel.setLayout(new BorderLayout());
+		panel.setBorder(BorderFactory.createMatteBorder(3, 3, 3, 3, new Color(239, 237, 239)));	// 패널 테두리 설정
+		
+		// add()
+		panel.add(cb_searchUsers_center_table(), BorderLayout.CENTER);
+		
+		return panel;
+	}
+	private JScrollPane cb_searchUsers_center_table() {
+		String[] header = {"이름", "아이디", "타입"};
+		String[][] contents = {
+			{"김건아", "rtguna@naver.com", "Patron"},
+			{"김건모", "kimgeona77@sch.ac.kr", "Manager"},
+			{"김건하", "rtguna@icloud.com", "Librarian"}
+		};
+		JTable table = new JTable(contents, header);
+		
+		JScrollPane panel = new JScrollPane(table);
+		return panel;
+	}
 	// EmptyPanel --------------------------------------------------------------------------------------------------------
 	private JPanel EmptyPanel() {
 		JPanel panel = new JPanel();
