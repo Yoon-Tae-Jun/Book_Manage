@@ -1,12 +1,13 @@
 package library_system.layout;
+import library_system.eventListener.*;
 import java.awt.*;
 import javax.swing.*;
 
 public class GuiLibraryDesk extends JFrame{
 	
-	private String libraryName;
-	private int width = 1000;
-	private int height = 650;
+	public static String libraryName;
+	public static int width = 1000;
+	public static int height = 650;
 	
 	//컨포넌트
 	
@@ -37,7 +38,7 @@ public class GuiLibraryDesk extends JFrame{
 	}
 	
 	// pos_center --------------------------------------------------------------------------------------------------------
-	private JPanel pos_center(int pWidth, int pHeight) {
+	public static JPanel pos_center(int pWidth, int pHeight) {
 		int width = 900;
 		int height = 520;
 		JPanel panel = new JPanel();
@@ -49,13 +50,19 @@ public class GuiLibraryDesk extends JFrame{
 		
 		// add()
 		panel.add(north_box(), BorderLayout.NORTH);
-		panel.add(west_box_library(), BorderLayout.WEST);
-		panel.add(cb_books(), BorderLayout.CENTER); // cb_borrowAndReturn(), cb_books(), cb_users()
+		panel.add(west_box_library(), BorderLayout.WEST); // west_box_library(), west_box_user()
+		panel.add(center_box(), BorderLayout.CENTER); // center_box(), cb_borrowAndReturn(), cb_books(), cb_users()
 		
 		return panel;
 	}
+	
+	
+	
+	
+	
+	
 	// north_box ---------------------------------------------------------------------------------------------------------
-	private JPanel north_box() {
+	public static JPanel north_box() {
 		int width = 900;
 		int height = 60;
 		
@@ -71,7 +78,7 @@ public class GuiLibraryDesk extends JFrame{
 		
 		return panel;
 	}
-	private JPanel north_left_box() {
+	public static JPanel north_left_box() {
 		int width = 801;
 		int height = 60;
 		
@@ -91,7 +98,7 @@ public class GuiLibraryDesk extends JFrame{
 		
 		return panel;
 	}
-	private JPanel north_right_box() {
+	public static JPanel north_right_box() {
 		int width = 60;
 		int height = 60;
 		
@@ -108,13 +115,17 @@ public class GuiLibraryDesk extends JFrame{
 		return panel;
 	}
 	// west_box ----------------------------------------------------------------------------------------------------------
-	private JPanel west_box_library() {
+	public static JPanel west_box_library() {
 		int width = 150;
 		int height = 460;
 		
 		JButton btn1 = new JButton("1. 대출, 반납");
 		JButton btn2 = new JButton("2. 도서 관련");
 		JButton btn3 = new JButton("3. 사용자 관련");
+		btn1.addMouseListener(new ChangeCenterBox());
+		btn2.addMouseListener(new ChangeCenterBox());
+		btn3.addMouseListener(new ChangeCenterBox());
+		
 		
 		JPanel panel = new JPanel();
 		panel.setPreferredSize(new Dimension(width, height));				// 패널 크기 설정
@@ -128,7 +139,7 @@ public class GuiLibraryDesk extends JFrame{
 		panel.add(btn3);
 		return panel;
 	}
-	private JPanel west_box_user() {
+	public static JPanel west_box_user() {
 		int width = 150;
 		int height = 460;
 		
@@ -148,15 +159,8 @@ public class GuiLibraryDesk extends JFrame{
 		panel.add(btn3);
 		return panel;
 	}
-	
-	
-	
-	
-	
-	
-	
 	// center_box --------------------------------------------------------------------------------------------------------
-	private JPanel center_box() {
+	public static JPanel center_box() {
 		int width = 741;
 		int height = 451;
 		
@@ -170,39 +174,40 @@ public class GuiLibraryDesk extends JFrame{
 		return panel;
 	}
 	// center_box : 대출, 반납 ---------------------------------------------------------------------------------------------
-	private JPanel cb_borrowAndReturn() {
+	public static JPanel cb_borrowAndReturn() {
 		int width = 741;
 		int height = 451;
 		
 		JPanel panel = new JPanel();
 		panel.setPreferredSize(new Dimension(width, height));				// 패널 크기 설정
-		panel.setBackground(Color.YELLOW);									// 패널 배경 설정
+		panel.setBackground(Color.WHITE);									// 패널 배경 설정
 		panel.setLayout(new BorderLayout());
 		
 		// add()
-		panel.add(EmptyPanel(), BorderLayout.WEST);
+		panel.add(cb_searchBooks(), BorderLayout.WEST);
 		panel.add(cb_borrowAndReturn_right_box(), BorderLayout.EAST);
 		
 		return panel;
 	}
-	private JPanel cb_borrowAndReturn_right_box() {
+	public static JPanel cb_borrowAndReturn_right_box() {
 		int width = 291;
 		int height = 451;
 		
 		JPanel panel = new JPanel();
 		panel.setPreferredSize(new Dimension(width, height));				// 패널 크기 설정
-		panel.setBackground(Color.GREEN);									// 패널 배경 설정
+		panel.setBackground(null);									// 패널 배경 설정
 		panel.setLayout(new BorderLayout());
+		panel.setBorder(BorderFactory.createMatteBorder(0, 3, 0, 0, new Color(239, 237, 239)));	// 패널 테두리 설정
 		
 		// add()
-		panel.add(cb_bookInfos2(), BorderLayout.NORTH);
-		panel.add(cb_userInfos2(), BorderLayout.CENTER);
-		panel.add(cb_modifyButtons(), BorderLayout.SOUTH);
+		panel.add(cb_bookInfos_mini(), BorderLayout.NORTH);
+		panel.add(cb_borrowAndReserve(), BorderLayout.CENTER);
+		panel.add(cb_login_mini(), BorderLayout.SOUTH);
 		
 		return panel;
 	}
 	// center_box : 도서 관련 ----------------------------------------------------------------------------------------------
-	private JPanel cb_books() {
+	public static JPanel cb_books() {
 		int width = 741;
 		int height = 451;
 		
@@ -217,7 +222,7 @@ public class GuiLibraryDesk extends JFrame{
 		
 		return panel;
 	}
-	private JPanel cb_books_right_box() {
+	public static JPanel cb_books_right_box() {
 		int width = 291;
 		int height = 451;
 		
@@ -234,7 +239,7 @@ public class GuiLibraryDesk extends JFrame{
 		return panel;
 	}
 	// center_box : 사용자 관련 ---------------------------------------------------------------------------------------------
-	private JPanel cb_users() {
+	public static JPanel cb_users() {
 		int width = 741;
 		int height = 451;
 		
@@ -249,7 +254,7 @@ public class GuiLibraryDesk extends JFrame{
 		
 		return panel;
 	}
-	private JPanel cb_users_right_box() {
+	public static JPanel cb_users_right_box() {
 		int width = 291;
 		int height = 451;
 		
@@ -257,6 +262,7 @@ public class GuiLibraryDesk extends JFrame{
 		panel.setPreferredSize(new Dimension(width, height));				// 패널 크기 설정
 		panel.setBackground(null);									// 패널 배경 설정
 		panel.setLayout(new BorderLayout());
+		panel.setBorder(BorderFactory.createMatteBorder(0, 3, 0, 0, new Color(239, 237, 239)));	// 패널 테두리 설정
 		
 		// add()
 		panel.add(cb_userInfos(), BorderLayout.CENTER);
@@ -273,8 +279,8 @@ public class GuiLibraryDesk extends JFrame{
 	
 
 	// center_box : 버튼 창 ------------------------------------------------------------------------------------------------
-	private JPanel cb_modifyButtons() {
-		int width = 291;
+	public static JPanel cb_modifyButtons() {
+		int width = 272;
 		int height = 51;
 		
 		JButton btn1 = new JButton("추가");
@@ -294,8 +300,189 @@ public class GuiLibraryDesk extends JFrame{
 		
 		return panel;
 	}
+	public static JPanel cb_borrowAndReserve() {
+		int width = 272;
+		int height = 150;
+		
+		JLabel la = new JLabel("해당 기능을 사용하시려면, 로그인 해야 합니다.");
+		
+		JPanel panel = new JPanel();
+		panel.setPreferredSize(new Dimension(width, height));				// 패널 크기 설정
+		panel.setBackground(null);											// 패널 배경 설정
+		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 13));						// 레이아웃 설정
+		panel.setBorder(BorderFactory.createEmptyBorder(5, 8, 10, 8));		// 패널 여백 설정
+		
+		// add()
+		panel.add(la);
+		panel.add(cb_borrowAndReserve_buttons());
+		
+		return panel;
+	}
+	public static JPanel cb_borrowAndReserve_buttons() {
+		int width = 252;
+		int height = 65;
+		
+		JButton btn1 = new JButton("대출");
+		JButton btn2 = new JButton("예약");
+		JButton btn3 = new JButton("반납");
+		JButton btn4 = new JButton("대출취소");
+		JButton btn5 = new JButton("예약취소");
+		JButton btn6 = new JButton("반납취소");
+		
+		JPanel panel = new JPanel();
+		panel.setPreferredSize(new Dimension(width, height));				// 패널 크기 설정
+		panel.setBackground(null);											// 패널 배경 설정
+		panel.setLayout(new GridLayout(2, 3, 5, 5));						// 레이아웃 설정
+		
+		// add()
+		panel.add(btn1);
+		panel.add(btn2);
+		panel.add(btn3);
+		panel.add(btn4);
+		panel.add(btn5);
+		panel.add(btn6);
+		
+		return panel;
+	}
+	// center_box : 대출 반납 -----------------------------------------------------------------------------------------------
+	public static JPanel cb_bookInfos_mini() {
+		int width = 272;
+		int height = 170;
+		
+		JLabel la1 = new JLabel("도서 정보");
+		
+		JPanel panel = new JPanel();
+		panel.setPreferredSize(new Dimension(width, height));				// 패널 크기 설정
+		panel.setBackground(null);									// 패널 배경 설정
+		panel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));					// 레이아웃 설정
+		panel.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));		// 패널 여백 설정
+		
+		// add()
+		panel.add(la1);
+		panel.add(cb_bookInfos_data_mini());
+		
+		return panel;
+	}
+	public static JPanel cb_bookInfos_data_mini() {
+		int width = 246;
+		int height = 126;
+		
+		// 책 정보 필드(String), 텍스트상자 크기(int)
+		String[] label = {"제목 :", "저자 :", "장르 :", "책 번호 :"};
+		int[] textfieldSize = {16, 16, 16, 15};
+		
+		// GridLayout 패널
+		JPanel panel = new JPanel();
+		panel.setPreferredSize(new Dimension(width, height));				// 패널 크기 설정
+		panel.setBackground(null);
+		panel.setLayout(new GridLayout(label.length, 1));
+				
+				
+		// add()
+		for (int i=0; i<label.length; i++) {	// 책 정보의 필드 수 만큼 반복
+					
+			// GridLayout 패널의 컴포넌트, FlowLayout 패널 
+			JPanel p = new JPanel();
+			p.setBackground(null);
+			p.setLayout(new FlowLayout(FlowLayout.LEFT));
+					
+			JLabel la = new JLabel(label[i]);
+			JTextField tf = new JTextField(textfieldSize[i]);
+					
+			p.add(la);
+			p.add(tf);
+			panel.add(p);
+		}
+				
+		return panel;
+	}
+	public static JPanel cb_login_mini() {
+		int width = 272;
+		int height = 155;
+
+		JPanel panel = new JPanel();
+		panel.setPreferredSize(new Dimension(width, height));				// 패널 크기 설정
+		panel.setBackground(null);											// 패널 배경 설정
+		panel.setLayout(new BorderLayout());						// 레이아웃 설정
+		panel.setBorder(BorderFactory.createMatteBorder(3, 0, 0, 0, new Color(239, 237, 239)));	// 패널 테두리 설정
+		
+		// add()
+		panel.add(cb_login_mini_textlabel(), BorderLayout.NORTH);
+		panel.add(cb_login_mini_textfield(), BorderLayout.CENTER);
+		panel.add(cb_login_mini_button(), BorderLayout.SOUTH);
+		
+		return panel;
+	}
+	public static JPanel cb_login_mini_textlabel() {
+		int width = 272;
+		int height = 37;
+		
+		JLabel la = new JLabel("로그아웃 됨");
+		
+		JPanel panel = new JPanel();
+		panel.setSize(new Dimension(width, height));
+		panel.setBackground(null);
+		
+		// add()
+		panel.add(la, BorderLayout.CENTER);
+		
+		return panel;
+	}
+	public static JPanel cb_login_mini_textfield() {
+		int width = 272;
+		int height = 81;
+		
+		// 책 정보 필드(String), 텍스트상자 크기(int)
+		String[] label = {"아이디 :", "비밀번호 :"};
+		int[] textfieldSize = {16, 15};
+		
+		// GridLayout 패널
+		JPanel panel = new JPanel();
+		panel.setPreferredSize(new Dimension(width, height));				// 패널 크기 설정
+		panel.setBorder(BorderFactory.createEmptyBorder(5, 13, 5, 13));		// 패널 여백 설정
+		panel.setBackground(null);									// 패널 배경 설정
+		panel.setLayout(new GridLayout(label.length, 1));
+				
+				
+		// add()
+		for (int i=0; i<label.length; i++) {	// 책 정보의 필드 수 만큼 반복
+					
+			// GridLayout 패널의 컴포넌트, FlowLayout 패널 
+			JPanel p = new JPanel();
+			p.setBackground(null);
+			p.setLayout(new FlowLayout(FlowLayout.LEFT));
+					
+			JLabel la = new JLabel(label[i]);
+			JTextField tf = new JTextField(textfieldSize[i]);
+					
+			p.add(la);
+			p.add(tf);
+			panel.add(p);
+		}
+				
+		return panel;
+	}
+	public static JPanel cb_login_mini_button() {
+		int width = 272;
+		int height = 37;
+		
+		JButton btn1 = new JButton("로그인");
+		JButton btn2 = new JButton("로그아웃");
+		
+		JPanel panel = new JPanel();
+		panel.setPreferredSize(new Dimension(width, height));				// 패널 크기 설정
+		panel.setBackground(null);											// 패널 배경 설정
+		panel.setLayout(new GridLayout(1, 2, 9, 0));						// 레이아웃 설정
+		panel.setBorder(BorderFactory.createEmptyBorder(3, 8, 3, 8));		// 패널 여백 설정
+		
+		// add()
+		panel.add(btn1);
+		panel.add(btn2);
+		
+		return panel;
+	}
 	// center_box : 도서 정보 -----------------------------------------------------------------------------------------------
-	private JScrollPane cb_bookInfos() {
+	public static JScrollPane cb_bookInfos() {
 		int width = 272;
 		int height = 500;
 		
@@ -319,7 +506,7 @@ public class GuiLibraryDesk extends JFrame{
 		scrolPanel.setBorder(null);
 		return scrolPanel;
 	}
-	private JPanel cb_bookInfos_data() {
+	public static JPanel cb_bookInfos_data() {
 		// 책 정보 필드(String), 텍스트상자 크기(int)
 		String[] label = {"제목 :", "저자 :", "장르 :", "출판 년도 :", "책 번호 :", "책 도서관 반입일 :"};
 		int[] textfieldSize = {16, 16, 16, 5, 14, 7};
@@ -348,7 +535,7 @@ public class GuiLibraryDesk extends JFrame{
 		
 		return panel;
 	}
-	private JPanel cb_bookInfos_state() {
+	public static JPanel cb_bookInfos_state() {
 		// 책 상태 정보 필드(String), 텍스트상자 크기(int)
 		String[] label = {"현재 대출자 :", "현재 예약자 :", "대출일 :", "반납입(연장횟수) :"};
 		int[] textfieldSize = {13, 13, 7, 7};
@@ -377,19 +564,9 @@ public class GuiLibraryDesk extends JFrame{
 		
 		return panel;
 	}
-	private JPanel cb_bookInfos2() {
-		int width = 291;
-		int height = 200;
-		
-		JPanel panel = new JPanel();
-		panel.setPreferredSize(new Dimension(width, height));				// 패널 크기 설정
-		panel.setBackground(Color.DARK_GRAY);									// 패널 배경 설정
-		panel.setLayout(new BorderLayout());
-		
-		return panel;
-	}
+	
 	// center_box : 사용자 정보 ---------------------------------------------------------------------------------------------
-	private JScrollPane cb_userInfos() {
+	public static JScrollPane cb_userInfos() {
 		int width = 272;
 		int height = 500;
 		
@@ -412,7 +589,7 @@ public class GuiLibraryDesk extends JFrame{
 		scrolPanel.setBorder(null);
 		return scrolPanel;
 	}
-	private JPanel cb_userInfos_data() {
+	public static JPanel cb_userInfos_data() {
 		// 책 정보 필드(String), 텍스트상자 크기(int)
 		String[] label = {"이름 :", "타입 :", "아이디 :", "비밀번호 :"};
 		int[] textfieldSize = {16, 16, 15, 14};
@@ -441,7 +618,7 @@ public class GuiLibraryDesk extends JFrame{
 		
 		return panel;
 	}
-	private JPanel cb_userInfos_books() {
+	public static JPanel cb_userInfos_books() {
 		// 책 상태 정보 필드(String), 텍스트상자 크기(int)
 		String[] label = {"대출도서(3) :", "예약도서(3) :", "연체도서(2) :"};
 		String[][] bookData = {
@@ -474,19 +651,8 @@ public class GuiLibraryDesk extends JFrame{
 		
 		return panel;
 	}
-	private JPanel cb_userInfos2() {
-		int width = 291;
-		int height = 200;
-		
-		JPanel panel = new JPanel();
-		panel.setPreferredSize(new Dimension(width, height));				// 패널 크기 설정
-		panel.setBackground(Color.MAGENTA);									// 패널 배경 설정
-		panel.setLayout(new BorderLayout());
-		
-		return panel;
-	}
 	// center_box : 도서 검색 -----------------------------------------------------------------------------------------------
-	private JPanel cb_searchBooks() {
+	public static JPanel cb_searchBooks() {
 		int width = 450;
 		int height = 451;
 		
@@ -502,7 +668,7 @@ public class GuiLibraryDesk extends JFrame{
 		
 		return panel;
 	}
-	private JPanel cb_searchBooks_north() {
+	public static JPanel cb_searchBooks_north() {
 		int width = 410;
 		int height = 58; // 32 + 23 = 62
 		
@@ -519,7 +685,7 @@ public class GuiLibraryDesk extends JFrame{
 		
 		return panel;
 	}
-	private JPanel cb_searchBooks_north_box1() {
+	public static JPanel cb_searchBooks_north_box1() {
 		int width = 215;
 		int height = 35;
 		
@@ -537,7 +703,7 @@ public class GuiLibraryDesk extends JFrame{
 		
 		return panel;
 	}
-	private JPanel cb_searchBooks_north_box2() {
+	public static JPanel cb_searchBooks_north_box2() {
 		int width = 195;
 		int height = 35;
 		
@@ -554,7 +720,7 @@ public class GuiLibraryDesk extends JFrame{
 		
 		return panel;
 	}
-	private JPanel cb_searchBooks_north_box3() {
+	public static JPanel cb_searchBooks_north_box3() {
 		int width = 410;
 		int height = 23;
 		
@@ -575,7 +741,7 @@ public class GuiLibraryDesk extends JFrame{
 		
 		return panel;
 	}
-	private JPanel cb_searchBooks_center() {
+	public static JPanel cb_searchBooks_center() {
 		int width = 410;
 		int height = 338;
 		
@@ -590,12 +756,12 @@ public class GuiLibraryDesk extends JFrame{
 		
 		return panel;
 	}
-	private JScrollPane cb_searchBooks_center_table() {
-		String[] header = {"제목", "책 번호", "대출상태"};
+	public static JScrollPane cb_searchBooks_center_table() {
+		String[] header = {"제목", "책 번호", "대출 가능", "예약 가능", "대출 상태", "예약 상태"};
 		String[][] contents = {
-			{"자료구조", "12340000", "Y"},
-			{"이산수학", "12340001", "N"},
-			{"자바", "12129999", "Y"}
+			{"자료구조", "12340000", "Y", "Y", "N", "N"},
+			{"이산수학", "12340001", "N" , "Y", "Y", "N"},
+			{"자바", "12129999", "N", "N", "N", "Y"}
 		};
 		JTable table = new JTable(contents, header);
 		
@@ -603,7 +769,7 @@ public class GuiLibraryDesk extends JFrame{
 		return panel;
 	}
 	// center_box : 사용자 검색 ---------------------------------------------------------------------------------------------
-	private JPanel cb_searchUsers() {
+	public static JPanel cb_searchUsers() {
 		int width = 450;
 		int height = 451;
 		
@@ -619,7 +785,7 @@ public class GuiLibraryDesk extends JFrame{
 		
 		return panel;
 	}
-	private JPanel cb_searchUsers_north() {
+	public static JPanel cb_searchUsers_north() {
 		int width = 410;
 		int height = 58; // 32 + 23 = 62
 		
@@ -636,7 +802,7 @@ public class GuiLibraryDesk extends JFrame{
 		
 		return panel;
 	}
-	private JPanel cb_searchUsers_north_box1() {
+	public static JPanel cb_searchUsers_north_box1() {
 		int width = 215;
 		int height = 35;
 		
@@ -654,7 +820,7 @@ public class GuiLibraryDesk extends JFrame{
 		
 		return panel;
 	}
-	private JPanel cb_searchUsers_north_box2() {
+	public static JPanel cb_searchUsers_north_box2() {
 		int width = 195;
 		int height = 35;
 		
@@ -671,7 +837,7 @@ public class GuiLibraryDesk extends JFrame{
 		
 		return panel;
 	}
-	private JPanel cb_searchUsers_north_box3() {
+	public static JPanel cb_searchUsers_north_box3() {
 		int width = 410;
 		int height = 23;
 		
@@ -691,7 +857,7 @@ public class GuiLibraryDesk extends JFrame{
 		
 		return panel;
 	}
-	private JPanel cb_searchUsers_center() {
+	public static JPanel cb_searchUsers_center() {
 		int width = 410;
 		int height = 338;
 		
@@ -706,7 +872,7 @@ public class GuiLibraryDesk extends JFrame{
 		
 		return panel;
 	}
-	private JScrollPane cb_searchUsers_center_table() {
+	public static JScrollPane cb_searchUsers_center_table() {
 		String[] header = {"이름", "아이디", "타입"};
 		String[][] contents = {
 			{"김건아", "rtguna@naver.com", "Patron"},
@@ -719,7 +885,7 @@ public class GuiLibraryDesk extends JFrame{
 		return panel;
 	}
 	// EmptyPanel --------------------------------------------------------------------------------------------------------
-	private JPanel EmptyPanel() {
+	public static JPanel EmptyPanel() {
 		JPanel panel = new JPanel();
 		panel.setBackground(null);
 		return panel;
