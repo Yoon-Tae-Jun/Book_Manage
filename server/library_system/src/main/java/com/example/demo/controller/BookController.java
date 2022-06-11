@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +16,7 @@ import com.example.demo.JsonForm.Responses.ListResponse;
 import com.example.demo.JsonForm.Responses.SingleResponse;
 import com.example.demo.exception.exceptions.BookNotFoundException;
 import com.example.demo.exception.exceptions.BookisEmptyException;
+import com.example.demo.exception.exceptions.ParamValueException;
 import com.example.demo.mapper.BookMapper;
 import com.example.demo.model.Book;
 
@@ -48,6 +50,44 @@ public class BookController {
 		}
 		else {
 			throw new BookisEmptyException();
+		}
+	}
+	
+	@PostMapping("book/search/{column}")
+	public ListResponse<Book> getBookOption(@PathVariable("column") String column_Type, @RequestParam("value") String value){
+		int type = Integer.parseInt(column_Type);
+		String column = "";
+		//라디오박스 값 체크
+		switch (type) {
+		case 0:
+			column = "BookName";
+			break;
+		case 1:
+			column = "BookAuthor";
+			break;
+		case 2:
+			column = "BookGenre";
+			break;
+		case 3:
+			column = "PublicationYear";
+			break;
+		case 4:
+			column = "BookID";
+			break;
+		default:
+			throw new ParamValueException();
+		}
+		
+		System.out.println(column + "  "+ value);
+		List<Book> result = mapper.getBookOption(column, value);
+		System.out.println(result.isEmpty());
+		
+		//검색 후 값 검사
+		if(!result.isEmpty()) {
+			return new ResponseService().getLListResult(result);
+		}
+		else {
+			throw new BookNotFoundException();
 		}
 	}
 	

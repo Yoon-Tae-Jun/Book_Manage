@@ -9,9 +9,10 @@ public class Book {
 	private boolean isReserve;
 	private String ownUser;
 	private String ImageURL;
-
+	private String PublicationYear;
+	
 	public Book(String BookId, String BookName, String BookAuthor, int BookGenre, boolean isLoan, boolean isReserve,
-			String ownUser, String ImageURL) {
+			String ownUser, String ImageURL, String PublicationYear) {
 		super();
 		this.BookId = BookId;
 		this.BookName = BookName;
@@ -21,6 +22,7 @@ public class Book {
 		this.isReserve = isReserve;
 		this.ownUser = ownUser;
 		this.ImageURL = ImageURL;
+		this.PublicationYear = PublicationYear;
 	}
 	
 	public String getBookId() {
@@ -70,6 +72,14 @@ public class Book {
 	}
 	public void setImageURL(String imageURL) {
 		ImageURL = imageURL;
+	}
+
+	public String getPublicationYear() {
+		return PublicationYear;
+	}
+
+	public void setPublicationYear(String publicationYear) {
+		PublicationYear = publicationYear;
 	}
 	
 	

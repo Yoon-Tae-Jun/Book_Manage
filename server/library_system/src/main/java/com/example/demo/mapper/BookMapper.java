@@ -21,6 +21,9 @@ public interface BookMapper {
 	@Select(Booksql.SELECT_BOOK_ALL)
 	List<Book> getBookList();
 	
+	@Select(Booksql.SELECT_BOOK_OPTION)
+	List<Book> getBookOption(@Param("column") String column, @Param("value") String value);
+	
 	@Insert(Booksql.INSERT_BOOK)
 	int insertBook(@Param("id") String id,@Param("bookName") String bookName, @Param("author") String Author, @Param("genre") int genre);
 	
@@ -29,4 +32,5 @@ public interface BookMapper {
 	
 	@Delete(Booksql.DELETE_BOOK)
 	int deleteBook(@Param("id") String id);
+	
 }
