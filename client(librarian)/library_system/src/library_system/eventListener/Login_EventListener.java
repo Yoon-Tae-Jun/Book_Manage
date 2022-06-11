@@ -53,8 +53,8 @@ public class Login_EventListener implements ActionListener {
 				user.setName((String)data.get("UserName"));
 				user.setUserType((String)data.get("userType"));
 				login_page.setVisible(false);
-				libraryDesk = new GuiLibraryDesk(user, login_page.getLibraryName());
-				
+				render.setDesk(new GuiLibraryDesk(user, login_page.getLibraryName()));
+				render.Change_screen();
 			}
 			else {
 				System.out.println("login fail");
