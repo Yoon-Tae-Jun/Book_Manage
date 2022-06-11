@@ -7,7 +7,6 @@ public class InfoBook {
 	
 	// 도서관 필드
 	private String id;			// 책 고유 번호
-	private Date addedDate;		// 책이 도서관에 추가된 날짜
 	
 	// 책 정보 필드
 	private String name;		// 책 이름
@@ -19,10 +18,9 @@ public class InfoBook {
 	
 	
 	// 생성자, 초기화 =============================================================================================
-	public InfoBook(String id, Date addedDate, String name, String author, String genre, String year, String image) {
+	public InfoBook(String id, String name, String author, String genre, String year, String image) {
 		// 기존 도서 만들때(불러올때) 사용
 		this.id = id;
-		this.addedDate = addedDate;
 		this.name = name;
 		this.author = author;
 		this.genre = genre;
@@ -32,7 +30,6 @@ public class InfoBook {
 	public InfoBook() {
 		// 비어있는 도서 만들때 사용
 		this.id = "unknown";
-		this.addedDate = new Date();	// 현재시간 저장
 		this.name = "unknown";
 		this.author = "unknown";
 		this.genre = "unknown";
@@ -40,22 +37,44 @@ public class InfoBook {
 		this.image = null;
 	}
 	
-	// 도서 정보 반환 =============================================================================================
-	public String 	getId() 		{return id;}
-	public String 	getAddedDate() 	{
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		return sdf.format(addedDate);
+	//getter, setter
+	public String getId() {
+		return id;
 	}
-	public String 	getName() 		{return name;}
-	public String 	getAuthor() 	{return author;}
-	public String 	getGenre() 		{return genre;}
-	public String 	getYear() 		{return year;}
-	public String   getimage()		{return image;}
-	// 도서 정보 수정 =============================================================================================
-	public void updateId(String id)					{this.id = id;}
-	public void updateName(String name)				{this.name = name;}
-	public void updateAuthor(String author)			{this.author = author;}
-	public void updateGenre(String genre)			{this.genre = genre;}
-	public void updateYear(String year)				{this.year = year;}
-	public void updateimage(String image)			{this.image = image;}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getAuthor() {
+		return author;
+	}
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+	public String getGenre() {
+		return genre;
+	}
+	public void setGenre(String genre) {
+		this.genre = genre;
+	}
+	public String getYear() {
+		return year;
+	}
+	public void setYear(String year) {
+		this.year = year;
+	}
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
+	}
+	
+
+
 }
