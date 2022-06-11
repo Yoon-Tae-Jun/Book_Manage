@@ -1,7 +1,12 @@
 package library_system.layout;
 import library_system.eventListener.*;
+import API.*;
 import java.awt.*;
 import javax.swing.*;
+
+import org.json.simple.JSONObject;
+
+import API.Call_API;
 
 public class GuiLibraryDesk extends JFrame{
 	
@@ -16,7 +21,7 @@ public class GuiLibraryDesk extends JFrame{
 		new GuiLibraryDesk("CSE Library");
 	}
 	
-	// main ------------------------------------------------------------------------------------------------------------
+	// 생성자 ------------------------------------------------------------------------------------------------------------
 	public GuiLibraryDesk(String libraryName) {
 		this.libraryName = libraryName;
 		
@@ -83,9 +88,10 @@ public class GuiLibraryDesk extends JFrame{
 		int width = 801;
 		int height = 60;
 		
+		// event
 		JButton btn = new JButton(libraryName);
 		btn.addMouseListener(new GoToMain(this));
-		
+				
 		JPanel panel = new JPanel();
 		panel.setPreferredSize(new Dimension(width, height));				// 패널 크기 설정
 		panel.setBackground(null);											// 패널 배경 설정
@@ -758,13 +764,10 @@ public class GuiLibraryDesk extends JFrame{
 		
 		return panel;
 	}
-	public JScrollPane cb_searchBooks_center_table() {
+	public JScrollPane cb_searchBooks_center_table() {		
 		String[] header = {"제목", "책 번호", "대출 가능", "예약 가능", "대출 상태", "예약 상태"};
-		String[][] contents = {
-			{"자료구조", "12340000", "Y", "Y", "N", "N"},
-			{"이산수학", "12340001", "N" , "Y", "Y", "N"},
-			{"자바", "12129999", "N", "N", "N", "Y"}
-		};
+		String[][] contents = {};
+		//String[][] contents = APIMethod.getBooksData(header);
 		JTable table = new JTable(contents, header);
 		
 		JScrollPane panel = new JScrollPane(table);
