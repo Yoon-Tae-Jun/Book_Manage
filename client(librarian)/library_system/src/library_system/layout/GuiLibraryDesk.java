@@ -148,6 +148,8 @@ public class GuiLibraryDesk extends JFrame{
 		btn_add = new JButton("추가");
 		btn_del = new JButton("삭제");
 		btn_save = new JButton("저장");
+		btn_del.setEnabled(false);		// 버튼 비활성화 - 책 선택시 활성화
+		btn_save.setEnabled(false);
 		
 		la_borrowAndReserve = new JLabel("해당 기능을 사용하시려면, 로그인 해야 합니다.");
 		
@@ -157,6 +159,12 @@ public class GuiLibraryDesk extends JFrame{
 		btn_cancel_borrow = new JButton("대출취소");
 		btn_cancel_reserve = new JButton("예약취소");
 		btn_cancel_return = new JButton("반납취소");
+		btn_borrow.setEnabled(false);	// 버튼 비활성화 - 로그인시 활성화
+		btn_reserve.setEnabled(false);
+		btn_return.setEnabled(false);
+		btn_cancel_borrow.setEnabled(false);
+		btn_cancel_reserve.setEnabled(false);
+		btn_cancel_return.setEnabled(false);
 		
 		la_bookInfo = new JLabel("도서 정보");
 		
@@ -175,6 +183,7 @@ public class GuiLibraryDesk extends JFrame{
 		
 		btn_login = new JButton("로그인");
 		btn_logout = new JButton("로그아웃");
+		btn_logout.setEnabled(false);		// 버튼 비활성화 - 로그인 상태시 활성화
 		
 		la_book_Info = new JLabel("도서 정보");
 		la_book_Statement = new JLabel("도서 상태");
@@ -706,6 +715,7 @@ public class GuiLibraryDesk extends JFrame{
 			
 			la_book_2_info[i] = new JLabel(la_book_info_2_label[i]);
 			tf_book_2_info[i] = new JTextField(tf_book_info_2_size[i]);
+			tf_book_2_info[i].setEnabled(false); 	// 텍스트 필드 비활성화
 			
 			p.add(la_book_2_info[i]);
 			p.add(tf_book_2_info[i]);
@@ -732,6 +742,7 @@ public class GuiLibraryDesk extends JFrame{
 			
 			la_book_3_info[i] = new JLabel(la_book_info_3_label[i]);
 			tf_book_3_info[i] = new JTextField(tf_book_info_3_size[i]);
+			tf_book_3_info[i].setEnabled(false); 	// 텍스트 필드 비활성화
 			
 			p.add(la_book_3_info[i]);
 			p.add(tf_book_3_info[i]);
@@ -779,6 +790,7 @@ public class GuiLibraryDesk extends JFrame{
 			
 			la_book_4_info[i] = new JLabel(la_book_info_4_label[i]);
 			tf_book_4_info[i] = new JTextField(tf_book_info_4_size[i]);
+			tf_book_4_info[i].setEnabled(false); 	// 텍스트 필드 비활성화
 			
 			p.add(la_book_4_info[i]);
 			p.add(tf_book_4_info[i]);
