@@ -17,6 +17,7 @@ public class GuiLibraryDesk extends JFrame{
 	private int width = 1000;
 	private int height = 650;
 	
+	private Users librarian;        //사서 정보
 	private Book[] books;			// 불러온 도서들
 	private Book bookSelected;
 	private Users[] users;			// 불러온 사용자들
@@ -24,33 +25,30 @@ public class GuiLibraryDesk extends JFrame{
 	
 	//컨포넌트
 	
-	// GUI test
-	public static void main(String[] args) {
-		new GuiLibraryDesk("CSE Library");
-	}
+
 	
 	// 컴포넌트 -----------------------------------------------------------------------------------------------------------
-	JButton btn_libraryName;
-	JButton btn_myAccount;
-	JButton btn_1;
-	JButton btn_2;
-	JButton btn_3;
-	JButton btn_1u;
-	JButton btn_2u;
-	JButton btn_3u;
+	public JButton btn_libraryName;
+	public JButton btn_myAccount;
+	public JButton btn_1;
+	public JButton btn_2;
+	public JButton btn_3;
+	public JButton btn_1u;
+	public JButton btn_2u;
+	public JButton btn_3u;
 
-	JButton btn_add;
-	JButton btn_del;
-	JButton btn_save;
+	public JButton btn_add;
+	public JButton btn_del;
+	public JButton btn_save;
 
-	JLabel la_borrowAndReserve;
+	public JLabel la_borrowAndReserve;
 	
-	JButton btn_borrow;
-	JButton btn_reserve;
-	JButton btn_return;
-	JButton btn_cancel_borrow;
-	JButton btn_cancel_reserve;
-	JButton btn_cancel_return;
+	public JButton btn_borrow;
+	public JButton btn_reserve;
+	public JButton btn_return;
+	public JButton btn_cancel_borrow;
+	public JButton btn_cancel_reserve;
+	public JButton btn_cancel_return;
 	
 	JLabel la_bookInfo;
 	
@@ -129,7 +127,8 @@ public class GuiLibraryDesk extends JFrame{
 	JTable table_2;
 	
 	// 생성자 ------------------------------------------------------------------------------------------------------------
-	public GuiLibraryDesk(String libraryName) {
+	public GuiLibraryDesk(Users librarian,String libraryName) {
+		this.librarian = librarian;
 		this.libraryName = libraryName;
 		
 		// 컴포넌트
@@ -251,12 +250,12 @@ public class GuiLibraryDesk extends JFrame{
 		table_2 = new JTable(tb_contents_2, tb_header_2);
 		
 		// event
-		btn_libraryName.addMouseListener(new GoToMain(this));	// 메인 페이지로 이동 (도서)
-		btn_myAccount.addMouseListener(new GoToMain2(this));		// 메인 페이지로 이동 (사용자)
+		//btn_libraryName.addMouseListener(new GoToMain(this));	// 메인 페이지로 이동 (도서)
+		//btn_myAccount.addMouseListener(new GoToMain2(this));		// 메인 페이지로 이동 (사용자)
 		
-		btn_1.addMouseListener(new ChangeCenterBox(this));
-		btn_2.addMouseListener(new ChangeCenterBox(this));
-		btn_3.addMouseListener(new ChangeCenterBox(this));
+		//btn_1.addMouseListener(new ChangeCenterBox(this));
+		//btn_2.addMouseListener(new ChangeCenterBox(this));
+		//btn_3.addMouseListener(new ChangeCenterBox(this));
 		
 		// this
 		setTitle(this.libraryName);							// 창 이름
@@ -1034,5 +1033,38 @@ public class GuiLibraryDesk extends JFrame{
 		JPanel panel = new JPanel();
 		panel.setBackground(null);
 		return panel;
+	}
+
+	//getter, setter
+	public Book[] getBooks() {
+		return books;
+	}
+
+	public void setBooks(Book[] books) {
+		this.books = books;
+	}
+
+	public Book getBookSelected() {
+		return bookSelected;
+	}
+
+	public void setBookSelected(Book bookSelected) {
+		this.bookSelected = bookSelected;
+	}
+
+	public Users[] getUsers() {
+		return users;
+	}
+
+	public void setUsers(Users[] users) {
+		this.users = users;
+	}
+
+	public Users getUserSelected() {
+		return userSelected;
+	}
+
+	public void setUserSelected(Users userSelected) {
+		this.userSelected = userSelected;
 	}
 }

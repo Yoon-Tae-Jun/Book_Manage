@@ -7,8 +7,9 @@ public class LibraryApp {
 
 	public static void main(String[] args) {
 		
-		Library cseLibrary = new Library("cseLibrary");		// "cse"도서관 생성
-		cseLibrary.run();						// 해당 도서관 프로그램 실행
+		//Library cseLibrary = new Library("cseLibrary");		// "cse"도서관 생성
+		//cseLibrary.run();		// 해당 도서관 프로그램 실행
+		Render render = new Render();
 	}
 
 }

@@ -10,16 +10,22 @@ import org.json.simple.JSONObject;
 
 import API.*;
 import library_system.LibraryDesk;
+import library_system.Render;
+import library_system.layout.GuiLibraryDesk;
 import library_system.layout.GuiLoginPage;
 import library_users.Users;
 
 public class Login_EventListener implements ActionListener {
 	
-
-	private GuiLoginPage mine;
-	public Login_EventListener(GuiLoginPage mine)
+	private Render render;
+	private GuiLoginPage login_page;
+	private GuiLibraryDesk libraryDesk;
+	
+	public Login_EventListener(Render render)
 	{
-		this.mine = mine;
+		this.render = render;
+		this.login_page = this.render.getLogin();
+		this.libraryDesk = this.render.getDesk();
 	}
 	
 	@Override
@@ -32,8 +38,8 @@ public class Login_EventListener implements ActionListener {
 		
 		//파라메터 정보
 		HashMap<String, String> option = new HashMap<String, String>();
-		option.put("userEmail", mine.getEmail_Text().getText());
-		option.put("password", mine.getPassword_Text().getText());
+		option.put("userEmail", login_page.getEmail_Text().getText());
+		option.put("password", login_page.getPassword_Text().getText());
 		
 		try {
 			obj = api.POST("/login", option);
@@ -46,14 +52,14 @@ public class Login_EventListener implements ActionListener {
 				user.setId((String)data.get("userEmail"));
 				user.setName((String)data.get("UserName"));
 				user.setUserType((String)data.get("userType"));
-				mine.setVisible(false);
-				LibraryDesk ld = new LibraryDesk(user, mine.getLibraryName());
-				ld.run();
+				login_page.setVisible(false);
+				libraryDesk = new GuiLibraryDesk(user, login_page.getLibraryName());
+				
 			}
 			else {
 				System.out.println("login fail");
-				mine.getError_Text().setText("아이디나 비밀번호가 틀렸습니다.");
-				mine.getError_Text().setForeground(Color.RED);
+				login_page.getError_Text().setText("아이디나 비밀번호가 틀렸습니다.");
+				login_page.getError_Text().setForeground(Color.RED);
 			}
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block

@@ -63,7 +63,6 @@ public class GuiLoginPage extends JFrame {
 		LeftBox.add(EmptyPanel());
 		LeftBox.add(EmptyPanel());
 		LeftBox.add(login_Button);
-		login_Button.addActionListener(new Login_EventListener(this ));
 		return LeftBox;
 	}
 	
@@ -122,7 +121,10 @@ public class GuiLoginPage extends JFrame {
 	public JLabel getError_Text() {
 		return error_Text;
 	}
-
+	
+	public JButton getLogin_Button() {
+		return login_Button;
+	}
 
 
 }
