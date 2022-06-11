@@ -9,13 +9,13 @@ import library_system.layout.GuiLoginPage;
 
 public class Render {
 	private GuiLibraryDesk desk;
-	private GuiLoginPage login;
+	private GuiLoginPage login ;
 	
 	public Render() {
-		login = new GuiLoginPage("SCH Library");
-		Login();
-		if(!(desk == null))
-			Change_screen();
+		//login = new GuiLoginPage("SCH Library");
+		//Login();
+		desk = new GuiLibraryDesk(null, "ss");
+		Change_screen();
 	}
 	
 	

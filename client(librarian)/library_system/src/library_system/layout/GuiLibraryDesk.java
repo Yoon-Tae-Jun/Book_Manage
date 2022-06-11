@@ -50,81 +50,81 @@ public class GuiLibraryDesk extends JFrame{
 	public JButton btn_cancel_reserve;
 	public JButton btn_cancel_return;
 	
-	JLabel la_bookInfo;
+	public JLabel la_bookInfo;
 	
 			// 책 정보 필드(String), 텍스트상자 크기(int)
-	String[] la_book_info_label;
-	int[] tf_book_info_size;
-	JLabel[] la_book_info;
-	JTextField[] tf_book_info;
+	public String[] la_book_info_label;
+	public int[] tf_book_info_size;
+	public JLabel[] la_book_info;
+	public JTextField[] tf_book_info;
 			
 
-	JLabel la_loginText;
+	public JLabel la_loginText;
 	
-	JLabel la_login_mini_id;
-	JLabel la_login_mini_pw;
-	JTextField tf_login_mini_id;
-	JTextField tf_login_mini_pw;
+	public JLabel la_login_mini_id;
+	public JLabel la_login_mini_pw;
+	public JTextField tf_login_mini_id;
+	public JTextField tf_login_mini_pw;
 	
-	JButton btn_login;
-	JButton btn_logout;
+	public JButton btn_login;
+	public JButton btn_logout;
 	
-	JLabel la_book_Info;
-	JLabel la_book_Statement;
+	public JLabel la_book_Info;
+	public JLabel la_book_Statement;
 		
 			// 책 정보 필드(String), 텍스트상자 크기(int)
-	String[] la_book_info_2_label;
-	int[] tf_book_info_2_size;
-	JLabel[] la_book_2_info;
-	JTextField[] tf_book_2_info;
+	public String[] la_book_info_2_label;
+	public int[] tf_book_info_2_size;
+	public JLabel[] la_book_2_info;
+	public JTextField[] tf_book_2_info;
 	
 			// 책 정보 필드(String), 텍스트상자 크기(int)
-	String[] la_book_info_3_label;
-	int[] tf_book_info_3_size;
-	JLabel[] la_book_3_info;
-	JTextField[] tf_book_3_info;
+	public String[] la_book_info_3_label;
+	public int[] tf_book_info_3_size;
+	public JLabel[] la_book_3_info;
+	public JTextField[] tf_book_3_info;
 	
 
-	JLabel la_userInfo;
-	JLabel la_userBookInfo;
+	public JLabel la_userInfo;
+	public JLabel la_userBookInfo;
 	
 		// 책 정보 필드(String), 텍스트상자 크기(int)
-	String[] la_book_info_4_label;
-	int[] tf_book_info_4_size;
-	JLabel[] la_book_4_info;
-	JTextField[] tf_book_4_info;
+	public String[] la_book_info_4_label;
+	public int[] tf_book_info_4_size;
+	public JLabel[] la_book_4_info;
+	public JTextField[] tf_book_4_info;
 	
 		// 책 정보 필드(String), 텍스트상자 크기(int)
-	String[] la_book_info_5_label;
-	String[][] cb_book_info_5_size;
-	JLabel[] la_book_5_info;
-	JComboBox[] cb_book_5_info;
+	public String[] la_book_info_5_label;
+	public String[][] cb_book_info_5_size;
+	public JLabel[] la_book_5_info;
+	public JComboBox[] cb_book_5_info;
 	
-	JLabel la_search;
-	JTextField tf_search;
+	public JLabel la_search;
+	public JTextField tf_search;
 
-	JButton btn_search;
+	public JButton btn_search;
 	
-	String[] radio_name_1;
-	JRadioButton[] rb_1;
-	ButtonGroup group_1;
+	public String[] radio_name_1;
+	public JRadioButton[] rb_1;
+	public ButtonGroup group_1;
 	
-	String[] tb_header_1;
-	String[][] tb_contents_1;
-	JTable table_1;
+	public String[] tb_header_1;
+	public String[][] tb_contents_1;
+	public JTable table_1;
 	
-	JLabel la_search_user;
-	JTextField tf_search_user;
+	public JLabel la_search_user;
+	public JTextField tf_search_user;
 
-	JButton btn_search_user;
+	public JButton btn_search_user;
 	
-	String[] radio_name_2;
-	JRadioButton[] rb_2;
-	ButtonGroup group_2;
+	public String[] radio_name_2;
+	public JRadioButton[] rb_2;
+	public ButtonGroup group_2;
 	
-	String[] tb_header_2;
-	String[][] tb_contents_2;
-	JTable table_2;
+	public String[] tb_header_2;
+	public String[][] tb_contents_2;
+	public JTable table_2;
 	
 	// 생성자 ------------------------------------------------------------------------------------------------------------
 	public GuiLibraryDesk(Users librarian,String libraryName) {
@@ -188,8 +188,8 @@ public class GuiLibraryDesk extends JFrame{
 		la_book_Statement = new JLabel("도서 상태");
 		
 				// 책 정보 필드(String), 텍스트상자 크기(int)
-		la_book_info_2_label = new String[] {"제목 :", "저자 :", "장르 :", "출판 년도 :", "책 번호 :", "책 도서관 반입일 :"};
-		tf_book_info_2_size = new int[] {16, 16, 16, 5, 14, 7};	
+		la_book_info_2_label = new String[] {"제목 :", "저자 :", "장르 :", "출판 년도 :", "책 번호 :"};
+		tf_book_info_2_size = new int[] {16, 16, 16, 5, 14};	
 		la_book_2_info = new JLabel[la_book_info_2_label.length];
 		tf_book_2_info = new JTextField[tf_book_info_2_size.length];
 		
@@ -450,7 +450,7 @@ public class GuiLibraryDesk extends JFrame{
 		
 		JPanel panel = new JPanel();
 		panel.setPreferredSize(new Dimension(width, height));				// 패널 크기 설정
-		panel.setBackground(null);									// 패널 배경 설정
+		panel.setBackground(Color.WHITE);									// 패널 배경 설정
 		panel.setLayout(new BorderLayout());
 		panel.setBorder(BorderFactory.createMatteBorder(0, 3, 0, 0, new Color(239, 237, 239)));	// 패널 테두리 설정
 		
@@ -676,12 +676,12 @@ public class GuiLibraryDesk extends JFrame{
 	}
 	// center_box : 도서 정보 -----------------------------------------------------------------------------------------------
 	public JScrollPane cb_bookInfos() {
-		int width = 272;
+		int width = 270;
 		int height = 500;
 		
 		JPanel panel = new JPanel();
 		panel.setPreferredSize(new Dimension(width, height));				// 패널 크기 설정
-		panel.setBackground(null);									// 패널 배경 설정
+		panel.setBackground(Color.WHITE);									// 패널 배경 설정
 		panel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 10));					// 레이아웃 설정
 		panel.setBorder(BorderFactory.createEmptyBorder(13, 10, 13, 10));		// 패널 여백 설정
 		
@@ -752,12 +752,12 @@ public class GuiLibraryDesk extends JFrame{
 	
 	// center_box : 사용자 정보 ---------------------------------------------------------------------------------------------
 	public JScrollPane cb_userInfos() {
-		int width = 272;
+		int width = 270;
 		int height = 500;
 		
 		JPanel panel = new JPanel();
 		panel.setPreferredSize(new Dimension(width, height));				// 패널 크기 설정
-		panel.setBackground(null);											// 패널 배경 설정
+		panel.setBackground(Color.WHITE);											// 패널 배경 설정
 		panel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 10));			// 레이아웃 설정
 		panel.setBorder(BorderFactory.createEmptyBorder(13, 10, 13, 10));		// 패널 여백 설정
 		

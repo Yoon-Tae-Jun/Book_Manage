@@ -14,12 +14,12 @@ public class InfoBook {
 	private String author;		// 저자 
 	private String genre;		// 장르 
 	private String year;		// 출판년도 
-	// private ? image;			// 이미지 -- 태준이가 처리하기
+	private String image;			// 이미지 -- 태준이가 처리하기
 	
 	
 	
 	// 생성자, 초기화 =============================================================================================
-	public InfoBook(String id, Date addedDate, String name, String author, String genre, String year) {
+	public InfoBook(String id, Date addedDate, String name, String author, String genre, String year, String image) {
 		// 기존 도서 만들때(불러올때) 사용
 		this.id = id;
 		this.addedDate = addedDate;
@@ -27,6 +27,7 @@ public class InfoBook {
 		this.author = author;
 		this.genre = genre;
 		this.year = year;
+		this.image =image;
 	}
 	public InfoBook() {
 		// 비어있는 도서 만들때 사용
@@ -36,15 +37,7 @@ public class InfoBook {
 		this.author = "unknown";
 		this.genre = "unknown";
 		this.year = "unknown";
-	}
-	public InfoBook(InfoBook ib) {
-		// 기존 객체로 책 정보 초기화
-		this.id = ib.id;
-		this.addedDate = ib.addedDate;
-		this.name = ib.name;
-		this.author = ib.author;
-		this.genre = ib.genre;
-		this.year = ib.year;
+		this.image = null;
 	}
 	
 	// 도서 정보 반환 =============================================================================================
@@ -56,12 +49,13 @@ public class InfoBook {
 	public String 	getName() 		{return name;}
 	public String 	getAuthor() 	{return author;}
 	public String 	getGenre() 		{return genre;}
-	public String 		getYear() 		{return year;}
-	
+	public String 	getYear() 		{return year;}
+	public String   getimage()		{return image;}
 	// 도서 정보 수정 =============================================================================================
 	public void updateId(String id)					{this.id = id;}
 	public void updateName(String name)				{this.name = name;}
 	public void updateAuthor(String author)			{this.author = author;}
 	public void updateGenre(String genre)			{this.genre = genre;}
-	public void udpateYear(String year)				{this.year = year;}
+	public void updateYear(String year)				{this.year = year;}
+	public void updateimage(String image)			{this.image = image;}
 }
