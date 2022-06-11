@@ -53,6 +53,7 @@ public class GuiLibraryDesk extends JFrame{
 		panel.add(west_box_library(), BorderLayout.WEST); // west_box_library(), west_box_user()
 		panel.add(center_box(), BorderLayout.CENTER); // center_box(), cb_borrowAndReturn(), cb_books(), cb_users()
 		
+		
 		return panel;
 	}
 	
@@ -83,6 +84,7 @@ public class GuiLibraryDesk extends JFrame{
 		int height = 60;
 		
 		JButton btn = new JButton(libraryName);
+		btn.addMouseListener(new GoToMain(this));
 		
 		JPanel panel = new JPanel();
 		panel.setPreferredSize(new Dimension(width, height));				// 패널 크기 설정
