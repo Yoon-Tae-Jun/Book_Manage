@@ -1,5 +1,8 @@
 package library_system.layout;
 import library_system.eventListener.*;
+import library_books.*;
+import library_users.*;
+
 import API.*;
 import java.awt.*;
 import javax.swing.*;
@@ -13,6 +16,11 @@ public class GuiLibraryDesk extends JFrame{
 	private String libraryName;
 	private int width = 1000;
 	private int height = 650;
+	
+	private Book[] books;			// 불러온 도서들
+	private Book bookSelected;
+	private Users[] users;			// 불러온 사용자들
+	private Users userSelected;
 	
 	//컨포넌트
 	
@@ -127,7 +135,7 @@ public class GuiLibraryDesk extends JFrame{
 		// 컴포넌트
 		btn_libraryName = new JButton(libraryName);
 		
-		btn_myAccount = new JButton("내 계정");
+		btn_myAccount = new JButton("계정");
 		
 		btn_1 = new JButton("1. 대출, 반납");
 		btn_2 = new JButton("2. 도서 관련");
@@ -234,7 +242,9 @@ public class GuiLibraryDesk extends JFrame{
 		table_2 = new JTable(tb_contents_2, tb_header_2);
 		
 		// event
-		btn_libraryName.addMouseListener(new GoToMain(this));
+		btn_libraryName.addMouseListener(new GoToMain(this));	// 메인 페이지로 이동 (도서)
+		btn_myAccount.addMouseListener(new GoToMain2(this));		// 메인 페이지로 이동 (사용자)
+		
 		btn_1.addMouseListener(new ChangeCenterBox(this));
 		btn_2.addMouseListener(new ChangeCenterBox(this));
 		btn_3.addMouseListener(new ChangeCenterBox(this));

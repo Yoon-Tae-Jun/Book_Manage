@@ -13,11 +13,14 @@ public class GoToMain extends MouseAdapter  {
 	public void mouseClicked(MouseEvent e) {
 		JButton btn = (JButton)e.getSource();
 		JPanel panel = (JPanel)btn.getParent().getParent().getParent();
+		BorderLayout l = (BorderLayout)panel.getLayout();
 		
-		panel.removeAll();
-		panel.add(ld.north_box(), BorderLayout.NORTH);
-		panel.add(ld.west_box_library(), BorderLayout.WEST);
+		panel.remove(l.getLayoutComponent(BorderLayout.CENTER));
+		panel.remove(l.getLayoutComponent(BorderLayout.WEST));
+		
 		panel.add(ld.center_box(), BorderLayout.CENTER);
+		panel.add(ld.west_box_library(), BorderLayout.WEST);
+		
 		panel.revalidate();
 		panel.repaint();
 	}
