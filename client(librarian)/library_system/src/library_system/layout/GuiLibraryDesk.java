@@ -212,12 +212,8 @@ public class GuiLibraryDesk extends JFrame{
 		group_1 = new ButtonGroup();
 		
 		tb_header_1 = new String[] {"제목", "책 번호", "대출 가능", "예약 가능", "대출 상태", "예약 상태"};
-		tb_contents_1 = new String[][]{
-				{"자료구조", "12340000", "Y", "Y", "N", "N"},
-				{"이산수학", "12340001", "N" , "Y", "Y", "N"},
-				{"자바", "12129999", "N", "N", "N", "Y"}
-		};
-		//tb_contents_1 = APIMethod.getBooksData(header);
+		tb_contents_1 = new String[][]{};
+		//tb_contents_1 = APIMethod.getBooksData(tb_header_1);
 		table_1 = new JTable(tb_contents_1, tb_header_1);
 		
 		la_search_user = new JLabel("검색 :");
