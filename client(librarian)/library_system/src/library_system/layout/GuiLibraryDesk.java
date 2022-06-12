@@ -217,7 +217,7 @@ public class GuiLibraryDesk extends JFrame{
 		
 		btn_search = new JButton("검색");
 		
-		radio_name_1 = new String[] {"제목", "저자", "책 번호", "대출자", "예약자"};
+		radio_name_1 = new String[] {"제목", "저자","장르","출판년도", "책 번호"};
 		rb_1 = new JRadioButton[radio_name_1.length];
 		group_1 = new ButtonGroup();
 		
@@ -1067,6 +1067,7 @@ public class GuiLibraryDesk extends JFrame{
 
 	// JTable 업데이트 : 데이터(Book[], Users[]) JTable에 채우기
 	public void updateJTableBooks() {
+		System.out.println(books.length);
 		tb_contents_1 = new String[books.length][tb_header_1.length];
 		
 		for(int i=0; i<books.length; i++) {

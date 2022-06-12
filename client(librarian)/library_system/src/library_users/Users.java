@@ -128,6 +128,9 @@ public class Users {
 	public void setOverdueBook() {
 		for (int i=0; i<borrowedCount; i++) {
 			String d = borrowedBook.get(i).getIbs().getBorrowedDate();
+			if(d == null) {
+				return;
+			}
 			if(OverdueCheck(d)) {
 				overdueBook.add(borrowedBook.get(i));
 			}

@@ -32,8 +32,7 @@ public class Login_EventListener implements ActionListener {
 	public void actionPerformed(ActionEvent e){
 		Users user = new Users();
 		user = APIMethod.getUserData(login_page.getEmail_Text().getText(),login_page.getPassword_Text().getText());
-		
-		if(user != null) {
+		if(user.getId() != null) {
 			login_page.setVisible(false);
 			render.setDesk(new GuiLibraryDesk(user, login_page.getLibraryName()));
 			render.Change_screen();

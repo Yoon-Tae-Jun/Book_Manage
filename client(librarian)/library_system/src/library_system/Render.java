@@ -13,11 +13,11 @@ public class Render {
 	private GuiLoginPage login ;
 	
 	public Render() {
-		//login = new GuiLoginPage("SCH Library");
-		//Login();
-		desk = new GuiLibraryDesk(null, "ss");
-		Change_screen();
-		APIMethod.getBooksData("2022", 3);
+		login = new GuiLoginPage("SCH Library");
+		Login();
+		//desk = new GuiLibraryDesk(null, "ss");
+		//Change_screen();
+		//APIMethod.getBooksData("2022", 3);
 	}
 	
 	

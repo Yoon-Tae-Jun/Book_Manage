@@ -12,7 +12,7 @@ import javax.swing.JRadioButton;
 import library_system.layout.GuiLibraryDesk;
 import library_books.*;
 import library_users.*;
-
+import API.APIMethod;
 // 체크된 라디오 버튼 이름으로 검색을 책과 사용자로 나누고
 // 검색 결과에 따라, 책 정보, 사용자 정보를 불러와 배열로 만들고 반환하기
 public class SearchData extends MouseAdapter{
@@ -41,9 +41,21 @@ public class SearchData extends MouseAdapter{
 		
 		if(is_book) {
 			// API 검색 : 검색어(SearchingWord_book)와 라디오버튼이름(checkedButtonName)으로 서버에서 검색하여 books에 저장
+			int check =0;
+			switch(checkedButtonName) {
+				case "저자":
+					check = 1;
+				case "장르":
+					check = 2;
+				case "출판년도":
+					check = 3;
+				case "책 번호":
+					check = 4;
+			}
+			desk.setBooks(APIMethod.getBooksData(SearchingWord_book,check));
 			
 			// books = "생성된 book[] 저장"
-			
+			//System.out.println(books.length);
 			desk.updateJTableBooks();	// JTable 업데이트(books에 저장된 도서들 JTable에 띄우기)
 		}
 		else {
