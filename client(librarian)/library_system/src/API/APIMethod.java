@@ -11,6 +11,8 @@ import library_books.Book;
 import library_books.InfoBook;
 import library_books.InfoBookStatement;
 import library_system.LibraryDesk;
+import library_system.layout.GuiLibraryDesk;
+import library_users.Patron;
 import library_users.Users;
 
 public class APIMethod {
@@ -79,11 +81,45 @@ public class APIMethod {
 	}
 	
 
-    public static Users[] getUsersData(String s, int sel) {
+    public static Users[] getUsersData(String id) {
         // 입력 : s = 검색 키워드,  sel = 라디오 버튼
         // 입력에 부합하는 조건을을 API로 검색하고, 해당 값들을 Users[]으로 만들어 리턴
         // 만약 검색결과가 없을시 비어있는 null 반환
 
         return null;
+    }
+    
+    public static Users getUserData(String id, String pw) {
+    	Users user = new Users();
+    	Call_API api = new API.Call_API();
+		JSONObject obj;
+		
+		HashMap<String, String> option = new HashMap<String, String>();
+		option.put("userEmail", id);
+		option.put("password", pw);
+		try {
+			obj = api.POST("/login", option);
+		
+			int statusCode = Integer.parseInt(String.valueOf(obj.get("statusCode")));
+			System.out.println(statusCode);
+			if(statusCode == 200) {
+				JSONObject data = (JSONObject) obj.get("data");
+				user.setId((String)data.get("userID"));
+				user.setPw((String)data.get("password"));
+				user.setEmail((String)data.get("userEmail"));
+				user.setName((String)data.get("UserName"));
+				user.setUserType((String)data.get("userType"));
+				user.
+			}
+			else {
+				System.out.println("login fail");
+			}
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		return user;
+		
+		
     }
 }

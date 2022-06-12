@@ -1,25 +1,54 @@
 package library_users;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+
+import library_books.Book;
+
 // 사용자 : Users
 // 전체 사용자 클래스
 // @건아
 public class Users {
-	protected String id;
-	protected String email;
-	protected String pw;
-	protected String name;
-	protected String userType;		// Patron, Librarian, Manager
+	private String id;
+	private String email;
+	private String pw;
+	private String name;
+	private String userType;		// Patron, Librarian, Manager
+	private int borrowedCount;						// 대출한 도서 수
+	private ArrayList<Book> borrowedBook;			// 대출한 도서 목록 (도서 id(String))
+	private int reservedCount;						// 예약한 도서 수
+	private ArrayList<Book> reservedBook;			// 예약된 도서 목록 (도서 id(String))
+	private int overdueCount;						// 연체된 도서 수
+	private ArrayList<Book> overdueBook; 			// 연체된 도서 목록 (도서 id(String))
+	private int MAX_borrowedCount;		// 최대 대출 가능 갯수
+	private int MAX_reservedCount;		// 최대 예약 가능 갯수
 	
 	// 생성자, 초기화 =============================================================================================
-	public Users(String id, String pw, String userType) {
+	public Users(String id, String pw, String userType, String email, ArrayList<Book> bB, ArrayList<Book> rB) {
 		this.id = id;
 		this.pw = pw;
 		this.name = "unknown";
 		this.userType = userType;
+		this.email = email;
+		borrowedBook = bB;
+		borrowedCount = borrowedBook.size();	// 현재 대출한 도서 수
+		reservedBook = rB;
+		reservedCount = reservedBook.size();	// 현재 예약된 도서 수
+		overdueBook = null;		
+		for (int i=0; i<borrowedCount; i++) {
+			String d = borrowedBook.get(i).getIbs().getBorrowedDate();
+			if(OverdueCheck(d)) {
+				overdueBook.add(borrowedBook.get(i));
+			}
+		}
 	}
 	public Users() {
 		id = null;
 		pw = null;
+		email = null;
 		name = "unknown";
 		userType = "unknown";
 	}
@@ -29,7 +58,7 @@ public class Users {
 	public String getId() 						{return id;}				// id 반환
 	public String getPw()						{return pw;}				// pw 반환
 	public String getUserType()					{return userType;}			// userType 반환
-	
+	public String getEmail()					{return email;}
 	// 사용자 정보 업데이트 메소드 ===================================================================================
 
 	public void setId(String id) {
@@ -44,6 +73,9 @@ public class Users {
 	public void setUserType(String userType) {
 		this.userType = userType;
 	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
 	// 기타 메소드 ===============================================================================================
 	public static String numToUserType(int i) {
@@ -52,4 +84,52 @@ public class Users {
 		else return null;
 	}
 
+	public boolean isOverdue() {	// 연체상태 반환
+		if(overdueCount != 0) return true;
+		else return false;
+	}
+	public boolean availableToBorrow() {	// 대출 가능여부 확인
+		if(borrowedCount < MAX_borrowedCount && !isOverdue()) return true;
+		else return false;
+	}
+	public boolean availableToReserve() {	// 대출 가능여부 확인 
+		if(reservedCount < MAX_reservedCount) return true;
+		else return false;
+	}
+	
+	//연체 체크
+	private boolean OverdueCheck(String d) {
+		Date date = null;
+		Date today = null;
+		Calendar now = Calendar.getInstance();
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		String nowTime = formatter.format(now.getTime());
+		try {
+			date = formatter.parse(d);
+			today = formatter.parse(nowTime);			
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		if (today.after(date)) {
+			return true;
+		}
+		return false;
+	}
+	
+	// getter, setter
+	public int getBorrowdNum() 					{return borrowedCount;}		// 대출한 도서 수 반환 
+	public int getReservedNum() 				{return reservedCount;}		// 예약한 도서 수 반환
+	public ArrayList<Book> getBorrowedBook()	{return borrowedBook;}		// 대출한 도서 반환
+	public ArrayList<Book> getReservedBook()	{return reservedBook;}		// 예약한 도서 반환
+	public ArrayList<Book> getOverdueBook()	{return overdueBook;}		// 연체된 도서 반환
+
+	public void setBorrowedBook(ArrayList<Book> borrowedBook) {
+		this.borrowedBook = borrowedBook;
+	}
+	public void setReservedBook(ArrayList<Book> reservedBook) {
+		this.reservedBook = reservedBook;
+	}
+	public void setOverdueBook(ArrayList<Book> overdueBook) {
+		this.overdueBook = overdueBook;
+	}
 }
