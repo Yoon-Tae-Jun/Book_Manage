@@ -118,7 +118,9 @@ public class Users {
 	public void setBorrowedBook(ArrayList<Book> borrowedBook) {
 		this.borrowedBook = borrowedBook;
 		this.borrowedCount = borrowedBook.size();
-		setOverdueBook();
+		if(borrowedCount != 0) {
+			setOverdueBook();			
+		}
 	}
 	public void setReservedBook(ArrayList<Book> reservedBook) {
 		this.reservedBook = reservedBook;
@@ -126,16 +128,19 @@ public class Users {
 	}
 	
 	public void setOverdueBook() {
+		int cnt =0;
 		for (int i=0; i<borrowedCount; i++) {
 			String d = borrowedBook.get(i).getIbs().getBorrowedDate();
+			
 			if(d == null) {
 				return;
 			}
 			if(OverdueCheck(d)) {
 				overdueBook.add(borrowedBook.get(i));
+				cnt++;
 			}
 		}
-		overdueCount = overdueBook.size(); 
+		overdueCount = cnt; 
 	}
 	public int getMAX_borrowedCount() {
 		return MAX_borrowedCount;

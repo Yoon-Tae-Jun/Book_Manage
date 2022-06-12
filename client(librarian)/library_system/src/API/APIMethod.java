@@ -150,16 +150,20 @@ public class APIMethod {
 					JSONObject data = (JSONObject)jsonAry.get(i);
 					InfoBook infobook = new InfoBook();
 					InfoBookStatement statement = new InfoBookStatement();
+					SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 					
 					//statement 받아오기
 					statement.setBorrowed((Boolean)data.get("borrowed"));
-					statement.setBorrowedDate((Date)data.get("borrowedDate"));
+					
+					String date = (String)data.get("borrowedDate");
+					statement.setBorrowedDate(format.parse(date));
 					statement.setBorrowedUser((String)data.get("borrowedUser"));
 					String buf = String.valueOf(data.get("cntExtension"));
 					statement.setExternDateCount(Integer.parseInt(buf));
 					statement.setReserved((Boolean)data.get("reserved"));
 					statement.setReservedUser((String)data.get("reservedUser"));
-					statement.setReturnDate((Date)data.get("returnDate"));
+					date = (String)data.get("returnDate");
+					statement.setReturnDate(format.parse(date));
 					
 					//infoBook 받아오기
 					infobook.setAuthor((String)data.get("bookAuthor"));
@@ -314,7 +318,9 @@ public class APIMethod {
 				buf = String.valueOf(data.get("maxReservedCount"));
 				user.setMAX_reservedCount(Integer.parseInt(buf));
 				Book[] books =getBorrowedBook(Integer.parseInt(user.getId()));
+				
 				ArrayList<Book> arrayList = new ArrayList<>(Arrays.asList(books));
+
 				user.setBorrowedBook(arrayList);
 				books = getReservedBook(Integer.parseInt(user.getId()));
 				arrayList = new ArrayList<>(Arrays.asList(books));
