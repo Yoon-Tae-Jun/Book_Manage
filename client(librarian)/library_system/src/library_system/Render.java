@@ -1,5 +1,6 @@
 package library_system;
 
+import javax.swing.JButton;
 import javax.swing.JRadioButton;
 
 import API.APIMethod;
@@ -39,7 +40,16 @@ public class Render {
 		// JTable 데이터 띄우기
 		desk.table_1.addMouseListener(new TableToBookData(desk));
 		desk.table_2.addMouseListener(new TableToUserData(desk));
-		// 도서관 이용자 로그인
+		// 도서관 이용자 로그인, 로그아웃
+		desk.btn_login.addActionListener(new Login_Patron(desk));
+		desk.btn_logout.addActionListener(new Logout_Patron(desk));
+		// 대출, 반납, 예약
+		desk.btn_borrow.addActionListener(new BorrowReverseReturn(desk));
+		desk.btn_reserve.addActionListener(new BorrowReverseReturn(desk));
+		desk.btn_return.addActionListener(new BorrowReverseReturn(desk));
+		desk.btn_cancel_borrow.addActionListener(new BorrowReverseReturn(desk));
+		desk.btn_cancel_reserve.addActionListener(new BorrowReverseReturn(desk));
+		desk.btn_cancel_return.addActionListener(new BorrowReverseReturn(desk));
 	}
 	
 	//getter, setter

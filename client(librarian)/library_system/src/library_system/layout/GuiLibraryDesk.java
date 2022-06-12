@@ -17,7 +17,8 @@ public class GuiLibraryDesk extends JFrame{
 	private int width = 1000;
 	private int height = 650;
 	
-	private Users librarian;        //사서 정보
+	private Users librarian;        // 로그인 된 사서 정보
+	private Users patron;			// 로그인 된 일반사용자 정보
 	private Book[] books;			// 불러온 도서들
 	private Book bookSelected;
 	private Users[] users;			// 불러온 사용자들
@@ -1139,6 +1140,9 @@ public class GuiLibraryDesk extends JFrame{
 		// 로그인 버튼
 		btn_login.setEnabled(true);
 		btn_logout.setEnabled(false);		// 로그인시 활성화
+		// 텍스트 필드 설정
+		la_borrowAndReserve.setText("해당 기능을 사용하시려면, 로그인 해야 합니다.");
+		la_loginText.setText("로그아웃 됨");
 	}
 	public void btn1_enabled_loggedin() {		// 1. 대출 버튼
 		// 검색 버튼
@@ -1154,6 +1158,9 @@ public class GuiLibraryDesk extends JFrame{
 		// 로그인 버튼
 		btn_login.setEnabled(false);
 		btn_logout.setEnabled(true);		// 로그인시 활성화
+		// 텍스트 필드 설정
+		la_borrowAndReserve.setText("");
+		la_loginText.setText("어서오세요 " + patron.getName() + "님");
 	}
 	public void btn2_enabled() {		// 2. 반납 버튼
 		// 검색 버튼
@@ -1169,6 +1176,9 @@ public class GuiLibraryDesk extends JFrame{
 		// 로그인 버튼
 		btn_login.setEnabled(true);
 		btn_logout.setEnabled(false);		// 로그인시 활성화
+		// 텍스트 필드 설정
+		la_borrowAndReserve.setText("해당 기능을 사용하시려면, 로그인 해야 합니다.");
+		la_loginText.setText("로그아웃 됨");
 	}
 	public void btn2_enabled_loggedin() {		// 2. 반납 버튼
 		// 검색 버튼
@@ -1184,6 +1194,9 @@ public class GuiLibraryDesk extends JFrame{
 		// 로그인 버튼
 		btn_login.setEnabled(false);
 		btn_logout.setEnabled(true);		// 로그인시 활성화
+		// 텍스트 필드 설정
+		la_borrowAndReserve.setText("");
+		la_loginText.setText("어서오세요 " + patron.getName() + "님");
 	}
 	public void btn3_enabled() {		// 3. 도서 관련 버튼
 		btn_add.setEnabled(true);
@@ -1227,5 +1240,13 @@ public class GuiLibraryDesk extends JFrame{
 
 	public void setUserSelected(Users userSelected) {
 		this.userSelected = userSelected;
+	}
+	
+	public Users getPatron() {
+		return patron;
+	}
+
+	public void setPatron(Users patron) {
+		this.patron = patron;
 	}
 }
