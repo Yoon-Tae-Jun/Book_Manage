@@ -235,10 +235,53 @@ public class APIMethod {
 		return books;
 	}
 	//user
-    public static Users[] getUsersData(String id) {
+    public static Users[] getUsersData(String s, int sel) {
+    	Users[] users = null;
+		String column = Integer.toString(sel);
+		Call_API api = new API.Call_API();
+		JSONObject obj;
+		HashMap<String, String> option = new HashMap<String, String>();
+		option.put("value", s);
+		try {
+			obj = api.POST("/user/search/"+column, option);
+			
+			int statusCode = Integer.parseInt(String.valueOf(obj.get("statusCode")));
+			System.out.println(statusCode);
+			if(statusCode == 200) {
+				JSONArray jsonAry = (JSONArray)obj.get("data");
+				users = new Users[jsonAry.size()];
+				for(int i=0; i<jsonAry.size(); i++) {
+					users[i] = new Users(); //북 객체 생성
+					JSONObject data = (JSONObject)jsonAry.get(i);
+					Users user = new Users();
+					user.setId((String)data.get("userID"));
+					user.setPw((String)data.get("password"));
+					user.setEmail((String)data.get("userEmail"));
+					user.setName((String)data.get("userName"));
+					user.setUserType((String)data.get("userType"));
+					String buf = String.valueOf(data.get("maxBorrowedCount"));
+					user.setMAX_borrowedCount(Integer.parseInt(buf));
+					buf = String.valueOf(data.get("maxReservedCount"));
+					user.setMAX_reservedCount(Integer.parseInt(buf));
+					Book[] books =getBorrowedBook(Integer.parseInt(user.getId()));
+					ArrayList<Book> arrayList = new ArrayList<>(Arrays.asList(books));
+					user.setBorrowedBook(arrayList);
+					books = getReservedBook(Integer.parseInt(user.getId()));
+					arrayList = new ArrayList<>(Arrays.asList(books));
+					user.setReservedBook(arrayList);
+				}
+				
+			}
+			else {
+				System.out.println("login fail");
+			}
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 
+		return users;
 
-        return null;
     }
     
     public static Users getUserData(String id, String pw) {
@@ -259,7 +302,7 @@ public class APIMethod {
 				user.setId((String)data.get("userID"));
 				user.setPw((String)data.get("password"));
 				user.setEmail((String)data.get("userEmail"));
-				user.setName((String)data.get("UserName"));
+				user.setName((String)data.get("userName"));
 				user.setUserType((String)data.get("userType"));
 				String buf = String.valueOf(data.get("maxBorrowedCount"));
 				user.setMAX_borrowedCount(Integer.parseInt(buf));
@@ -282,5 +325,42 @@ public class APIMethod {
 		return user;
 		
 		
+    }
+    
+    public static Users getUserDataID(String id) {
+    	Users user = new Users();
+    	Call_API api = new API.Call_API();
+		JSONObject obj;
+		
+		try {
+			obj = api.GET("/user/"+id);
+			int statusCode = Integer.parseInt(String.valueOf(obj.get("statusCode")));
+			System.out.println(statusCode);
+			if(statusCode == 200) {
+				JSONObject data = (JSONObject) obj.get("data");
+				user.setId((String)data.get("userID"));
+				user.setPw((String)data.get("password"));
+				user.setEmail((String)data.get("userEmail"));
+				user.setName((String)data.get("userName"));
+				user.setUserType((String)data.get("userType"));
+				String buf = String.valueOf(data.get("maxBorrowedCount"));
+				user.setMAX_borrowedCount(Integer.parseInt(buf));
+				buf = String.valueOf(data.get("maxReservedCount"));
+				user.setMAX_reservedCount(Integer.parseInt(buf));
+				Book[] books =getBorrowedBook(Integer.parseInt(user.getId()));
+				ArrayList<Book> arrayList = new ArrayList<>(Arrays.asList(books));
+				user.setBorrowedBook(arrayList);
+				books = getReservedBook(Integer.parseInt(user.getId()));
+				arrayList = new ArrayList<>(Arrays.asList(books));
+				user.setReservedBook(arrayList);
+			}
+			else {
+				System.out.println("login fail");
+			}
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		return user;
     }
 }

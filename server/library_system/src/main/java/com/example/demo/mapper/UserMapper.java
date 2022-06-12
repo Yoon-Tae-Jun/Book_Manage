@@ -22,4 +22,7 @@ public interface UserMapper {
 	
 	@Select(Usersql.GET_USER)
 	User getUser(@Param("id") String id);
+	
+	@Select(Usersql.GET_USER_OPTION)
+	List<User> getUserOption(@Param("column") String column, @Param("value") String value);
 }

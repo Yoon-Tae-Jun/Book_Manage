@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.JsonForm.ResponseService;
 import com.example.demo.JsonForm.Responses.ListResponse;
 import com.example.demo.JsonForm.Responses.SingleResponse;
+import com.example.demo.exception.exceptions.BookNotFoundException;
+import com.example.demo.exception.exceptions.ParamValueException;
 import com.example.demo.exception.exceptions.UserNotFoundException;
 import com.example.demo.mapper.UserMapper;
 import com.example.demo.model.Book;
@@ -73,6 +75,36 @@ public class LoginController {
 			return new ResponseService().getSingleResult(result);
 		}
 		else{
+			throw new UserNotFoundException();
+		}
+	}
+	
+	@PostMapping("user/search/{column}")
+	public ListResponse<User> getUserOption(@PathVariable("column") String column_Type, @RequestParam("value") String value){
+		int type = Integer.parseInt(column_Type);
+		String column = "";
+		//라디오박스 값 체크
+		switch (type) {
+		case 0:
+			column = "userName";
+			break;
+		case 1:
+			column = "userType";
+			break;
+		case 2:
+			column = "userID";
+			break;
+		default:
+			throw new ParamValueException();
+		}
+		
+
+		List<User> result = mapper.getUserOption(column, value);
+		//검색 후 값 검사
+		if(!result.isEmpty()) {
+			return new ResponseService().getLListResult(result);
+		}
+		else {
 			throw new UserNotFoundException();
 		}
 	}

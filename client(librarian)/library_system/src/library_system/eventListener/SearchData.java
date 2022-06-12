@@ -60,10 +60,33 @@ public class SearchData extends MouseAdapter{
 		}
 		else {
 			// API 검색 : 검색어(SearchingWord_user)와 라디오버튼이름(checkedButtonName)으로 서버에서 검색하여 users에 저장
+			Users[] users = null;
 			
+			Book[] books = null;
 			// users = "생성된 Users[] 저장"
-			
+			switch(checkedButtonName) {
+			case "이름":
+				users =APIMethod.getUsersData(SearchingWord_book, 0);
+			case "타입":
+				users =APIMethod.getUsersData(SearchingWord_book, 1);
+			case "아이디":
+				users =APIMethod.getUsersData(SearchingWord_book, 2);
+			case "대출도서":
+				books = APIMethod.getBooksData(SearchingWord_book, 0);
+				users = new Users[books.length];
+				for(int i=0; i< books.length; i++) {
+					users[i] = APIMethod.getUserDataID(books[i].getIbs().getBorrowedUser());
+				}
+			case "예약도서":
+				books = APIMethod.getBooksData(SearchingWord_book, 0);
+				users = new Users[books.length];
+				for(int i=0; i< books.length; i++) {
+					users[i] = APIMethod.getUserDataID(books[i].getIbs().getReservedUser());
+				}
+			}
+			desk.setUsers(users);
 			desk.updateJTableUsers();	// JTable 업데이트(users에 저장된 사용자들 JTable에 띄우기)
-		}
+			
+			}
 	}
 }
