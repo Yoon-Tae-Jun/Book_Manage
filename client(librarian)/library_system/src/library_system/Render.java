@@ -35,8 +35,8 @@ public class Render {
 		desk.btn_3.addMouseListener(new ChangeCenterBox(desk));
 		desk.btn_4.addMouseListener(new ChangeCenterBox(desk));
 		// 책, 사용자 검색
-		desk.btn_search.addMouseListener(new SearchData(desk));
-		desk.btn_search_user.addMouseListener(new SearchData(desk));
+		desk.btn_search.addMouseListener(new SearchBook(desk));
+		desk.btn_search_user.addMouseListener(new SearchUser(desk));
 		// JTable 데이터 띄우기
 		desk.table_1.addMouseListener(new TableToBookData(desk));
 		desk.table_2.addMouseListener(new TableToUserData(desk));

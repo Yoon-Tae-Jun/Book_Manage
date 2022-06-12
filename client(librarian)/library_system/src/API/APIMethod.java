@@ -1,6 +1,7 @@
 package API;
 
 import java.awt.Color;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -43,16 +44,19 @@ public class APIMethod {
 					JSONObject data = (JSONObject)jsonAry.get(i);
 					InfoBook infobook = new InfoBook();
 					InfoBookStatement statement = new InfoBookStatement();
-					
+					SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+					Date date;
 					//statement 받아오기
 					statement.setBorrowed((Boolean)data.get("borrowed"));
-					statement.setBorrowedDate((Date)data.get("borrowedDate"));
+					date = format.parse((String)data.get("borrowedDate"));
+					statement.setBorrowedDate(date);
 					statement.setBorrowedUser((String)data.get("borrowedUser"));
 					String buf = String.valueOf(data.get("cntExtension"));
 					statement.setExternDateCount(Integer.parseInt(buf));
 					statement.setReserved((Boolean)data.get("reserved"));
 					statement.setReservedUser((String)data.get("reservedUser"));
-					statement.setReturnDate((Date)data.get("returnDate"));
+					date = format.parse((String)data.get("returnDate"));
+					statement.setReturnDate((Date)data.get(date));
 					
 					//infoBook 받아오기
 					infobook.setAuthor((String)data.get("bookAuthor"));
@@ -253,24 +257,25 @@ public class APIMethod {
 				for(int i=0; i<jsonAry.size(); i++) {
 					users[i] = new Users(); //북 객체 생성
 					JSONObject data = (JSONObject)jsonAry.get(i);
-					Users user = new Users();
-					user.setId((String)data.get("userID"));
-					user.setPw((String)data.get("password"));
-					user.setEmail((String)data.get("userEmail"));
-					user.setName((String)data.get("userName"));
-					user.setUserType((String)data.get("userType"));
+					System.out.println((String)data.get("userID"));
+					users[i].setId((String)data.get("userID"));
+					users[i].setPw((String)data.get("password"));
+					users[i].setEmail((String)data.get("userEmail"));
+					users[i].setName((String)data.get("userName"));
+					users[i].setUserType((String)data.get("userType"));
 					String buf = String.valueOf(data.get("maxBorrowedCount"));
-					user.setMAX_borrowedCount(Integer.parseInt(buf));
+					users[i].setMAX_borrowedCount(Integer.parseInt(buf));
 					buf = String.valueOf(data.get("maxReservedCount"));
-					user.setMAX_reservedCount(Integer.parseInt(buf));
-					Book[] books =getBorrowedBook(Integer.parseInt(user.getId()));
+					users[i].setMAX_reservedCount(Integer.parseInt(buf));
+					Book[] books =getBorrowedBook(Integer.parseInt(users[i].getId()));
 					ArrayList<Book> arrayList = new ArrayList<>(Arrays.asList(books));
-					user.setBorrowedBook(arrayList);
-					books = getReservedBook(Integer.parseInt(user.getId()));
+					users[i].setBorrowedBook(arrayList);
+					books = getReservedBook(Integer.parseInt(users[i].getId()));
 					arrayList = new ArrayList<>(Arrays.asList(books));
-					user.setReservedBook(arrayList);
+					users[i].setReservedBook(arrayList);
+					System.out.println(users[i].getId());
 				}
-				
+
 			}
 			else {
 				System.out.println("login fail");

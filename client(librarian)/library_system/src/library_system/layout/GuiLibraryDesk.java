@@ -231,7 +231,7 @@ public class GuiLibraryDesk extends JFrame{
 		
 		btn_search_user = new JButton("검색");
 		
-		radio_name_2 = new String[] {"이름", "타입", "아이디", "대출도서", "예약도서", "연체도서"};
+		radio_name_2 = new String[] {"이름", "타입", "아이디", "대출도서", "예약도서"};
 		rb_2 = new JRadioButton[radio_name_2.length];
 		group_2 = new ButtonGroup();
 		

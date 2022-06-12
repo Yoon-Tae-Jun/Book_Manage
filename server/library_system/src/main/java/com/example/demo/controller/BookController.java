@@ -1,5 +1,8 @@
 package com.example.demo.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.JsonForm.ResponseService;
+import com.example.demo.JsonForm.Responses.BasicResponse;
 import com.example.demo.JsonForm.Responses.ListResponse;
 import com.example.demo.JsonForm.Responses.SingleResponse;
 import com.example.demo.exception.exceptions.BookNotFoundException;
@@ -99,10 +103,31 @@ public class BookController {
 		
 	}
 	
-	//책 수정
-	@PostMapping("/book/{id}")
-	public void postBook(@PathVariable("id") String id, @RequestParam("bookName") String bookName, @RequestParam("author") String Author, @RequestParam("genre") int genre) {
-		mapper.updateBook(id, bookName, Author, genre);
+	//책 대출
+	@PostMapping("/book/borrowed/{bookid}")
+	public BasicResponse postBook(@PathVariable("bookid") String bookId, @RequestParam("userID") String userID) {
+		Book result = mapper.getBook(bookId);
+		BasicResponse resultcode = new BasicResponse();
+		if(result.isBorrowed()) {
+			Calendar cal = Calendar.getInstance();
+			Date now = new Date();
+			cal.setTime(now);
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+			String now_dt = format.format(now);
+			cal.add(Calendar.DATE, 7);
+			String return_dt = format.format(cal.getTime()); 
+			mapper.borrowedBook(userID,now_dt, return_dt, bookId);
+			
+			resultcode.setMsg("대출 성공");
+			resultcode.setStatusCode(200);
+			return resultcode;
+		}
+		else {
+			resultcode.setMsg("대출 실패");
+			resultcode.setStatusCode(500);
+			return resultcode;
+		}
+		
 	}
 	
 	//책 삭제

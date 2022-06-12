@@ -27,8 +27,8 @@ public interface BookMapper {
 	@Insert(Booksql.INSERT_BOOK)
 	int insertBook(@Param("id") String id,@Param("bookName") String bookName, @Param("author") String Author, @Param("genre") int genre);
 	
-	@Update(Booksql.UPDATE_BOOK)
-	int updateBook(@Param("id") String id,@Param("bookName") String bookName, @Param("author") String Author, @Param("genre") int genre);
+	@Update(Booksql.BORROWED_BOOK)
+	int borrowedBook(@Param("userID") String userID, @Param("loandate") String loandate, @Param("returndate") String returndate, @Param("bookID") String bookID);
 	
 	@Delete(Booksql.DELETE_BOOK)
 	int deleteBook(@Param("id") String id);
