@@ -51,4 +51,15 @@ public class LoginController {
 		
 	}
 	
+	@GetMapping("/user/{id}")
+	public SingleResponse<User> getUser(@PathVariable("id") String id){
+		User result = mapper.getUser(id);
+		if (result != null)
+		{
+			return new ResponseService().getSingleResult(result);
+		}
+		else{
+			throw new UserNotFoundException();
+		}
+	}
 }

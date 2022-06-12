@@ -33,6 +33,7 @@ public class GuiLibraryDesk extends JFrame{
 	public JButton btn_1;
 	public JButton btn_2;
 	public JButton btn_3;
+	public JButton btn_4;
 	public JButton btn_1u;
 	public JButton btn_2u;
 	public JButton btn_3u;
@@ -136,9 +137,10 @@ public class GuiLibraryDesk extends JFrame{
 		
 		btn_myAccount = new JButton("계정");
 		
-		btn_1 = new JButton("1. 대출, 반납");
-		btn_2 = new JButton("2. 도서 관련");
-		btn_3 = new JButton("3. 사용자 관련");
+		btn_1 = new JButton("1. 대출");
+		btn_2 = new JButton("2. 반납");
+		btn_3 = new JButton("3. 도서 관련");
+		btn_4 = new JButton("4. 사용자 관련");
 		
 		btn_1u = new JButton("1. 사용자 관련 기능");
 		btn_2u = new JButton("2. 사용자 관련 기능");
@@ -147,8 +149,6 @@ public class GuiLibraryDesk extends JFrame{
 		btn_add = new JButton("추가");
 		btn_del = new JButton("삭제");
 		btn_save = new JButton("저장");
-		btn_del.setEnabled(false);		// 버튼 비활성화 - 책 선택시 활성화
-		btn_save.setEnabled(false);
 		
 		la_borrowAndReserve = new JLabel("해당 기능을 사용하시려면, 로그인 해야 합니다.");
 		
@@ -158,12 +158,6 @@ public class GuiLibraryDesk extends JFrame{
 		btn_cancel_borrow = new JButton("대출취소");
 		btn_cancel_reserve = new JButton("예약취소");
 		btn_cancel_return = new JButton("반납취소");
-		btn_borrow.setEnabled(false);	// 버튼 비활성화 - 로그인시 활성화
-		btn_reserve.setEnabled(false);
-		btn_return.setEnabled(false);
-		btn_cancel_borrow.setEnabled(false);
-		btn_cancel_reserve.setEnabled(false);
-		btn_cancel_return.setEnabled(false);
 		
 		la_bookInfo = new JLabel("도서 정보");
 		
@@ -182,7 +176,6 @@ public class GuiLibraryDesk extends JFrame{
 		
 		btn_login = new JButton("로그인");
 		btn_logout = new JButton("로그아웃");
-		btn_logout.setEnabled(false);		// 버튼 비활성화 - 로그인 상태시 활성화
 		
 		la_book_Info = new JLabel("도서 정보");
 		la_book_Statement = new JLabel("도서 상태");
@@ -223,7 +216,7 @@ public class GuiLibraryDesk extends JFrame{
 		
 		btn_search = new JButton("검색");
 		
-		radio_name_1 = new String[] {"제목", "저자", "장르", "출판년도", "책 번호", "대출자", "예약자"};
+		radio_name_1 = new String[] {"제목", "저자", "책 번호", "대출자", "예약자"};
 		rb_1 = new JRadioButton[radio_name_1.length];
 		group_1 = new ButtonGroup();
 		
@@ -288,7 +281,7 @@ public class GuiLibraryDesk extends JFrame{
 		// add()
 		panel.add(north_box(), BorderLayout.NORTH);
 		panel.add(west_box_library(), BorderLayout.WEST); // west_box_library(), west_box_user()
-		panel.add(center_box(), BorderLayout.CENTER); // center_box(), cb_borrowAndReturn(), cb_books(), cb_users()
+		panel.add(center_box(), BorderLayout.CENTER); // center_box(), cb_borrow() cb_return(), cb_books(), cb_users()
 		
 		
 		return panel;
@@ -363,6 +356,7 @@ public class GuiLibraryDesk extends JFrame{
 		panel.add(btn_1);
 		panel.add(btn_2);
 		panel.add(btn_3);
+		panel.add(btn_4);
 		return panel;
 	}
 	public JPanel west_box_user() {
@@ -395,8 +389,8 @@ public class GuiLibraryDesk extends JFrame{
 		
 		return panel;
 	}
-	// center_box : 대출, 반납 ---------------------------------------------------------------------------------------------
-	public JPanel cb_borrowAndReturn() {
+	// center_box : 대출 ---------------------------------------------------------------------------------------------
+	public JPanel cb_borrow() {
 		int width = 741;
 		int height = 451;
 		
@@ -407,11 +401,44 @@ public class GuiLibraryDesk extends JFrame{
 		
 		// add()
 		panel.add(cb_searchBooks(), BorderLayout.WEST);
-		panel.add(cb_borrowAndReturn_right_box(), BorderLayout.EAST);
+		panel.add(cb_borrow_right_box(), BorderLayout.EAST);
 		
 		return panel;
 	}
-	public JPanel cb_borrowAndReturn_right_box() {
+	public JPanel cb_borrow_right_box() {
+		int width = 291;
+		int height = 451;
+		
+		JPanel panel = new JPanel();
+		panel.setPreferredSize(new Dimension(width, height));				// 패널 크기 설정
+		panel.setBackground(null);									// 패널 배경 설정
+		panel.setLayout(new BorderLayout());
+		panel.setBorder(BorderFactory.createMatteBorder(0, 3, 0, 0, new Color(239, 237, 239)));	// 패널 테두리 설정
+		
+		// add()
+		panel.add(cb_bookInfos_mini(), BorderLayout.NORTH);
+		panel.add(cb_borrowAndReserve(), BorderLayout.CENTER);
+		panel.add(cb_login_mini(), BorderLayout.SOUTH);
+		
+		return panel;
+	}
+	// center_box : 반납 ---------------------------------------------------------------------------------------------
+	public JPanel cb_return() {
+		int width = 741;
+		int height = 451;
+		
+		JPanel panel = new JPanel();
+		panel.setPreferredSize(new Dimension(width, height));				// 패널 크기 설정
+		panel.setBackground(Color.WHITE);									// 패널 배경 설정
+		panel.setLayout(new BorderLayout());
+		
+		// add()
+		panel.add(cb_searchBooks(), BorderLayout.WEST);
+		panel.add(cb_return_right_box(), BorderLayout.EAST);
+		
+		return panel;
+	}
+	public JPanel cb_return_right_box() {
 		int width = 291;
 		int height = 451;
 		
@@ -1002,7 +1029,7 @@ public class GuiLibraryDesk extends JFrame{
 		// add()
 		for(int i=0; i<radio_name_2.length; i++) {
 			rb_2[i] = new JRadioButton(radio_name_2[i]);
-			rb_2[i].setActionCommand(radio_name_1[i]);
+			rb_2[i].setActionCommand(radio_name_2[i]);
 			group_2.add(rb_2[i]);
 			panel.add(rb_2[i]);
 		}
@@ -1095,6 +1122,78 @@ public class GuiLibraryDesk extends JFrame{
 		}
 		// 새로운 테이블 저장
 		table_2 = new JTable(tb_contents_2, tb_header_2);
+	}
+
+	// JButton 화성화
+	public void btn1_enabled() {		// 1. 대출 버튼
+		// 검색 버튼
+		tf_search.setEnabled(true);
+		btn_search.setEnabled(true);
+		// 대출 반납 예약 버튼
+		btn_borrow.setEnabled(false);			// 로그인시 활성화
+		btn_reserve.setEnabled(false);			// 로그인시 활성화
+		btn_return.setEnabled(false);
+		btn_cancel_borrow.setEnabled(false);	// 로그인시 활성화
+		btn_cancel_reserve.setEnabled(false);	// 로그인시 활성화
+		btn_cancel_return.setEnabled(false);
+		// 로그인 버튼
+		btn_login.setEnabled(true);
+		btn_logout.setEnabled(false);		// 로그인시 활성화
+	}
+	public void btn1_enabled_loggedin() {		// 1. 대출 버튼
+		// 검색 버튼
+		tf_search.setEnabled(true);
+		btn_search.setEnabled(true);
+		// 대출 반납 예약 버튼
+		btn_borrow.setEnabled(true);			// 로그인시 활성화
+		btn_reserve.setEnabled(true);			// 로그인시 활성화
+		btn_return.setEnabled(false);
+		btn_cancel_borrow.setEnabled(true);		// 로그인시 활성화
+		btn_cancel_reserve.setEnabled(true);	// 로그인시 활성화
+		btn_cancel_return.setEnabled(false);
+		// 로그인 버튼
+		btn_login.setEnabled(false);
+		btn_logout.setEnabled(true);		// 로그인시 활성화
+	}
+	public void btn2_enabled() {		// 2. 반납 버튼
+		// 검색 버튼
+		tf_search.setEnabled(false);
+		btn_search.setEnabled(false);
+		// 대출 반납 예약 버튼
+		btn_borrow.setEnabled(false);	
+		btn_reserve.setEnabled(false);			// 로그인시 활성화
+		btn_return.setEnabled(false);			// 로그인시 활성화
+		btn_cancel_borrow.setEnabled(false);
+		btn_cancel_reserve.setEnabled(false);	// 로그인시 활성화
+		btn_cancel_return.setEnabled(false);	// 로그인시 활성화
+		// 로그인 버튼
+		btn_login.setEnabled(true);
+		btn_logout.setEnabled(false);		// 로그인시 활성화
+	}
+	public void btn2_enabled_loggedin() {		// 2. 반납 버튼
+		// 검색 버튼
+		tf_search.setEnabled(false);
+		btn_search.setEnabled(false);
+		// 대출 반납 예약 버튼
+		btn_borrow.setEnabled(false);	
+		btn_reserve.setEnabled(true);			// 로그인시 활성화
+		btn_return.setEnabled(true);			// 로그인시 활성화
+		btn_cancel_borrow.setEnabled(false);
+		btn_cancel_reserve.setEnabled(true);	// 로그인시 활성화
+		btn_cancel_return.setEnabled(true);	// 로그인시 활성화
+		// 로그인 버튼
+		btn_login.setEnabled(false);
+		btn_logout.setEnabled(true);		// 로그인시 활성화
+	}
+	public void btn3_enabled() {		// 3. 도서 관련 버튼
+		btn_add.setEnabled(true);
+		btn_del.setEnabled(false);
+		btn_save.setEnabled(false);
+	}		
+	public void btn4_enabled() {		// 4. 사용자 관련 버튼
+		btn_add.setEnabled(true);
+		btn_del.setEnabled(false);
+		btn_save.setEnabled(false);
 	}
 	
 	//getter, setter

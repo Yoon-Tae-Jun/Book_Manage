@@ -14,7 +14,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 public class Call_API {
-	final private String API_URL = "http://Libraryserver-env-2.eba-yf973i6v.ap-northeast-2.elasticbeanstalk.com";
+	final private String API_URL = "http://Libraryserver-env.eba-yf973i6v.ap-northeast-2.elasticbeanstalk.com";
 	
 	
 	public JSONObject GET(String parameter) throws IOException {

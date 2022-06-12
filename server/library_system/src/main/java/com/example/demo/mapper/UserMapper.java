@@ -16,4 +16,7 @@ public interface UserMapper {
 	
 	@Select(Usersql.GET_BORROWED_LIST)
 	List<Book> getBorrowedBook(@Param("userName") String userName);
+	
+	@Select(Usersql.GET_USER)
+	User getUser(@Param("id") String id);
 }

@@ -2,7 +2,7 @@ package library_books;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.sql.*;
+
 public class InfoBookStatement {
 	private boolean isBorrowed;
 	private boolean isReserved;

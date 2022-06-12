@@ -5,6 +5,7 @@ package library_users;
 // @건아
 public class Users {
 	protected String id;
+	protected String email;
 	protected String pw;
 	protected String name;
 	protected String userType;		// Patron, Librarian, Manager
