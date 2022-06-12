@@ -20,8 +20,8 @@ public class GuiLibraryDesk extends JFrame{
 	private Users librarian;        //사서 정보
 	private Book[] books;			// 불러온 도서들
 	private Book bookSelected;
-	private Users[] users;			// 불러온 사용자들
-	private Users userSelected;
+	private Patron[] users;			// 불러온 사용자들
+	private Patron userSelected;
 	
 	//컨포넌트
 	
@@ -899,6 +899,7 @@ public class GuiLibraryDesk extends JFrame{
 		// add()
 		for(int i=0; i<radio_name_1.length; i++) {
 			rb_1[i] = new JRadioButton(radio_name_1[i]);
+			rb_1[i].setActionCommand(radio_name_1[i]);
 			group_1.add(rb_1[i]);
 			panel.add(rb_1[i]);
 		}
@@ -1001,6 +1002,7 @@ public class GuiLibraryDesk extends JFrame{
 		// add()
 		for(int i=0; i<radio_name_2.length; i++) {
 			rb_2[i] = new JRadioButton(radio_name_2[i]);
+			rb_2[i].setActionCommand(radio_name_1[i]);
 			group_2.add(rb_2[i]);
 			panel.add(rb_2[i]);
 		}
@@ -1035,6 +1037,66 @@ public class GuiLibraryDesk extends JFrame{
 		return panel;
 	}
 
+	// JTable 업데이트 : 데이터(Book[], Patron[]) JTable에 채우기
+	public void updateJTableBooks() {
+		tb_contents_1 = new String[books.length][tb_header_1.length];
+		
+		for(int i=0; i<books.length; i++) {
+			// tb_contents_1에다 필요한 책 정보 String 형태로 저장
+			String bookNmae = books[i].getIb().getName();	// 제목
+			String bookId = books[i].getIb().getId();		// 책 번호
+				// !대출중 && !예약중
+			String borrowState = "N";							// 대출 가능
+			String reserveState = "N";							// 예약 가능
+			String canBorrow = "Y";								// 대출 상태
+			String canReserve = "Y";							// 예약 상태
+			
+			boolean isBorrowed = books[i].getIbs().isBorrowed();
+			boolean isReserved = books[i].getIbs().isReserved();
+			
+			if(isBorrowed) {		// 대출중 && !예약중
+				borrowState = "Y";
+				reserveState = "N";
+				canBorrow = "N";
+				canReserve = "Y";
+				if(isReserved) {	// 대출중 && 예약중
+					reserveState = "Y";
+					canReserve = "N";
+				}
+			}
+			else if(isReserved) {	// !대출중 && 예약중
+				borrowState = "N";
+				reserveState = "Y";
+				canBorrow = "N";
+				canReserve = "N";
+			}
+			
+			tb_contents_1[i][0] = bookNmae;
+			tb_contents_1[i][1] = bookId;
+			tb_contents_1[i][2] = borrowState;
+			tb_contents_1[i][3] = reserveState;
+			tb_contents_1[i][4] = canBorrow;
+			tb_contents_1[i][5] = canReserve;
+		}
+		// 새로운 테이블 저장
+		table_1 = new JTable(tb_contents_1, tb_header_1);
+	}
+	public void updateJTableUsers() {
+		tb_contents_2 = new String[users.length][tb_header_2.length];
+		for(int i=0; i<books.length; i++) {
+			// tb_contents_1에다 필요한 책 정보 String 형태로 저장
+			String userName = users[i].getName();		// 이름 
+			String userId = users[i].getId();			// 아이디 
+			String userType = users[i].getUserType();	// 타입
+			
+			tb_contents_2[i][0] = userName;
+			tb_contents_2[i][1] = userId;
+			tb_contents_2[i][2] = userType;
+		}
+		// 새로운 테이블 저장
+		table_2 = new JTable(tb_contents_2, tb_header_2);
+	}
+	
 	//getter, setter
 	public Book[] getBooks() {
 		return books;
@@ -1052,19 +1114,19 @@ public class GuiLibraryDesk extends JFrame{
 		this.bookSelected = bookSelected;
 	}
 
-	public Users[] getUsers() {
+	public Patron[] getUsers() {
 		return users;
 	}
 
-	public void setUsers(Users[] users) {
+	public void setUsers(Patron[] users) {
 		this.users = users;
 	}
 
-	public Users getUserSelected() {
+	public Patron getUserSelected() {
 		return userSelected;
 	}
 
-	public void setUserSelected(Users userSelected) {
+	public void setUserSelected(Patron userSelected) {
 		this.userSelected = userSelected;
 	}
 }
