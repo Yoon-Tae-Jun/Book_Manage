@@ -18,18 +18,27 @@ public class ChangeCenterBox extends MouseAdapter {
 		BorderLayout l = (BorderLayout)panel.getLayout();
 		panel.remove(l.getLayoutComponent(BorderLayout.CENTER));
 		
-		if(btn.getText().equals("1. 대출, 반납")) {
-			panel.add(ld.cb_borrowAndReturn(), BorderLayout.CENTER);
+		if(btn.getText().equals("1. 대출")) {
+			panel.add(ld.cb_borrow(), BorderLayout.CENTER);
+			ld.btn1_enabled();
 			panel.revalidate();
 			panel.repaint();
 		}
-		else if(btn.getText().equals("2. 도서 관련")) {
+		else if(btn.getText().equals("2. 반납")) {
+			panel.add(ld.cb_return(), BorderLayout.CENTER);
+			ld.btn2_enabled();
+			panel.revalidate();
+			panel.repaint();
+		}
+		else if(btn.getText().equals("3. 도서 관련")) {
 			panel.add(ld.cb_books(), BorderLayout.CENTER);
+			ld.btn3_enabled();
 			panel.revalidate();
 			panel.repaint();
 		}
-		else if(btn.getText().equals("3. 사용자 관련")) {
+		else if(btn.getText().equals("4. 사용자 관련")) {
 			panel.add(ld.cb_users(), BorderLayout.CENTER);
+			ld.btn4_enabled();
 			panel.revalidate();
 			panel.repaint();
 		}
