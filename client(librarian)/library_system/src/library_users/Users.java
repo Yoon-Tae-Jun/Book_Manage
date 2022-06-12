@@ -37,13 +37,8 @@ public class Users {
 		borrowedCount = borrowedBook.size();	// 현재 대출한 도서 수
 		reservedBook = rB;
 		reservedCount = reservedBook.size();	// 현재 예약된 도서 수
-		overdueBook = null;		
-		for (int i=0; i<borrowedCount; i++) {
-			String d = borrowedBook.get(i).getIbs().getBorrowedDate();
-			if(OverdueCheck(d)) {
-				overdueBook.add(borrowedBook.get(i));
-			}
-		}
+		overdueBook = null;
+		setOverdueBook();
 	}
 	public Users() {
 		id = null;
@@ -53,29 +48,6 @@ public class Users {
 		userType = "unknown";
 	}
 
-	// 사용자 정보(상태) 가져오기 메소드 ==============================================================================
-	public String getName() 					{return name;}				// 이름 반환 
-	public String getId() 						{return id;}				// id 반환
-	public String getPw()						{return pw;}				// pw 반환
-	public String getUserType()					{return userType;}			// userType 반환
-	public String getEmail()					{return email;}
-	// 사용자 정보 업데이트 메소드 ===================================================================================
-
-	public void setId(String id) {
-		this.id = id;
-	}
-	public void setPw(String pw) {
-		this.pw = pw;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public void setUserType(String userType) {
-		this.userType = userType;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
 
 	// 기타 메소드 ===============================================================================================
 	public static String numToUserType(int i) {
@@ -117,19 +89,58 @@ public class Users {
 	}
 	
 	// getter, setter
+	public String getName() 					{return name;}				// 이름 반환 
+	public String getId() 						{return id;}				// id 반환
+	public String getPw()						{return pw;}				// pw 반환
+	public String getUserType()					{return userType;}			// userType 반환
+	public String getEmail()					{return email;}
 	public int getBorrowdNum() 					{return borrowedCount;}		// 대출한 도서 수 반환 
 	public int getReservedNum() 				{return reservedCount;}		// 예약한 도서 수 반환
 	public ArrayList<Book> getBorrowedBook()	{return borrowedBook;}		// 대출한 도서 반환
 	public ArrayList<Book> getReservedBook()	{return reservedBook;}		// 예약한 도서 반환
 	public ArrayList<Book> getOverdueBook()	{return overdueBook;}		// 연체된 도서 반환
 
+	public void setId(String id) {
+		this.id = id;
+	}
+	public void setPw(String pw) {
+		this.pw = pw;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public void setUserType(String userType) {
+		this.userType = userType;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	public void setBorrowedBook(ArrayList<Book> borrowedBook) {
 		this.borrowedBook = borrowedBook;
 	}
 	public void setReservedBook(ArrayList<Book> reservedBook) {
 		this.reservedBook = reservedBook;
 	}
-	public void setOverdueBook(ArrayList<Book> overdueBook) {
-		this.overdueBook = overdueBook;
+	
+	public void setOverdueBook() {
+		for (int i=0; i<borrowedCount; i++) {
+			String d = borrowedBook.get(i).getIbs().getBorrowedDate();
+			if(OverdueCheck(d)) {
+				overdueBook.add(borrowedBook.get(i));
+			}
+		}
+		overdueCount = overdueBook.size(); 
+	}
+	public int getMAX_borrowedCount() {
+		return MAX_borrowedCount;
+	}
+	public void setMAX_borrowedCount(int mAX_borrowedCount) {
+		MAX_borrowedCount = mAX_borrowedCount;
+	}
+	public int getMAX_reservedCount() {
+		return MAX_reservedCount;
+	}
+	public void setMAX_reservedCount(int mAX_reservedCount) {
+		MAX_reservedCount = mAX_reservedCount;
 	}
 }

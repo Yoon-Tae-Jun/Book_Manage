@@ -80,7 +80,13 @@ public class APIMethod {
 
 	}
 	
-
+	public static Book getBookData(int sel){
+		
+	}
+	public static Book getBookData(int sel){
+		
+	}
+	//user
     public static Users[] getUsersData(String id) {
         // 입력 : s = 검색 키워드,  sel = 라디오 버튼
         // 입력에 부합하는 조건을을 API로 검색하고, 해당 값들을 Users[]으로 만들어 리턴
@@ -109,7 +115,8 @@ public class APIMethod {
 				user.setEmail((String)data.get("userEmail"));
 				user.setName((String)data.get("UserName"));
 				user.setUserType((String)data.get("userType"));
-				user.
+				user.setMAX_borrowedCount((String)data.get("userType"));
+				
 			}
 			else {
 				System.out.println("login fail");

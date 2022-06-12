@@ -54,4 +54,8 @@ public class SearchData extends MouseAdapter{
 			desk.updateJTableUsers();	// JTable 업데이트(users에 저장된 사용자들 JTable에 띄우기)
 		}
 	}
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> f01eafe7a0dcd8265a0e2597d8685742037dd3ac

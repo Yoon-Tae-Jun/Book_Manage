@@ -9,7 +9,6 @@ public class User {
 	private String userType;
 	private int maxBorrowedCount;
 	private int maxReservedCount;
-
 	public User(String userID, String userEmail, String password, String userName, String userType,
 			int maxBorrowedCount, int maxReservedCount) {
 		super();
