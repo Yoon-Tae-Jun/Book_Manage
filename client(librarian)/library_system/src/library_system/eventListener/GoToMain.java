@@ -10,7 +10,7 @@ public class GoToMain extends MouseAdapter  {
 	public GoToMain(GuiLibraryDesk ld) {
 		this.ld = ld;
 	}
-	public void mouseClicked(MouseEvent e) {
+	public void mousePressed(MouseEvent e) {
 		JButton btn = (JButton)e.getSource();
 		JPanel panel = (JPanel)btn.getParent().getParent().getParent();
 		BorderLayout l = (BorderLayout)panel.getLayout();
