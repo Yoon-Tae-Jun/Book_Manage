@@ -39,7 +39,7 @@ public class Render {
 		// JTable 데이터 띄우기
 		desk.table_1.addMouseListener(new TableToBookData(desk));
 		desk.table_2.addMouseListener(new TableToUserData(desk));
-		
+		// 도서관 이용자 로그인
 	}
 	
 	//getter, setter
