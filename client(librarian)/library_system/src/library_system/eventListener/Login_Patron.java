@@ -34,30 +34,13 @@ public class Login_Patron implements ActionListener {
 		option.put("userEmail", ld.tf_login_mini_id.getText());
 		option.put("password", ld.tf_login_mini_pw.getText());
 		
-		try {
-			obj = api.POST("/login", option);
+		// API Method를 이용하여 사용자 로그인
+		// 로그인 성공하면 성공한 사용자 정보를 user에 형식으로 저장
+		ld.setPatron(null);
+		// 로그인 실패시 null 저장, 실패 문구 출
+		ld.setPatron(null);
+		ld.la_loginText.setText("사용자 정보를 다시 확인해 주세요.");
 		
-			int statusCode = Integer.parseInt(String.valueOf(obj.get("statusCode")));
-			System.out.println(statusCode);
-			if(statusCode == 200) {
-				JSONObject data = (JSONObject) obj.get("data");
-				user.setPw((String)data.get("password"));
-				user.setId((String)data.get("userEmail"));
-				user.setName((String)data.get("UserName"));
-				user.setUserType((String)data.get("userType"));
-				login_page.setVisible(false);
-				render.setDesk(new GuiLibraryDesk(user, login_page.getLibraryName()));
-				render.Change_screen();
-			}
-			else {
-				System.out.println("login fail");
-				login_page.getError_Text().setText("아이디나 비밀번호가 틀렸습니다.");
-				login_page.getError_Text().setForeground(Color.RED);
-			}
-		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		
-	}
+		ld.btn1_enabled_loggedin(); 	// 로그인 후 상태로 버튼 enabled 설정
+	}// end of actionPerformed()
 }
