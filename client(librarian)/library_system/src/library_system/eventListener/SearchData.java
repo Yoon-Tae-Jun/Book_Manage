@@ -57,6 +57,15 @@ public class SearchData extends MouseAdapter{
 			// books = "생성된 book[] 저장"
 			//System.out.println(books.length);
 			desk.updateJTableBooks();	// JTable 업데이트(books에 저장된 도서들 JTable에 띄우기)
+			
+			// 화면에 다시 그리기
+			JButton btn = desk.btn_1;
+			JPanel panel = (JPanel)btn.getParent().getParent();
+			BorderLayout l = (BorderLayout)panel.getLayout();
+			panel.remove(l.getLayoutComponent(BorderLayout.CENTER));
+			panel.add(desk.cb_borrow(), BorderLayout.CENTER);
+			panel.revalidate();
+			panel.repaint();
 		}
 		else {
 			// API 검색 : 검색어(SearchingWord_user)와 라디오버튼이름(checkedButtonName)으로 서버에서 검색하여 users에 저장
@@ -87,6 +96,17 @@ public class SearchData extends MouseAdapter{
 			desk.setUsers(users);
 			desk.updateJTableUsers();	// JTable 업데이트(users에 저장된 사용자들 JTable에 띄우기)
 			
+			// 화면에 다시 그리기
+			JButton btn = desk.btn_1;
+			JPanel panel = (JPanel)btn.getParent().getParent();
+			BorderLayout l = (BorderLayout)panel.getLayout();
+			panel.remove(l.getLayoutComponent(BorderLayout.CENTER));
+			panel.add(desk.cb_return(), BorderLayout.CENTER);
+			panel.revalidate();
+			panel.repaint();
 			}
-	}
+
+		
+		}
+
 }
