@@ -24,6 +24,7 @@ public class GuiLibraryDesk extends JFrame{
 	private Users[] users;			// 불러온 사용자들
 	private Users userSelected;
 	
+	private String clickedButton;
 	//컨포넌트
 	
 
@@ -1200,11 +1201,19 @@ public class GuiLibraryDesk extends JFrame{
 		la_loginText.setText("어서오세요 " + patron.getName() + "님");
 	}
 	public void btn3_enabled() {		// 3. 도서 관련 버튼
+		// 검색 버튼
+		tf_search.setEnabled(true);
+		btn_search.setEnabled(true);
+		
 		btn_add.setEnabled(true);
 		btn_del.setEnabled(false);
 		btn_save.setEnabled(false);
 	}		
 	public void btn4_enabled() {		// 4. 사용자 관련 버튼
+		// 검색 버튼
+		tf_search.setEnabled(true);
+		btn_search.setEnabled(true);
+		
 		btn_add.setEnabled(true);
 		btn_del.setEnabled(false);
 		btn_save.setEnabled(false);
@@ -1250,4 +1259,13 @@ public class GuiLibraryDesk extends JFrame{
 	public void setPatron(Users patron) {
 		this.patron = patron;
 	}
+	
+	public String getClickedButton() {
+		return clickedButton;
+	}
+
+	public void setClickedButton(String clickedButton) {
+		this.clickedButton = clickedButton;
+	}
+	
 }
