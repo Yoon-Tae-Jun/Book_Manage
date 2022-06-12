@@ -17,6 +17,7 @@ public class ChangeCenterBox extends MouseAdapter {
 		JPanel panel = (JPanel)btn.getParent().getParent();
 		BorderLayout l = (BorderLayout)panel.getLayout();
 		panel.remove(l.getLayoutComponent(BorderLayout.CENTER));
+		ld.setClickedButton(btn.getText()); // 클릭된 버튼 이름 저장
 		
 		if(btn.getText().equals("1. 대출")) {
 			panel.add(ld.cb_borrow(), BorderLayout.CENTER);

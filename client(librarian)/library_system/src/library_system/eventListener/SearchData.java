@@ -17,8 +17,7 @@ import API.APIMethod;
 // 검색 결과에 따라, 책 정보, 사용자 정보를 불러와 배열로 만들고 반환하기
 public class SearchData extends MouseAdapter{
 	private GuiLibraryDesk desk;
-	private String checkedButtonName;
-	private String checkedButtonName2;	// 체크된 라디오 버튼 이름
+	private String checkedButtonName;	// 체크된 라디오 버튼 이름
 	private String SearchingWord_book;			// 검색어 : 책
 	private String SearchingWord_user;			// 검색어 : 사용자
 	private Book[] books;			// 검색결과(리턴) : 책
@@ -34,7 +33,7 @@ public class SearchData extends MouseAdapter{
 		SearchingWord_book = desk.tf_search.getText();			// 검색 키워드 TextField로 부터 받아오기 : 책
 		SearchingWord_user = desk.tf_search_user.getText();		// 검색 키워드 TextField로 부터 받아오기 : 사용자
 		checkedButtonName = desk.group_1.getSelection().getActionCommand();	// 체크된 라디오 버튼 이름 구하기
-		checkedButtonName2 = desk.group_2.getSelection().getActionCommand();
+		
 		// 체크박스로 도서검색 사용자검색 구분
 		String[] rb_name = desk.radio_name_1;	// 라디오 버튼 이름 불러오기
 		boolean is_book = false;
@@ -46,7 +45,6 @@ public class SearchData extends MouseAdapter{
 			switch(checkedButtonName) {
 				case "저자":
 					check = 1;
-					break;
 				case "장르":
 					check = 2;
 				case "출판년도":
@@ -65,37 +63,18 @@ public class SearchData extends MouseAdapter{
 			JPanel panel = (JPanel)btn.getParent().getParent();
 			BorderLayout l = (BorderLayout)panel.getLayout();
 			panel.remove(l.getLayoutComponent(BorderLayout.CENTER));
-			panel.add(desk.cb_borrow(), BorderLayout.CENTER);
+			if(desk.getClickedButton().equals("1. 대출")) panel.add(desk.cb_borrow(), BorderLayout.CENTER);
+			else if(desk.getClickedButton().equals("2. 반납")) panel.add(desk.cb_return(), BorderLayout.CENTER);
+			else if(desk.getClickedButton().equals("3. 도서 관련")) panel.add(desk.cb_books(), BorderLayout.CENTER);
+			else panel.add(desk.cb_users(), BorderLayout.CENTER);
 			panel.revalidate();
 			panel.repaint();
 		}
 		else {
 			// API 검색 : 검색어(SearchingWord_user)와 라디오버튼이름(checkedButtonName)으로 서버에서 검색하여 users에 저장
-			Users[] users = null;
 			
-			Book[] books = null;
 			// users = "생성된 Users[] 저장"
-			switch(checkedButtonName2) {
-			case "이름":
-				users =APIMethod.getUsersData(SearchingWord_user, 0);
-			case "타입":
-				users =APIMethod.getUsersData(SearchingWord_user, 1);
-			case "아이디":
-				users =APIMethod.getUsersData(SearchingWord_user, 2);
-			case "대출도서":
-				books = APIMethod.getBooksData(SearchingWord_user, 0);
-				users = new Users[books.length];
-				for(int i=0; i< books.length; i++) {
-					users[i] = APIMethod.getUserDataID(books[i].getIbs().getBorrowedUser());
-				}
-			case "예약도서":
-				books = APIMethod.getBooksData(SearchingWord_user, 0);
-				users = new Users[books.length];
-				for(int i=0; i< books.length; i++) {
-					users[i] = APIMethod.getUserDataID(books[i].getIbs().getReservedUser());
-				}
-			}
-			desk.setUsers(users);
+			
 			desk.updateJTableUsers();	// JTable 업데이트(users에 저장된 사용자들 JTable에 띄우기)
 			
 			// 화면에 다시 그리기
@@ -103,12 +82,12 @@ public class SearchData extends MouseAdapter{
 			JPanel panel = (JPanel)btn.getParent().getParent();
 			BorderLayout l = (BorderLayout)panel.getLayout();
 			panel.remove(l.getLayoutComponent(BorderLayout.CENTER));
-			panel.add(desk.cb_return(), BorderLayout.CENTER);
+			if(desk.getClickedButton().equals("1. 대출")) panel.add(desk.cb_borrow(), BorderLayout.CENTER);
+			else if(desk.getClickedButton().equals("2. 반납")) panel.add(desk.cb_return(), BorderLayout.CENTER);
+			else if(desk.getClickedButton().equals("3. 도서 관련")) panel.add(desk.cb_books(), BorderLayout.CENTER);
+			else panel.add(desk.cb_users(), BorderLayout.CENTER);
 			panel.revalidate();
 			panel.repaint();
-			}
-
-		
 		}
-
+	}
 }
