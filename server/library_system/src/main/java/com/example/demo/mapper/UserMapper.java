@@ -15,7 +15,10 @@ public interface UserMapper {
 	User Login(@Param("userEmail") String userEmail, @Param("password") String password);
 	
 	@Select(Usersql.GET_BORROWED_LIST)
-	List<Book> getBorrowedBook(@Param("userName") String userName);
+	List<Book> getBorrowedBook(@Param("userID") String userID);
+	
+	@Select(Usersql.GET_RESERVED_LIST)
+	List<Book> getReservedBook(@Param("userID") String userID);
 	
 	@Select(Usersql.GET_USER)
 	User getUser(@Param("id") String id);

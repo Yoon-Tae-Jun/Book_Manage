@@ -117,9 +117,12 @@ public class Users {
 	}
 	public void setBorrowedBook(ArrayList<Book> borrowedBook) {
 		this.borrowedBook = borrowedBook;
+		this.borrowedCount = borrowedBook.size();
+		setOverdueBook();
 	}
 	public void setReservedBook(ArrayList<Book> reservedBook) {
 		this.reservedBook = reservedBook;
+		this.reservedCount = reservedBook.size();
 	}
 	
 	public void setOverdueBook() {

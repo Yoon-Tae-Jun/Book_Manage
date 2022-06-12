@@ -37,9 +37,23 @@ public class LoginController {
 			throw new UserNotFoundException();
 		}
 	}
-	@GetMapping("/user/borrowedBook/{name}")
-	public ListResponse<Book> getBorrowedBook(@PathVariable("name") String name) {
-		List<Book> result = mapper.getBorrowedBook(name);
+	@GetMapping("/user/borrowedBook/{id}")
+	public ListResponse<Book> getBorrowedBook(@PathVariable("id") String id) {
+		List<Book> result = mapper.getBorrowedBook(id);
+		
+		//데이터가 존재하는지 체크 
+		if (!result.isEmpty()) {
+			return new ResponseService().getLListResult(result);
+		}
+		else {
+			throw new UserNotFoundException();
+		}
+		
+	}
+	
+	@GetMapping("/user/reservedBook/{id}")
+	public ListResponse<Book> getReservedBook(@PathVariable("id") String id) {
+		List<Book> result = mapper.getReservedBook(id);
 		
 		//데이터가 존재하는지 체크 
 		if (!result.isEmpty()) {

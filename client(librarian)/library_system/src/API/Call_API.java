@@ -22,7 +22,7 @@ public class Call_API {
 		StringBuilder urlBuilder = new StringBuilder(API_URL+parameter);
 		URL url = new URL(urlBuilder.toString());
 		HttpURLConnection conn =(HttpURLConnection) url.openConnection();
-        conn.setRequestMethod("POST");
+        conn.setRequestMethod("GET");
         conn.setRequestProperty("Content-type", "application/json");
         System.out.println("Response code: " + conn.getResponseCode());
         BufferedReader rd;
