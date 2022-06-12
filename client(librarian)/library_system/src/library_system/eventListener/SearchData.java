@@ -21,7 +21,7 @@ public class SearchData extends MouseAdapter{
 	private String SearchingWord_book;			// 검색어 : 책
 	private String SearchingWord_user;			// 검색어 : 사용자
 	private Book[] books;			// 검색결과(리턴) : 책
-	private Patron[] users;			// 검색결과(리턴) : 사용자
+	private Users[] users;			// 검색결과(리턴) : 사용자
 	
 	public SearchData(GuiLibraryDesk desk) {
 		this.desk = desk;
@@ -49,7 +49,7 @@ public class SearchData extends MouseAdapter{
 		else {
 			// API 검색 : 검색어(SearchingWord_user)와 라디오버튼이름(checkedButtonName)으로 서버에서 검색하여 users에 저장
 			
-			// users = "생성된 Patron[] 저장"
+			// users = "생성된 Users[] 저장"
 			
 			desk.updateJTableUsers();	// JTable 업데이트(users에 저장된 사용자들 JTable에 띄우기)
 		}
