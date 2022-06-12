@@ -21,7 +21,7 @@ public class TableToUserData extends MouseAdapter{
 		ld.setUserSelected(ld.getUsers()[row]);
 		
 		// 선택된 사용자 출력
-		Patron user = (Patron)ld.getUserSelected();
+		Users user = (Users)ld.getUserSelected();
 		
 		// {"이름 :", "타입 :", "아이디 :", "비밀번호 :"};
 		ld.tf_book_4_info[0].setText(user.getName());		// 이름

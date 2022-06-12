@@ -20,8 +20,8 @@ public class GuiLibraryDesk extends JFrame{
 	private Users librarian;        //사서 정보
 	private Book[] books;			// 불러온 도서들
 	private Book bookSelected;
-	private Patron[] users;			// 불러온 사용자들
-	private Patron userSelected;
+	private Users[] users;			// 불러온 사용자들
+	private Users userSelected;
 	
 	//컨포넌트
 	
@@ -1064,7 +1064,7 @@ public class GuiLibraryDesk extends JFrame{
 		return panel;
 	}
 
-	// JTable 업데이트 : 데이터(Book[], Patron[]) JTable에 채우기
+	// JTable 업데이트 : 데이터(Book[], Users[]) JTable에 채우기
 	public void updateJTableBooks() {
 		tb_contents_1 = new String[books.length][tb_header_1.length];
 		
@@ -1213,19 +1213,19 @@ public class GuiLibraryDesk extends JFrame{
 		this.bookSelected = bookSelected;
 	}
 
-	public Patron[] getUsers() {
+	public Users[] getUsers() {
 		return users;
 	}
 
-	public void setUsers(Patron[] users) {
+	public void setUsers(Users[] users) {
 		this.users = users;
 	}
 
-	public Patron getUserSelected() {
+	public Users getUserSelected() {
 		return userSelected;
 	}
 
-	public void setUserSelected(Patron userSelected) {
+	public void setUserSelected(Users userSelected) {
 		this.userSelected = userSelected;
 	}
 }
