@@ -242,6 +242,25 @@ public class APIMethod {
 		}
 		return books;
 	}
+	
+	public static int postBorrowedBook(int BookID, int UserID) {
+		String bookid = Integer.toString(BookID);
+		String userid = Integer.toString(UserID);
+		int statusCode = 500;
+		Call_API api = new API.Call_API();
+		JSONObject obj;
+		HashMap<String, String> option = new HashMap<String, String>();
+		option.put("userID", userid);
+		try {
+			obj = api.POST("/book/borrowed/"+bookid, option);
+			statusCode = Integer.parseInt(String.valueOf(obj.get("statusCode")));
+		}
+		catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		return statusCode;
+	}
 	//user
     public static Users[] getUsersData(String s, int sel) {
     	Users[] users = null;

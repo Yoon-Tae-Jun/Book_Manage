@@ -50,6 +50,7 @@ public class Render {
 		desk.btn_cancel_borrow.addActionListener(new BorrowReverseReturn(desk));
 		desk.btn_cancel_reserve.addActionListener(new BorrowReverseReturn(desk));
 		desk.btn_cancel_return.addActionListener(new BorrowReverseReturn(desk));
+		desk.btn_borrow.addMouseListener(new borrowedEventListener(desk));
 	}
 	
 	//getter, setter

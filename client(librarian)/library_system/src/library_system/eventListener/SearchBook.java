@@ -49,7 +49,10 @@ public class SearchBook extends MouseAdapter{
 		JPanel panel = (JPanel)btn.getParent().getParent();
 		BorderLayout l = (BorderLayout)panel.getLayout();
 		panel.remove(l.getLayoutComponent(BorderLayout.CENTER));
-		panel.add(desk.cb_borrow(), BorderLayout.CENTER);
+		if(desk.getClickedButton().equals("1. 대출")) panel.add(desk.cb_borrow(), BorderLayout.CENTER);
+		else if(desk.getClickedButton().equals("2. 반납")) panel.add(desk.cb_return(), BorderLayout.CENTER);
+		else if(desk.getClickedButton().equals("3. 도서 관련")) panel.add(desk.cb_books(), BorderLayout.CENTER);
+		else panel.add(desk.cb_users(), BorderLayout.CENTER);
 		panel.revalidate();
 		panel.repaint();
 		}
