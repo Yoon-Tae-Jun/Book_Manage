@@ -24,7 +24,6 @@ public class Call_API {
 		HttpURLConnection conn =(HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
         conn.setRequestProperty("Content-type", "application/json");
-        System.out.println("Response code: " + conn.getResponseCode());
         BufferedReader rd;
         if(conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
             rd = new BufferedReader(new InputStreamReader(conn.getInputStream(),"UTF-8"));
@@ -77,7 +76,6 @@ public class Call_API {
 		
 		out.write(str.getBytes("utf-8"));
 		out.close();
-        System.out.println("Response code: " + conn.getResponseCode());
         BufferedReader rd;
         if(conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
             rd = new BufferedReader(new InputStreamReader(conn.getInputStream(),"UTF-8"));
@@ -95,7 +93,6 @@ public class Call_API {
 		//JSON 파싱 시작
         JSONParser parser = new JSONParser();
         JSONObject obj = null;
-        
         try {
         	obj = (JSONObject)parser.parse(sb.toString());
         }

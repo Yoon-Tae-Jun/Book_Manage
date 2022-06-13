@@ -44,13 +44,12 @@ public class Render {
 		desk.btn_login.addActionListener(new Login_Patron(desk));
 		desk.btn_logout.addActionListener(new Logout_Patron(desk));
 		// 대출, 반납, 예약
-		desk.btn_borrow.addActionListener(new BorrowReverseReturn(desk));
-		desk.btn_reserve.addActionListener(new BorrowReverseReturn(desk));
-		desk.btn_return.addActionListener(new BorrowReverseReturn(desk));
-		desk.btn_cancel_borrow.addActionListener(new BorrowReverseReturn(desk));
-		desk.btn_cancel_reserve.addActionListener(new BorrowReverseReturn(desk));
-		desk.btn_cancel_return.addActionListener(new BorrowReverseReturn(desk));
+		desk.btn_image.addMouseListener(new imagePopEventListener(desk));
 		desk.btn_borrow.addMouseListener(new borrowedEventListener(desk));
+		desk.btn_reserve.addMouseListener(new reservedEventListener(desk));
+		desk.btn_cancel_reserve.addMouseListener(new cancelReservedEventListener(desk));
+		desk.btn_return.addMouseListener(new returnEventLister(desk));
+		desk.btn_cancel_borrow.addMouseListener(new returnEventLister(desk));
 	}
 	
 	//getter, setter

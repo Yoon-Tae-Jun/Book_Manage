@@ -136,6 +136,7 @@ public class Users {
 				return;
 			}
 			if(OverdueCheck(d)) {
+				overdueBook = new ArrayList<Book>();
 				overdueBook.add(borrowedBook.get(i));
 				cnt++;
 			}

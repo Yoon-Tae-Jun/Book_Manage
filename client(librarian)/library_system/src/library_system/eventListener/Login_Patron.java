@@ -25,15 +25,16 @@ public class Login_Patron implements ActionListener {
 	public void actionPerformed(ActionEvent e){
 		Users user = new Users();
 		user = APIMethod.getUserData(ld.tf_login_mini_id.getText(),ld.tf_login_mini_pw.getText());
-		System.out.println(user.getName());
 		if(user.getId() != null) {
-			ld.setPatron(user);
+			ld.setUserSelected(user);
+			ld.btn1_enabled_loggedin();
 		}
 		else {
 			ld.la_loginText.setText("사용자 정보를 다시 확인해 주세요.");
+			ld.la_loginText.setForeground(Color.RED);
 		}
 		
 		
-		ld.btn1_enabled_loggedin(); 	// 로그인 후 상태로 버튼 enabled 설정
+		 	// 로그인 후 상태로 버튼 enabled 설정
 	}// end of actionPerformed()
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.example.demo.model.Book;
 import com.example.demo.model.User;
@@ -25,4 +26,8 @@ public interface UserMapper {
 	
 	@Select(Usersql.GET_USER_OPTION)
 	List<User> getUserOption(@Param("column") String column, @Param("value") String value);
-}
+
+	@Update(Usersql.UPDATE_OVERDUE)
+	int updateOverdue(@Param("day") String day, @Param("id") String id);
+		
+	}

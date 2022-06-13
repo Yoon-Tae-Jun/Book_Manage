@@ -55,7 +55,7 @@ public class SearchUser extends MouseAdapter{
 			}
 			break;
 		}
-
+		System.out.println();
 		desk.setUsers(users);
 		desk.updateJTableUsers();	// JTable 업데이트(users에 저장된 사용자들 JTable에 띄우기)
 		
@@ -70,6 +70,7 @@ public class SearchUser extends MouseAdapter{
 		else panel.add(desk.cb_users(), BorderLayout.CENTER);
 		panel.revalidate();
 		panel.repaint();
+		desk.table_2.addMouseListener(new TableToUserData(desk));
 		}
 }
 

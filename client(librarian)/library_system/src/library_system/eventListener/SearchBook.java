@@ -55,5 +55,6 @@ public class SearchBook extends MouseAdapter{
 		else panel.add(desk.cb_users(), BorderLayout.CENTER);
 		panel.revalidate();
 		panel.repaint();
+		desk.table_1.addMouseListener(new TableToBookData(desk));
 		}
 }

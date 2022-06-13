@@ -30,7 +30,18 @@ public interface BookMapper {
 	@Update(Booksql.BORROWED_BOOK)
 	int borrowedBook(@Param("userID") String userID, @Param("loandate") String loandate, @Param("returndate") String returndate, @Param("bookID") String bookID);
 	
+	@Update(Booksql.RESERVED_BOOK)
+	int reservedBook(@Param("userID") String userID, @Param("bookID") String bookID);
+
 	@Delete(Booksql.DELETE_BOOK)
 	int deleteBook(@Param("id") String id);
 	
+	@Update(Booksql.BORROWED_BOOK)
+	void completeReserved();
+	
+	@Update(Booksql.CANCEL_RESERVED_BOOK)
+	int cancelReservedBook(@Param("bookID") String bookID);
+	
+	@Update(Booksql.RETURN_BOOK)
+	int returnBook(@Param("bookID") String bookID);
 }

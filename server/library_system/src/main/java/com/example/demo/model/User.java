@@ -9,8 +9,9 @@ public class User {
 	private String userType;
 	private int maxBorrowedCount;
 	private int maxReservedCount;
+	private int overdueDay;
 	public User(String userID, String userEmail, String password, String userName, String userType,
-			int maxBorrowedCount, int maxReservedCount) {
+			int maxBorrowedCount, int maxReservedCount, int overdueDay) {
 		super();
 		this.userID = userID;
 		this.userEmail = userEmail;
@@ -19,6 +20,7 @@ public class User {
 		this.userType = userType;
 		this.maxBorrowedCount = maxBorrowedCount;
 		this.maxReservedCount = maxReservedCount;
+		this.overdueDay = overdueDay;
 	}
 	public String getUserID() {
 		return userID;
@@ -61,6 +63,14 @@ public class User {
 	}
 	public void setMaxReservedCount(int maxReservedCount) {
 		this.maxReservedCount = maxReservedCount;
+	}
+	
+	public int getOverdueDay() {
+		return overdueDay;
+	}
+	
+	public void setOverdueDay(int overdueDay) {
+		this.overdueDay = overdueDay;
 	}
 	
 	

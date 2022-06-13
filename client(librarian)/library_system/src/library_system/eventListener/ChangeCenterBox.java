@@ -24,24 +24,28 @@ public class ChangeCenterBox extends MouseAdapter {
 			ld.btn1_enabled();
 			panel.revalidate();
 			panel.repaint();
+			ld.setSelect_screen(1);
 		}
 		else if(btn.getText().equals("2. 반납")) {
 			panel.add(ld.cb_return(), BorderLayout.CENTER);
 			ld.btn2_enabled();
 			panel.revalidate();
 			panel.repaint();
+			ld.setSelect_screen(2);
 		}
 		else if(btn.getText().equals("3. 도서 관련")) {
 			panel.add(ld.cb_books(), BorderLayout.CENTER);
 			ld.btn3_enabled();
 			panel.revalidate();
 			panel.repaint();
+			ld.setSelect_screen(3);
 		}
 		else if(btn.getText().equals("4. 사용자 관련")) {
 			panel.add(ld.cb_users(), BorderLayout.CENTER);
 			ld.btn4_enabled();
 			panel.revalidate();
 			panel.repaint();
+			ld.setSelect_screen(4);
 		}
 		else {
 			panel.remove(l.getLayoutComponent(BorderLayout.WEST));

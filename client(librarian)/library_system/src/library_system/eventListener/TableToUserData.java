@@ -12,7 +12,7 @@ public class TableToUserData extends MouseAdapter{
 		this.ld = ld;
 	}
 	@Override
-	public void mousePressed(MouseEvent e) {
+	public void mouseClicked(MouseEvent e) {
 		// 테이블 데이터 얻어오기
 		JTable tb = (JTable)e.getSource(); 
 		int row = tb.getSelectedRow();
@@ -24,9 +24,12 @@ public class TableToUserData extends MouseAdapter{
 		Users user = (Users)ld.getUserSelected();
 		
 		// {"이름 :", "타입 :", "아이디 :", "비밀번호 :"};
-		ld.tf_book_4_info[0].setText(user.getName());		// 이름
-		ld.tf_book_4_info[1].setText(user.getUserType());	// 타입
-		ld.tf_book_4_info[2].setText(user.getId());			// 아이디 
-		ld.tf_book_4_info[3].setText(user.getPw());			// 비밀번호
+		if(ld.getSelect_screen() == 4) {
+			ld.tf_book_4_info[0].setText(user.getName());		// 이름
+			ld.tf_book_4_info[1].setText(user.getUserType());	// 타입
+			ld.tf_book_4_info[2].setText(user.getId());			// 아이디 
+			ld.tf_book_4_info[3].setText(user.getPw());			// 비밀번호
+		}
+		
 	}
 }

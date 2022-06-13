@@ -34,7 +34,7 @@ public class APIMethod {
 			obj = api.POST("/book/search/"+column, option);
 			
 			int statusCode = Integer.parseInt(String.valueOf(obj.get("statusCode")));
-			System.out.println(statusCode);
+			
 			if(statusCode == 200) {
 				
 				JSONArray jsonAry = (JSONArray)obj.get("data");
@@ -45,22 +45,25 @@ public class APIMethod {
 					InfoBook infobook = new InfoBook();
 					InfoBookStatement statement = new InfoBookStatement();
 					SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-					Date date;
+					
 					//statement 받아오기
 					statement.setBorrowed((Boolean)data.get("borrowed"));
-					date = format.parse((String)data.get("borrowedDate"));
-					statement.setBorrowedDate(date);
+					
+					String date = (String)data.get("borrowedDate");
+					if( date != null) statement.setBorrowedDate(format.parse(date));
+					else statement.setBorrowedDate(null);
 					statement.setBorrowedUser((String)data.get("borrowedUser"));
 					String buf = String.valueOf(data.get("cntExtension"));
 					statement.setExternDateCount(Integer.parseInt(buf));
 					statement.setReserved((Boolean)data.get("reserved"));
 					statement.setReservedUser((String)data.get("reservedUser"));
-					date = format.parse((String)data.get("returnDate"));
-					statement.setReturnDate((Date)data.get(date));
+					date = (String)data.get("returnDate");
+					if( date != null) statement.setReturnDate(format.parse(date));
+					else statement.setReturnDate(null);
 					
 					//infoBook 받아오기
 					infobook.setAuthor((String)data.get("bookAuthor"));
-					infobook.setGenre(String.valueOf("bookGenre"));
+					infobook.setGenre(String.valueOf(data.get("bookGenre")));
 					infobook.setId((String)data.get("bookId"));
 					infobook.setImage((String)data.get("imageURL"));
 					infobook.setName((String)data.get("bookName"));
@@ -73,7 +76,7 @@ public class APIMethod {
 				
 			}
 			else {
-				System.out.println("login fail");
+				System.out.println("fail found book");
 			}
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
@@ -93,21 +96,26 @@ public class APIMethod {
 			obj = api.GET("/book/"+id);
 			
 			int statusCode = Integer.parseInt(String.valueOf(obj.get("statusCode")));
-			System.out.println(statusCode);
 			if(statusCode == 200) {
 				
 				JSONObject data = (JSONObject) obj.get("data");
 				InfoBook infobook = new InfoBook();
 				InfoBookStatement statement = new InfoBookStatement();
+				SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+				
 				//statement 받아오기
 				statement.setBorrowed((Boolean)data.get("borrowed"));
-				statement.setBorrowedDate((Date)data.get("borrowedDate"));
+				String date = (String)data.get("borrowedDate");
+				if( date != null) statement.setBorrowedDate(format.parse(date));
+				else statement.setBorrowedDate(null);
 				statement.setBorrowedUser((String)data.get("borrowedUser"));
 				String buf = String.valueOf(data.get("cntExtension"));
 				statement.setExternDateCount(Integer.parseInt(buf));
 				statement.setReserved((Boolean)data.get("reserved"));
 				statement.setReservedUser((String)data.get("reservedUser"));
-				statement.setReturnDate((Date)data.get("returnDate"));
+				date = (String)data.get("returnDate");
+				if( date != null) statement.setReturnDate(format.parse(date));
+				else statement.setReturnDate(null);
 				
 				//infoBook 받아오기
 				infobook.setAuthor((String)data.get("bookAuthor"));
@@ -140,7 +148,6 @@ public class APIMethod {
 			obj = api.GET("/user/borrowedBook/"+id);
 			
 			int statusCode = Integer.parseInt(String.valueOf(obj.get("statusCode")));
-			System.out.println(statusCode);
 			if(statusCode == 200) {
 				
 				JSONArray jsonAry = (JSONArray)obj.get("data");
@@ -156,14 +163,15 @@ public class APIMethod {
 					statement.setBorrowed((Boolean)data.get("borrowed"));
 					
 					String date = (String)data.get("borrowedDate");
-					statement.setBorrowedDate(format.parse(date));
+					if( date != null) statement.setBorrowedDate(format.parse(date));
+					else statement.setBorrowedDate(null);
 					statement.setBorrowedUser((String)data.get("borrowedUser"));
 					String buf = String.valueOf(data.get("cntExtension"));
 					statement.setExternDateCount(Integer.parseInt(buf));
 					statement.setReserved((Boolean)data.get("reserved"));
 					statement.setReservedUser((String)data.get("reservedUser"));
-					date = (String)data.get("returnDate");
-					statement.setReturnDate(format.parse(date));
+					if( date != null) statement.setReturnDate(format.parse(date));
+					else statement.setReturnDate(null);
 					
 					//infoBook 받아오기
 					infobook.setAuthor((String)data.get("bookAuthor"));
@@ -198,7 +206,6 @@ public class APIMethod {
 			obj = api.GET("/user/reservedBook/"+id);
 			
 			int statusCode = Integer.parseInt(String.valueOf(obj.get("statusCode")));
-			System.out.println(statusCode);
 			if(statusCode == 200) {
 				
 				JSONArray jsonAry = (JSONArray)obj.get("data");
@@ -208,16 +215,21 @@ public class APIMethod {
 					JSONObject data = (JSONObject)jsonAry.get(i);
 					InfoBook infobook = new InfoBook();
 					InfoBookStatement statement = new InfoBookStatement();
+					SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 					
 					//statement 받아오기
 					statement.setBorrowed((Boolean)data.get("borrowed"));
-					statement.setBorrowedDate((Date)data.get("borrowedDate"));
+					String date = (String)data.get("borrowedDate");
+					if( date != null) statement.setBorrowedDate(format.parse(date));
+					else statement.setBorrowedDate(null);
 					statement.setBorrowedUser((String)data.get("borrowedUser"));
 					String buf = String.valueOf(data.get("cntExtension"));
 					statement.setExternDateCount(Integer.parseInt(buf));
 					statement.setReserved((Boolean)data.get("reserved"));
 					statement.setReservedUser((String)data.get("reservedUser"));
-					statement.setReturnDate((Date)data.get("returnDate"));
+					date = (String)data.get("returnDate");
+					if( date != null) statement.setReturnDate(format.parse(date));
+					else statement.setReturnDate(null);
 					
 					//infoBook 받아오기
 					infobook.setAuthor((String)data.get("bookAuthor"));
@@ -234,7 +246,7 @@ public class APIMethod {
 				
 			}
 			else {
-				System.out.println("login fail");
+				System.out.println("fail load reserve data");
 			}
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
@@ -246,13 +258,83 @@ public class APIMethod {
 	public static int postBorrowedBook(int BookID, int UserID) {
 		String bookid = Integer.toString(BookID);
 		String userid = Integer.toString(UserID);
+		Users user = getUserDataID(userid);
+		int statusCode = 500;
+		int cnt =user.getMAX_borrowedCount();
+		if(cnt != 0) {
+			Call_API api = new API.Call_API();
+			JSONObject obj;
+			HashMap<String, String> option = new HashMap<String, String>();
+			option.put("userID", userid);
+			try {
+				obj = api.POST("/book/borrowed/"+bookid, option);
+				
+				statusCode = Integer.parseInt(String.valueOf(obj.get("statusCode")));
+				if(statusCode == 200) {
+					user.setMAX_borrowedCount(--cnt);
+				}
+			}
+			catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+		
+		return statusCode;
+	}
+	
+	public static int postReservedBook(int BookID, int UserID) {
+		String bookid = Integer.toString(BookID);
+		String userid = Integer.toString(UserID);
 		int statusCode = 500;
 		Call_API api = new API.Call_API();
 		JSONObject obj;
 		HashMap<String, String> option = new HashMap<String, String>();
 		option.put("userID", userid);
 		try {
-			obj = api.POST("/book/borrowed/"+bookid, option);
+			obj = api.POST("/book/reserved/"+bookid, option);
+			
+			statusCode = Integer.parseInt(String.valueOf(obj.get("statusCode")));
+		}
+		catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		return statusCode;
+	}
+	public static int postcancelReservedBook(int BookID, int UserID) {
+		String bookid = Integer.toString(BookID);
+		String userid = Integer.toString(UserID);
+		int statusCode = 500;
+		Call_API api = new API.Call_API();
+		JSONObject obj;
+		HashMap<String, String> option = new HashMap<String, String>();
+		option.put("userID", userid);
+		try {
+			obj = api.POST("/book/reserved/cancel/"+bookid, option);
+			
+			statusCode = Integer.parseInt(String.valueOf(obj.get("statusCode")));
+		}
+		catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		return statusCode;
+	}
+	
+	public static int postReturnBook(int BookID, int UserID, int overdueDay) {
+		String bookid = Integer.toString(BookID);
+		String userid = Integer.toString(UserID);
+		String day = Integer.toString(overdueDay);
+		int statusCode = 500;
+		Call_API api = new API.Call_API();
+		JSONObject obj;
+		HashMap<String, String> option = new HashMap<String, String>();
+		option.put("userID", userid);
+		option.put("day", day);
+		try {
+			obj = api.POST("/book/return/"+bookid, option);
+			
 			statusCode = Integer.parseInt(String.valueOf(obj.get("statusCode")));
 		}
 		catch (Exception e1) {
@@ -273,7 +355,6 @@ public class APIMethod {
 			obj = api.POST("/user/search/"+column, option);
 			
 			int statusCode = Integer.parseInt(String.valueOf(obj.get("statusCode")));
-			System.out.println(statusCode);
 			if(statusCode == 200) {
 				JSONArray jsonAry = (JSONArray)obj.get("data");
 				users = new Users[jsonAry.size()];
@@ -296,12 +377,11 @@ public class APIMethod {
 					books = getReservedBook(Integer.parseInt(users[i].getId()));
 					arrayList = new ArrayList<>(Arrays.asList(books));
 					users[i].setReservedBook(arrayList);
-					System.out.println(users[i].getId());
 				}
 
 			}
 			else {
-				System.out.println("login fail");
+				System.out.println("fail load user list");
 			}
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
@@ -324,7 +404,6 @@ public class APIMethod {
 			obj = api.POST("/login", option);
 		
 			int statusCode = Integer.parseInt(String.valueOf(obj.get("statusCode")));
-			System.out.println(statusCode);
 			if(statusCode == 200) {
 				JSONObject data = (JSONObject) obj.get("data");
 				user.setId((String)data.get("userID"));
@@ -336,17 +415,21 @@ public class APIMethod {
 				user.setMAX_borrowedCount(Integer.parseInt(buf));
 				buf = String.valueOf(data.get("maxReservedCount"));
 				user.setMAX_reservedCount(Integer.parseInt(buf));
-				Book[] books =getBorrowedBook(Integer.parseInt(user.getId()));
+				Book[] br_books =getBorrowedBook(Integer.parseInt(user.getId()));
 				
-				ArrayList<Book> arrayList = new ArrayList<>(Arrays.asList(books));
-
-				user.setBorrowedBook(arrayList);
-				books = getReservedBook(Integer.parseInt(user.getId()));
-				arrayList = new ArrayList<>(Arrays.asList(books));
-				user.setReservedBook(arrayList);
+				if(br_books != null) {
+					user.setBorrowedBook(new ArrayList<>(Arrays.asList(br_books)));
+				}
+				
+				System.out.println(user.getId());
+				Book[] rr_books = getReservedBook(Integer.parseInt(user.getId()));
+				if(rr_books != null) {
+					user.setReservedBook(new ArrayList<>(Arrays.asList(rr_books)));
+				}
+				
 			}
 			else {
-				System.out.println("login fail");
+				System.out.println("fail load user");
 			}
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
@@ -365,7 +448,6 @@ public class APIMethod {
 		try {
 			obj = api.GET("/user/"+id);
 			int statusCode = Integer.parseInt(String.valueOf(obj.get("statusCode")));
-			System.out.println(statusCode);
 			if(statusCode == 200) {
 				JSONObject data = (JSONObject) obj.get("data");
 				user.setId((String)data.get("userID"));

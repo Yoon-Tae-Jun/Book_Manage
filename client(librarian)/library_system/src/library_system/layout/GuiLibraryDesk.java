@@ -25,6 +25,8 @@ public class GuiLibraryDesk extends JFrame{
 	private Users userSelected;
 	
 	private String clickedButton;
+	private int select_screen;
+	
 	//컨포넌트
 	
 
@@ -51,7 +53,7 @@ public class GuiLibraryDesk extends JFrame{
 	public JButton btn_return;
 	public JButton btn_cancel_borrow;
 	public JButton btn_cancel_reserve;
-	public JButton btn_cancel_return;
+	public JButton btn_image;
 	
 	public JLabel la_bookInfo;
 	
@@ -159,7 +161,7 @@ public class GuiLibraryDesk extends JFrame{
 		btn_return = new JButton("반납");
 		btn_cancel_borrow = new JButton("대출취소");
 		btn_cancel_reserve = new JButton("예약취소");
-		btn_cancel_return = new JButton("반납취소");
+		btn_image = new JButton("책 사진");
 		
 		la_bookInfo = new JLabel("도서 정보");
 		
@@ -237,11 +239,7 @@ public class GuiLibraryDesk extends JFrame{
 		group_2 = new ButtonGroup();
 		
 		tb_header_2 = new String[] {"이름", "아이디", "타입"};
-		tb_contents_2 = new String[][] {
-			{"김건아", "rtguna@naver.com", "Patron"},
-			{"김건모", "kimgeona77@sch.ac.kr", "Manager"},
-			{"김건하", "rtguna@icloud.com", "Librarian"}
-		};
+		tb_contents_2 = new String[][] {};
 		table_2 = new JTable(tb_contents_2, tb_header_2);
 		
 		// event
@@ -578,7 +576,7 @@ public class GuiLibraryDesk extends JFrame{
 		panel.add(btn_return);
 		panel.add(btn_cancel_borrow);
 		panel.add(btn_cancel_reserve);
-		panel.add(btn_cancel_return);
+		panel.add(btn_image);
 		
 		return panel;
 	}
@@ -1068,52 +1066,58 @@ public class GuiLibraryDesk extends JFrame{
 
 	// JTable 업데이트 : 데이터(Book[], Users[]) JTable에 채우기
 	public void updateJTableBooks() {
-		System.out.println(books.length);
-		tb_contents_1 = new String[books.length][tb_header_1.length];
 		
-		for(int i=0; i<books.length; i++) {
-			// tb_contents_1에다 필요한 책 정보 String 형태로 저장
-			String bookNmae = books[i].getIb().getName();	// 제목
-			String bookId = books[i].getIb().getId();		// 책 번호
-				// !대출중 && !예약중
-			String borrowState = "N";							// 대출 가능
-			String reserveState = "N";							// 예약 가능
-			String canBorrow = "Y";								// 대출 상태
-			String canReserve = "Y";							// 예약 상태
-			
-			boolean isBorrowed = books[i].getIbs().isBorrowed();
-			boolean isReserved = books[i].getIbs().isReserved();
-			
-			if(isBorrowed) {		// 대출중 && !예약중
-				borrowState = "Y";
-				reserveState = "N";
-				canBorrow = "N";
-				canReserve = "Y";
-				if(isReserved) {	// 대출중 && 예약중
+		if (books != null) {
+			tb_contents_1 = new String[books.length][tb_header_1.length];
+			for(int i=0; i<books.length; i++) {
+				// tb_contents_1에다 필요한 책 정보 String 형태로 저장
+				String bookNmae = books[i].getIb().getName();	// 제목
+				String bookId = books[i].getIb().getId();		// 책 번호
+					// !대출중 && !예약중
+				String borrowState = "N";							// 대출 가능
+				String reserveState = "N";							// 예약 가능
+				String canBorrow = "Y";								// 대출 상태
+				String canReserve = "Y";							// 예약 상태
+				
+				boolean isBorrowed = books[i].getIbs().isBorrowed();
+				boolean isReserved = books[i].getIbs().isReserved();
+				
+				if(isBorrowed) {		// 대출중 && !예약중
+					borrowState = "Y";
+					reserveState = "N";
+					canBorrow = "N";
+					canReserve = "Y";
+					if(isReserved) {	// 대출중 && 예약중
+						reserveState = "Y";
+						canReserve = "N";
+					}
+				}
+				else if(isReserved) {	// !대출중 && 예약중
+					borrowState = "N";
 					reserveState = "Y";
+					canBorrow = "N";
 					canReserve = "N";
 				}
+				
+				tb_contents_1[i][0] = bookNmae;
+				tb_contents_1[i][1] = bookId;
+				tb_contents_1[i][2] = borrowState;
+				tb_contents_1[i][3] = reserveState;
+				tb_contents_1[i][4] = canBorrow;
+				tb_contents_1[i][5] = canReserve;
 			}
-			else if(isReserved) {	// !대출중 && 예약중
-				borrowState = "N";
-				reserveState = "Y";
-				canBorrow = "N";
-				canReserve = "N";
-			}
-			
-			tb_contents_1[i][0] = bookNmae;
-			tb_contents_1[i][1] = bookId;
-			tb_contents_1[i][2] = borrowState;
-			tb_contents_1[i][3] = reserveState;
-			tb_contents_1[i][4] = canBorrow;
-			tb_contents_1[i][5] = canReserve;
+			// 새로운 테이블 저장
+			setTable_1(new JTable(tb_contents_1, tb_header_1));
 		}
-		// 새로운 테이블 저장
-		table_1 = new JTable(tb_contents_1, tb_header_1);
+		else {
+			setTable_1(new JTable(new String[][]{}, tb_header_1));
+		}
+		
+		
 	}
 	public void updateJTableUsers() {
 		tb_contents_2 = new String[users.length][tb_header_2.length];
-		for(int i=0; i<books.length; i++) {
+		for(int i=0; i<users.length; i++) {
 			// tb_contents_1에다 필요한 책 정보 String 형태로 저장
 			String userName = users[i].getName();		// 이름 
 			String userId = users[i].getId();			// 아이디 
@@ -1138,7 +1142,7 @@ public class GuiLibraryDesk extends JFrame{
 		btn_return.setEnabled(false);
 		btn_cancel_borrow.setEnabled(false);	// 로그인시 활성화
 		btn_cancel_reserve.setEnabled(false);	// 로그인시 활성화
-		btn_cancel_return.setEnabled(false);
+		btn_image.setEnabled(true);
 		// 로그인 버튼
 		btn_login.setEnabled(true);
 		btn_logout.setEnabled(false);		// 로그인시 활성화
@@ -1156,13 +1160,14 @@ public class GuiLibraryDesk extends JFrame{
 		btn_return.setEnabled(false);
 		btn_cancel_borrow.setEnabled(true);		// 로그인시 활성화
 		btn_cancel_reserve.setEnabled(true);	// 로그인시 활성화
-		btn_cancel_return.setEnabled(false);
+		btn_image.setEnabled(true);
 		// 로그인 버튼
 		btn_login.setEnabled(false);
 		btn_logout.setEnabled(true);		// 로그인시 활성화
 		// 텍스트 필드 설정
 		la_borrowAndReserve.setText("");
-		la_loginText.setText("어서오세요 " + patron.getName() + "님");
+		la_loginText.setText("어서오세요 " + userSelected.getName() + "님");
+		la_loginText.setForeground(Color.BLACK);
 	}
 	public void btn2_enabled() {		// 2. 반납 버튼
 		// 검색 버튼
@@ -1174,7 +1179,7 @@ public class GuiLibraryDesk extends JFrame{
 		btn_return.setEnabled(false);			// 로그인시 활성화
 		btn_cancel_borrow.setEnabled(false);
 		btn_cancel_reserve.setEnabled(false);	// 로그인시 활성화
-		btn_cancel_return.setEnabled(false);	// 로그인시 활성화
+		btn_image.setEnabled(true);	// 로그인시 활성화
 		// 로그인 버튼
 		btn_login.setEnabled(true);
 		btn_logout.setEnabled(false);		// 로그인시 활성화
@@ -1192,7 +1197,7 @@ public class GuiLibraryDesk extends JFrame{
 		btn_return.setEnabled(true);			// 로그인시 활성화
 		btn_cancel_borrow.setEnabled(false);
 		btn_cancel_reserve.setEnabled(true);	// 로그인시 활성화
-		btn_cancel_return.setEnabled(true);	// 로그인시 활성화
+		btn_image.setEnabled(true);	// 로그인시 활성화
 		// 로그인 버튼
 		btn_login.setEnabled(false);
 		btn_logout.setEnabled(true);		// 로그인시 활성화
@@ -1266,6 +1271,62 @@ public class GuiLibraryDesk extends JFrame{
 
 	public void setClickedButton(String clickedButton) {
 		this.clickedButton = clickedButton;
+	}
+
+	public JTable getTable_1() {
+		return table_1;
+	}
+
+	public void setTable_1(JTable table_1) {
+		this.table_1 = table_1;
+	}
+
+	public JTable getTable_2() {
+		return table_2;
+	}
+
+	public void setTable_2(JTable table_2) {
+		this.table_2 = table_2;
+	}
+
+	public JButton getBtn_1() {
+		return btn_1;
+	}
+
+	public void setBtn_1(JButton btn_1) {
+		this.btn_1 = btn_1;
+	}
+
+	public JButton getBtn_2() {
+		return btn_2;
+	}
+
+	public void setBtn_2(JButton btn_2) {
+		this.btn_2 = btn_2;
+	}
+
+	public JButton getBtn_3() {
+		return btn_3;
+	}
+
+	public void setBtn_3(JButton btn_3) {
+		this.btn_3 = btn_3;
+	}
+
+	public JButton getBtn_4() {
+		return btn_4;
+	}
+
+	public void setBtn_4(JButton btn_4) {
+		this.btn_4 = btn_4;
+	}
+
+	public int getSelect_screen() {
+		return select_screen;
+	}
+
+	public void setSelect_screen(int select_screen) {
+		this.select_screen = select_screen;
 	}
 	
 }
