@@ -44,4 +44,7 @@ public interface BookMapper {
 	
 	@Update(Booksql.RETURN_BOOK)
 	int returnBook(@Param("bookID") String bookID);
+	
+	@Update(Booksql.EXTENSION_BOOK)
+	int extension(@Param("cnt") int cnt, @Param("returnDate") String returnDate, @Param("bookID") String bookID);
 }

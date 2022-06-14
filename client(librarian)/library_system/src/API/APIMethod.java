@@ -88,7 +88,7 @@ public class APIMethod {
 	}
 	
 	public static Book getBookData(int bookID){
-		Book book = null;
+		Book book = new Book();
 		String id = Integer.toString(bookID);
 		Call_API api = new API.Call_API();
 		JSONObject obj;
@@ -188,7 +188,7 @@ public class APIMethod {
 				
 			}
 			else {
-				System.out.println("login fail");
+				System.out.println("예약된 책이 없음");
 			}
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
@@ -302,6 +302,7 @@ public class APIMethod {
 		}
 		return statusCode;
 	}
+	
 	public static int postcancelReservedBook(int BookID, int UserID) {
 		String bookid = Integer.toString(BookID);
 		String userid = Integer.toString(UserID);
@@ -312,6 +313,26 @@ public class APIMethod {
 		option.put("userID", userid);
 		try {
 			obj = api.POST("/book/reserved/cancel/"+bookid, option);
+			
+			statusCode = Integer.parseInt(String.valueOf(obj.get("statusCode")));
+		}
+		catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		return statusCode;
+	}
+	
+	public static int postExtensioncount(int BookID, int cnt) {
+		String bookid = Integer.toString(BookID);
+		String extension = Integer.toString(cnt);
+		int statusCode = 500;
+		Call_API api = new API.Call_API();
+		JSONObject obj;
+		HashMap<String, String> option = new HashMap<String, String>();
+		option.put("cnt", extension);
+		try {
+			obj = api.POST("/book/extension/"+bookid, option);
 			
 			statusCode = Integer.parseInt(String.valueOf(obj.get("statusCode")));
 		}
@@ -460,7 +481,13 @@ public class APIMethod {
 				buf = String.valueOf(data.get("maxReservedCount"));
 				user.setMAX_reservedCount(Integer.parseInt(buf));
 				Book[] books =getBorrowedBook(Integer.parseInt(user.getId()));
-				ArrayList<Book> arrayList = new ArrayList<>(Arrays.asList(books));
+				ArrayList<Book> arrayList = null;
+				if (books == null) {
+					arrayList = new ArrayList<>();
+				}
+				else {
+					arrayList = new ArrayList<>(Arrays.asList(books));					
+				}
 				user.setBorrowedBook(arrayList);
 				books = getReservedBook(Integer.parseInt(user.getId()));
 				arrayList = new ArrayList<>(Arrays.asList(books));
@@ -475,4 +502,6 @@ public class APIMethod {
 		}
 		return user;
     }
+
+    
 }

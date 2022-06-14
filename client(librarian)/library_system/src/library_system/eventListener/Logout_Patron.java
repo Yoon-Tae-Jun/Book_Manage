@@ -15,7 +15,13 @@ public class Logout_Patron implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		ld.setPatron(null);		// 로그인 된 사용자 정보 삭제
-		ld.btn1_enabled(); 		// 로그인 전 상태로 버튼 enabled 설정
+		if(ld.getSelect_screen() == 1) {
+			ld.btn1_enabled(); 		// 로그인 전 상태로 버튼 enabled 설정
+		}
+		else if (ld.getSelect_screen() == 2) {
+			ld.btn2_enabled(); 
+		}
+		
 	}
 	
 	

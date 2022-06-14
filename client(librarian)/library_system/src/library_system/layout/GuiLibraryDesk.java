@@ -159,7 +159,7 @@ public class GuiLibraryDesk extends JFrame{
 		btn_borrow = new JButton("대출");
 		btn_reserve = new JButton("예약");
 		btn_return = new JButton("반납");
-		btn_cancel_borrow = new JButton("대출취소");
+		btn_cancel_borrow = new JButton("연장");
 		btn_cancel_reserve = new JButton("예약취소");
 		btn_image = new JButton("책 사진");
 		
@@ -1166,7 +1166,7 @@ public class GuiLibraryDesk extends JFrame{
 		btn_logout.setEnabled(true);		// 로그인시 활성화
 		// 텍스트 필드 설정
 		la_borrowAndReserve.setText("");
-		la_loginText.setText("어서오세요 " + userSelected.getName() + "님");
+		la_loginText.setText("어서오세요 " + patron.getName() + "님");
 		la_loginText.setForeground(Color.BLACK);
 	}
 	public void btn2_enabled() {		// 2. 반납 버튼
@@ -1193,10 +1193,10 @@ public class GuiLibraryDesk extends JFrame{
 		btn_search.setEnabled(false);
 		// 대출 반납 예약 버튼
 		btn_borrow.setEnabled(false);	
-		btn_reserve.setEnabled(true);			// 로그인시 활성화
+		btn_reserve.setEnabled(false);			// 로그인시 활성화
 		btn_return.setEnabled(true);			// 로그인시 활성화
 		btn_cancel_borrow.setEnabled(false);
-		btn_cancel_reserve.setEnabled(true);	// 로그인시 활성화
+		btn_cancel_reserve.setEnabled(false);	// 로그인시 활성화
 		btn_image.setEnabled(true);	// 로그인시 활성화
 		// 로그인 버튼
 		btn_login.setEnabled(false);

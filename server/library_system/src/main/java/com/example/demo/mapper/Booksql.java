@@ -10,4 +10,5 @@ public class Booksql {
 	public static final String DELETE_BOOK = "DELETE FROM book WHERE BookId=#{id}";
 	public static final String CANCEL_RESERVED_BOOK = "UPDATE book SET isReserve= true, reservedUser=null WHERE BookId= #{bookID}";
 	public static final String RETURN_BOOK = "UPDATE book SET isLoan = true, borrowedUser = null, loanDate = null, returnDate = null WHERE BookId= #{bookID}";
+	public static final String EXTENSION_BOOK = "UPDATE book SET cntExtension = #{cnt}, returnDate = #{returnDate} WHERE BookId = #{bookID}";
 }

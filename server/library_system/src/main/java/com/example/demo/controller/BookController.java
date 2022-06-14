@@ -236,6 +236,24 @@ public class BookController {
 		}
 		return resultcode;
 	}
+	
+	//책 연장
+	@PostMapping("/book/extension/{bookid}")
+	public BasicResponse extensionBook(@PathVariable("bookid") String bookId, @RequestParam("cnt") String cnt) {
+		Book result = mapper.getBook(bookId);
+		User user = userMapper.getUser(result.getBorrowedUser());
+		BasicResponse resultcode = new BasicResponse();
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Calendar cal = Calendar.getInstance();
+		Date now = result.getReturnDate();
+		cal.setTime(now);
+		cal.add(Calendar.DATE, 7);
+		String return_dt = format.format(cal.getTime()); 
+		mapper.extension(Integer.parseInt(cnt), return_dt, bookId);
+		resultcode.setMsg("연장 성공");
+		resultcode.setStatusCode(200);
+		return resultcode;
+	}
 	//책 삭제
 	@DeleteMapping("/book/{id}")
 	public void deleteUserProfile(@PathVariable("id") String id) {

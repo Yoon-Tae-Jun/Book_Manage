@@ -21,7 +21,7 @@ public class cancelReservedEventListener extends MouseAdapter{
 			return;
 		}
 		int bookid = Integer.parseInt(desk.getBookSelected().getIb().getId());
-		int userid = Integer.parseInt(desk.getUserSelected().getId());
+		int userid = Integer.parseInt(desk.getPatron().getId());
 		statuscode = APIMethod.postcancelReservedBook(bookid,userid );
 		if(statuscode == 200) {
 			desk.la_borrowAndReserve.setText("취소 성공");

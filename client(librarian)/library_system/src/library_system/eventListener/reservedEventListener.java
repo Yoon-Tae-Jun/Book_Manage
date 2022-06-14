@@ -17,11 +17,12 @@ public class reservedEventListener extends MouseAdapter{
 	public void mousePressed(MouseEvent e) {
 		int statuscode;
 		int bookid = Integer.parseInt(desk.getBookSelected().getIb().getId());
-		int userid = Integer.parseInt(desk.getUserSelected().getId());
+		int userid = Integer.parseInt(desk.getPatron().getId());
 		statuscode = APIMethod.postReservedBook(bookid,userid );
 		if(statuscode == 200) {
 			desk.la_borrowAndReserve.setText("예약 성공");
 			desk.la_borrowAndReserve.setForeground(Color.BLACK);
+			desk.setBookSelected(APIMethod.getBookData(bookid));
 		}
 		else {
 			desk.la_borrowAndReserve.setText("예약 실패");

@@ -48,7 +48,7 @@ public class LoginController {
 			return new ResponseService().getLListResult(result);
 		}
 		else {
-			throw new UserNotFoundException();
+			throw new BookNotFoundException();
 		}
 		
 	}

@@ -70,7 +70,7 @@ public class Users {
 	}
 	
 	//연체 체크
-	private boolean OverdueCheck(String d) {
+	public boolean OverdueCheck(String d) {
 		Date date = null;
 		Date today = null;
 		Calendar now = Calendar.getInstance();
@@ -130,7 +130,7 @@ public class Users {
 	public void setOverdueBook() {
 		int cnt =0;
 		for (int i=0; i<borrowedCount; i++) {
-			String d = borrowedBook.get(i).getIbs().getBorrowedDate();
+			String d = borrowedBook.get(i).getIbs().getReturnDate();
 			
 			if(d == null) {
 				return;

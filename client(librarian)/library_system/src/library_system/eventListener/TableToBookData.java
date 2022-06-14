@@ -39,9 +39,13 @@ public class TableToBookData extends MouseAdapter{
 		}
 		else if(ld.getSelect_screen() ==2) {
 			ld.tf_book_info[0].setText(ib.getName());
+			ld.tf_book_info[0].setEnabled(false);
 			ld.tf_book_info[1].setText(ib.getAuthor());
+			ld.tf_book_info[1].setEnabled(false);
 			ld.tf_book_info[2].setText(ib.getGenre());
+			ld.tf_book_info[2].setEnabled(false);
 			ld.tf_book_info[3].setText(ib.getId());
+			ld.tf_book_info[3].setEnabled(false);
 			
 		}
 		else if (ld.getSelect_screen() ==3) {

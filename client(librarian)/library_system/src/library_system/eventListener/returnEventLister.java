@@ -18,26 +18,36 @@ public class returnEventLister extends MouseAdapter{
 		this.desk = desk;
 	}
 	public void mousePressed(MouseEvent e) {
-		int statuscode;
+		int statuscode = 0;
 		if (desk.getBookSelected() == null) {
 			desk.la_borrowAndReserve.setText("책을 선택해주세요.");
 			desk.la_borrowAndReserve.setForeground(Color.RED);
 			return;
 		}
 		int bookid = Integer.parseInt(desk.getBookSelected().getIb().getId());
-		int userid = Integer.parseInt(desk.getUserSelected().getId());
-		int day = calDate(desk.getBookSelected().getIbs().getReturnDate());
-		if(day < 0) {
-			day = 0;
+		int userid = Integer.parseInt(desk.getPatron().getId());
+		String date = desk.getBookSelected().getIbs().getReturnDate();
+		if( date == null) {
+			desk.la_borrowAndReserve.setText("책이 대출되지 않았습니다.");
+			desk.la_borrowAndReserve.setForeground(Color.RED);
 		}
-		statuscode = APIMethod.postReturnBook(bookid,userid,day);
+		else {
+			int day = calDate(date);
+			if(day < 0) {
+				day = 0;
+			}
+			statuscode = APIMethod.postReturnBook(bookid,userid,day);
+		}
+		
+		
 		if(statuscode == 200) {
-			desk.la_borrowAndReserve.setText("취소 성공");
+			APIMethod.postExtensioncount(bookid, 3);
+			desk.la_borrowAndReserve.setText("반납 성공");
 			desk.la_borrowAndReserve.setForeground(Color.BLACK);
 			desk.setBookSelected(APIMethod.getBookData(bookid));
 		}
 		else {
-			desk.la_borrowAndReserve.setText("취소 실패");
+			desk.la_borrowAndReserve.setText("반납 실패");
 			desk.la_borrowAndReserve.setForeground(Color.RED);
 		}
 
