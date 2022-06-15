@@ -36,12 +36,12 @@ public class returnEventLister extends MouseAdapter{
 			if(day < 0) {
 				day = 0;
 			}
+			APIMethod.postExtensioncount(bookid, 3);
 			statuscode = APIMethod.postReturnBook(bookid,userid,day);
 		}
 		
 		
 		if(statuscode == 200) {
-			APIMethod.postExtensioncount(bookid, 3);
 			desk.la_borrowAndReserve.setText("반납 성공");
 			desk.la_borrowAndReserve.setForeground(Color.BLACK);
 			desk.setBookSelected(APIMethod.getBookData(bookid));
