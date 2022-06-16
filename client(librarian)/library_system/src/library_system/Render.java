@@ -51,6 +51,11 @@ public class Render {
 		desk.btn_return.addMouseListener(new returnEventLister(desk));
 		desk.btn_cancel_borrow.addMouseListener(new extensionEventListener(desk));
 		
+		desk.btn_del.addMouseListener(new deleteBookEventListener(desk));
+		desk.btn_save.addMouseListener(new modifyBookEventListener(desk));
+		desk.btn_add.addMouseListener(new putBookEventListener(desk));
+		
+		desk.btn_save.addMouseListener(new modifyUserEventListener(desk));
 	}
 	
 	//getter, setter

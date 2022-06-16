@@ -30,6 +30,7 @@ public class Login_Patron implements ActionListener {
 		Users user = new Users();
 		user = APIMethod.getUserData(ld.tf_login_mini_id.getText(),ld.tf_login_mini_pw.getText());
 		if(user.getId() != null) {
+			user.setOverdueBook();
 			ld.setPatron(user);
 			if(ld.getSelect_screen() == 1) {
 				ld.btn1_enabled_loggedin();	

@@ -94,8 +94,8 @@ public class Users {
 	public String getPw()						{return pw;}				// pw 반환
 	public String getUserType()					{return userType;}			// userType 반환
 	public String getEmail()					{return email;}
-	public int getBorrowdNum() 					{return borrowedCount;}		// 대출한 도서 수 반환 
-	public int getReservedNum() 				{return reservedCount;}		// 예약한 도서 수 반환
+	public int getBorrowedCount() 					{return borrowedCount;}		// 대출한 도서 수 반환 
+	public int getReservedCount() 				{return reservedCount;}		// 예약한 도서 수 반환
 	public ArrayList<Book> getBorrowedBook()	{return borrowedBook;}		// 대출한 도서 반환
 	public ArrayList<Book> getReservedBook()	{return reservedBook;}		// 예약한 도서 반환
 	public ArrayList<Book> getOverdueBook()	{return overdueBook;}		// 연체된 도서 반환
@@ -131,7 +131,6 @@ public class Users {
 		int cnt =0;
 		for (int i=0; i<borrowedCount; i++) {
 			String d = borrowedBook.get(i).getIbs().getReturnDate();
-			
 			if(d == null) {
 				return;
 			}
@@ -154,5 +153,14 @@ public class Users {
 	}
 	public void setMAX_reservedCount(int mAX_reservedCount) {
 		MAX_reservedCount = mAX_reservedCount;
+	}
+	public int getOverdueCount() {
+		return overdueCount;
+	}
+	public void setOverdueCount(int overdueCount) {
+		this.overdueCount = overdueCount;
+	}
+	public void setOverdueBook(ArrayList<Book> overdueBook) {
+		this.overdueBook = overdueBook;
 	}
 }

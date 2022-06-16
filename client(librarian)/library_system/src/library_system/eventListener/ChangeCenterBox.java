@@ -42,6 +42,7 @@ public class ChangeCenterBox extends MouseAdapter {
 			ld.btn3_enabled();
 			panel.revalidate();
 			panel.repaint();
+			ld.btn_cancel_add_save.addMouseListener(new btn_cancel(ld));
 			ld.setSelect_screen(3);
 		}
 		else if(btn.getText().equals("4. 사용자 관련")) {
@@ -49,6 +50,7 @@ public class ChangeCenterBox extends MouseAdapter {
 			ld.btn4_enabled();
 			panel.revalidate();
 			panel.repaint();
+			ld.btn_cancel_add_save.addMouseListener(new btn_cancel(ld));
 			ld.setSelect_screen(4);
 		}
 		else {

@@ -25,7 +25,7 @@ public interface BookMapper {
 	List<Book> getBookOption(@Param("column") String column, @Param("value") String value);
 	
 	@Insert(Booksql.INSERT_BOOK)
-	int insertBook(@Param("id") String id,@Param("bookName") String bookName, @Param("author") String Author, @Param("genre") int genre);
+	int insertBook(@Param("name") String bookName, @Param("author") String Author, @Param("genre") String genre, @Param("year") String year, @Param("url") String url );
 	
 	@Update(Booksql.BORROWED_BOOK)
 	int borrowedBook(@Param("userID") String userID, @Param("loandate") String loandate, @Param("returndate") String returndate, @Param("bookID") String bookID);
@@ -47,4 +47,7 @@ public interface BookMapper {
 	
 	@Update(Booksql.EXTENSION_BOOK)
 	int extension(@Param("cnt") int cnt, @Param("returnDate") String returnDate, @Param("bookID") String bookID);
+
+	@Update(Booksql.UPDATE_BOOK)
+	int updateBook(@Param("name") String name, @Param("author") String author, @Param("genre") String genre, @Param("year") String year, @Param("bookID") String bookID);
 }

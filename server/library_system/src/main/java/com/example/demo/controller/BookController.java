@@ -101,10 +101,13 @@ public class BookController {
 	}
 	
 	//책 추가
-	@PutMapping("/book/{id}")
-	public void putBook(@PathVariable("id") String id, @RequestParam("bookName") String bookName, @RequestParam("author") String Author, @RequestParam("genre") int genre) {
-		
-		mapper.insertBook(id, bookName, Author, genre);
+	@PostMapping("/book/put/{name}")
+	public BasicResponse putBook(@PathVariable("name") String name, @RequestParam("author") String author, @RequestParam("genre") String genre, @RequestParam("year") String year, @RequestParam("url") String url) {
+		BasicResponse resultcode = new BasicResponse();
+		mapper.insertBook(name, author, genre, year, url);
+		resultcode.setMsg("추가 성공");
+		resultcode.setStatusCode(200);
+		return resultcode;
 		
 	}
 	
@@ -215,7 +218,7 @@ public class BookController {
 	
 	//책 반납
 	@PostMapping("/book/return/{bookid}")
-	public  BasicResponse returnBook(@PathVariable("bookid") String bookId, @RequestParam("userID") String userID, @RequestParam("userID") String day) {
+	public  BasicResponse returnBook(@PathVariable("bookid") String bookId, @RequestParam("userID") String userID, @RequestParam("day") String day) {
 		Book result = mapper.getBook(bookId);
 		BasicResponse resultcode = new BasicResponse();
 		if(!result.isBorrowed()) {
@@ -254,10 +257,23 @@ public class BookController {
 		resultcode.setStatusCode(200);
 		return resultcode;
 	}
+	
 	//책 삭제
 	@DeleteMapping("/book/{id}")
-	public void deleteUserProfile(@PathVariable("id") String id) {
+	public void deletebook(@PathVariable("id") String id) {
 		mapper.deleteBook(id);
+	}
+	
+	//책 수정
+	@PostMapping("/book/update/{bookid}")
+	public BasicResponse updateBook(@PathVariable("bookid") String bookId, @RequestParam("name") String name, @RequestParam("author") String author, @RequestParam("genre") String genre, @RequestParam("year") String year ) {
+
+		BasicResponse resultcode = new BasicResponse();
+		
+		mapper.updateBook(name, author, genre, year, bookId);
+		resultcode.setMsg("수정 성공");
+		resultcode.setStatusCode(200);
+		return resultcode;
 	}
 	
 }

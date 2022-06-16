@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url:  jdbc:mysql://librarydb.csajpcjqomkl.ap-northeast-2.rds.amazonaws.com:3306/librarySystem?serverTimezone=Asia/Seoul
+    url:  jdbc:mysql://librarydb.csajpcjqomkl.ap-northeast-2.rds.amazonaws.com:3306/librarySystem?serverTimezone=Asia/Seoul&allowMultiQueries=TRUE
     username: root
     password: a123456789
 

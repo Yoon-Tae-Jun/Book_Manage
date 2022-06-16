@@ -37,6 +37,7 @@ public class returnEventLister extends MouseAdapter{
 				day = 0;
 			}
 			APIMethod.postExtensioncount(bookid, 3);
+			System.out.println("day:"+day);
 			statuscode = APIMethod.postReturnBook(bookid,userid,day);
 		}
 		
@@ -65,6 +66,7 @@ public class returnEventLister extends MouseAdapter{
 			
 			long diffSec = (getToday.getTimeInMillis() - cmpDate.getTimeInMillis()) / 1000;
 			diffDays = (int)(diffSec / (24*60*60)); //일자수 차이
+			System.out.println(diffDays);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

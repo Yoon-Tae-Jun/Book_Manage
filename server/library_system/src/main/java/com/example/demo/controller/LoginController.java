@@ -2,6 +2,9 @@ package com.example.demo.controller;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.JsonForm.ResponseService;
+import com.example.demo.JsonForm.Responses.BasicResponse;
 import com.example.demo.JsonForm.Responses.ListResponse;
 import com.example.demo.JsonForm.Responses.SingleResponse;
 import com.example.demo.exception.exceptions.BookNotFoundException;
@@ -104,4 +108,33 @@ public class LoginController {
 			throw new UserNotFoundException();
 		}
 	}
+	
+	//유저 삭제
+	@DeleteMapping("user/{id}")
+	public void deleteUser(@PathVariable("id") String id) {
+		mapper.deleteUser(id);
+	}
+	
+	//유저 추가
+	@PostMapping("/user/put/{name}")
+	public BasicResponse putUser(@PathVariable("name") String name, @RequestParam("email") String email, @RequestParam("password") String password, @RequestParam("type") String type) {
+		BasicResponse resultcode = new BasicResponse();
+		mapper.insertUser(email, password, name, type);
+		resultcode.setMsg("추가 성공");
+		resultcode.setStatusCode(200);
+		return resultcode;	
+	}
+	
+	//유저 수정
+	@PostMapping("/user/update/{userid}")
+	public BasicResponse updateBook(@PathVariable("userid") String userId, @RequestParam("email") String email, @RequestParam("password") String password, @RequestParam("name") String name) {
+
+		BasicResponse resultcode = new BasicResponse();
+		
+		mapper.updateUser(email, password, name, userId);
+		resultcode.setMsg("수정 성공");
+		resultcode.setStatusCode(200);
+		return resultcode;
+	}
+	
 }

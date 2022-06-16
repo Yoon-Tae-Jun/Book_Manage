@@ -1,6 +1,7 @@
 package API;
 
 import java.awt.Color;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -354,6 +355,7 @@ public class APIMethod {
 		option.put("userID", userid);
 		option.put("day", day);
 		try {
+			System.out.println(option.get("day"));
 			obj = api.POST("/book/return/"+bookid, option);
 			
 			statusCode = Integer.parseInt(String.valueOf(obj.get("statusCode")));
@@ -364,6 +366,65 @@ public class APIMethod {
 		}
 		return statusCode;
 	}
+	
+	public static int deleteBook(int BookID) {
+		String bookid = Integer.toString(BookID);
+		int statusCode = 404;
+		Call_API api = new API.Call_API();
+		int statuscode = 0;
+		try {
+			statusCode = api.DELETE("/book/"+bookid);
+		}
+		catch(Exception e1) {
+			e1.printStackTrace();
+		}
+		return statusCode;
+	}
+	
+	public static int postUpdateBook(int BookID, String name, String author, String genre, String year) {
+		String bookid = Integer.toString(BookID);
+		int statusCode = 500;
+		Call_API api = new API.Call_API();
+		JSONObject obj;
+		HashMap<String, String> option = new HashMap<String, String>();
+		option.put("name", name);
+		option.put("author", author);
+		option.put("genre", genre);
+		option.put("year", year);
+		try {
+			obj = api.POST("/book/update/"+bookid, option);
+			
+			statusCode = Integer.parseInt(String.valueOf(obj.get("statusCode")));
+		}
+		catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		return statusCode;
+	}
+	
+	public static int putBook(String name, String author, String genre, String year, String url) {
+		int statusCode = 500;
+		Call_API api = new API.Call_API();
+		JSONObject obj;
+		HashMap<String, String> option = new HashMap<String, String>();
+		option.put("author", author);
+		option.put("genre", genre);
+		option.put("year", year);
+		option.put("url", url);
+		try {
+			name = URLEncoder.encode(name, "UTF-8");
+			obj = api.POST("/book/put/"+name, option);
+
+			statusCode = Integer.parseInt(String.valueOf(obj.get("statusCode")));
+		}
+		catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		return statusCode;
+	}
+	
 	//user
     public static Users[] getUsersData(String s, int sel) {
     	Users[] users = null;
@@ -503,5 +564,59 @@ public class APIMethod {
 		return user;
     }
 
-    
+    public static int deleteUser(int UserID) {
+    	String userid = Integer.toString(UserID);
+		int statusCode = 404;
+		Call_API api = new API.Call_API();
+		int statuscode = 0;
+		try {
+			statusCode = api.DELETE("/user/"+userid);
+		}
+		catch(Exception e1) {
+			e1.printStackTrace();
+		}
+		return statusCode;
+    }
+
+    public static int postUpdateUser(int UserID, String email, String password, String name) {
+		String userid = Integer.toString(UserID);
+		int statusCode = 500;
+		Call_API api = new API.Call_API();
+		JSONObject obj;
+		HashMap<String, String> option = new HashMap<String, String>();
+		option.put("email", email);
+		option.put("password", password);
+		option.put("name", name);
+		try {
+			obj = api.POST("/user/update/"+userid, option);
+			
+			statusCode = Integer.parseInt(String.valueOf(obj.get("statusCode")));
+		}
+		catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		return statusCode;
+	}
+
+    public static int putUser(String name, String email, String password, String type) {
+		int statusCode = 500;
+		Call_API api = new API.Call_API();
+		JSONObject obj;
+		HashMap<String, String> option = new HashMap<String, String>();
+		option.put("email", email);
+		option.put("password", password);
+		option.put("type", type);
+		try {
+			name = URLEncoder.encode(name, "UTF-8");
+			obj = api.POST("/user/put/"+name, option);
+
+			statusCode = Integer.parseInt(String.valueOf(obj.get("statusCode")));
+		}
+		catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		return statusCode;
+	}
 }

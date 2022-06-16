@@ -105,4 +105,16 @@ public class Call_API {
 	}
 	
 	
+	public int DELETE(String parameter) throws IOException {
+		
+		StringBuilder urlBuilder = new StringBuilder(API_URL+parameter);
+		URL url = new URL(urlBuilder.toString());
+		HttpURLConnection conn =(HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("DELETE");
+        conn.setRequestProperty("Content-type", "application/json");
+        BufferedReader rd;
+        return conn.getResponseCode();
+       
+	}
+	
 }
