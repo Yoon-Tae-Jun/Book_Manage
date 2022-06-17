@@ -50,6 +50,7 @@ public class ChangeCenterBox extends MouseAdapter {
 			ld.btn4_enabled();
 			panel.revalidate();
 			panel.repaint();
+			ld.btn_cancel_add_save.addMouseListener(new btn_cancel(ld));
 			ld.setSelect_screen(4);
 		}
 		else {

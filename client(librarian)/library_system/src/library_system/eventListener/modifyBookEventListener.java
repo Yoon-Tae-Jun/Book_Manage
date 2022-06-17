@@ -14,6 +14,9 @@ public class modifyBookEventListener extends MouseAdapter{
 	private String genre;
 	private String year;
 	
+	private String username;
+	private String email;
+	private String password;
 	public modifyBookEventListener(GuiLibraryDesk desk)
 	{
 		this.desk = desk;
@@ -82,6 +85,60 @@ public class modifyBookEventListener extends MouseAdapter{
 				desk.btn_cancel_add_save.setVisible(true);
 			}
 		}
+		else if (desk.getSelect_screen() == 4) {
+			username =desk.tf_book_4_info[1].getText();
+			email= desk.tf_book_4_info[3].getText();
+			password = desk.tf_book_4_info[4].getText();
+			String[] data = {username, email, password};
+			//저장
+			if(desk.getBtn_save_sel()) {
+				for(int i=0; i<3; i++) {
+					if (data[i].equals("")) {
+						desk.la_userSearch.setText("정보를 공백 없이 입력하세요.");
+						desk.la_userSearch.setForeground(Color.RED);
+						return;
+					}
+					
+					if(i == 1){
+						if(data[i].contains("@") == false) {
+							desk.la_userSearch.setText("유효한 이메일주소를 적어주세요");
+							desk.la_userSearch.setForeground(Color.RED);
+							return;
+						}
+					}
+				}
+				
+				statuscode = APIMethod.postUpdateUser(Integer.parseInt(desk.getUserSelected().getId()), email, password, username);
+				if(statuscode == 200) {
+					desk.setBtn_save_sel(false);
+					desk.tf_book_4_info[1].setEnabled(false);
+					desk.tf_book_4_info[3].setEnabled(false);
+					desk.tf_book_4_info[4].setEnabled(false);
+					desk.la_userSearch.setText("변경 완료");
+					desk.la_userSearch.setForeground(Color.BLACK);
+					desk.btn_save.setText("변경");
+					desk.btn_cancel_add_save.setVisible(false);
+					return;
+				}
+				else {
+					desk.la_userSearch.setText("변경 실패");
+					desk.la_userSearch.setForeground(Color.BLACK);
+				}
+			}
 			
+			//변경
+			else {
+				desk.setBtn_save_sel(true);
+				desk.tf_book_4_info[1].setEnabled(true);
+				desk.tf_book_4_info[3].setEnabled(true);
+				desk.tf_book_4_info[4].setEnabled(true);
+
+				desk.la_userSearch.setText("수정할 정보를 입력하세요.");
+				desk.la_userSearch.setForeground(Color.BLUE);
+				desk.btn_save.setText("저장");
+				desk.btn_cancel_add_save.setVisible(true);
+			}
 		}
+		
+	}
 }

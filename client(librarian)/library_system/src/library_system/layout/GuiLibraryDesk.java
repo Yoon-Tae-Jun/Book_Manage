@@ -49,6 +49,7 @@ public class GuiLibraryDesk extends JFrame{
 
 	public JLabel la_borrowAndReserve;
 	public JLabel la_bookSearch;
+	public JLabel la_userSearch;
 	
 	public JButton btn_cancel_add_save;
 	public JButton btn_borrow;
@@ -199,6 +200,7 @@ public class GuiLibraryDesk extends JFrame{
 		la_book_3_info = new JLabel[la_book_info_3_label.length];
 		tf_book_3_info = new JTextField[tf_book_info_3_size.length];
 		la_bookSearch = new JLabel("");
+		la_userSearch = new JLabel("");
 		
 		la_userInfo = new JLabel("사용자 기본 정보");
 		la_userBookInfo = new JLabel("사용자 도서 대출 정보");
@@ -583,6 +585,24 @@ public class GuiLibraryDesk extends JFrame{
 		panel.add(btn_cancel_add_save);
 		return panel;
 	}
+	
+	public JPanel cb_userSearch() {
+		int width = 272;
+		int height = 100;
+		
+		JPanel panel = new JPanel();			
+		btn_cancel_add_save = new JButton("취소");
+		panel.setPreferredSize(new Dimension(width, height));				// 패널 크기 설정
+		panel.setBackground(null);											// 패널 배경 설정
+		panel.setLayout(new FlowLayout(FlowLayout.CENTER));						// 레이아웃 설정
+		panel.setBorder(BorderFactory.createEmptyBorder(0, 8, 10, 8));		// 패널 여백 설정
+
+		btn_cancel_add_save.setVisible(false);
+		// add()
+		panel.add(la_userSearch);
+		panel.add(btn_cancel_add_save);
+		return panel;
+	}
 	public JPanel cb_borrowAndReserve_buttons() {
 		int width = 252;
 		int height = 65;
@@ -822,7 +842,7 @@ public class GuiLibraryDesk extends JFrame{
 		panel.add(cb_userInfos_data());
 		panel.add(la_userBookInfo);
 		panel.add(cb_userInfos_books());
-		
+		panel.add(cb_userSearch());
 		JScrollPane scrolPanel = new JScrollPane(panel);
 		scrolPanel.setBorder(null);
 		return scrolPanel;

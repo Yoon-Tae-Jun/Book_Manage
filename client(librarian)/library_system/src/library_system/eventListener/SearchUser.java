@@ -57,7 +57,9 @@ public class SearchUser extends MouseAdapter{
 		}
 		System.out.println();
 		desk.setUsers(users);
-		desk.updateJTableUsers();	// JTable 업데이트(users에 저장된 사용자들 JTable에 띄우기)
+		if(users != null) {
+			desk.updateJTableUsers();	// JTable 업데이트(users에 저장된 사용자들 JTable에 띄우기)			
+		}
 		
 		// 화면에 다시 그리기
 		JButton btn = desk.btn_1;
