@@ -861,7 +861,6 @@ public class GuiLibraryDesk extends JFrame{
 		panel.setBackground(null);
 		panel.setLayout(new GridLayout(la_book_info_5_label.length, 1));
 		
-		btn_cancel_add_save = new JButton("취소");
 		// add()
 		for (int i=0; i<la_book_info_5_label.length; i++) {	// 책 정보의 필드 수 만큼 반복
 			
@@ -877,7 +876,7 @@ public class GuiLibraryDesk extends JFrame{
 			p.add(cb_book_5_info[i]);
 			panel.add(p);
 		}
-		panel.add(panel)
+		
 		return panel;
 	}
 	// center_box : 도서 검색 -----------------------------------------------------------------------------------------------

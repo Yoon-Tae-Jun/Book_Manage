@@ -171,6 +171,7 @@ public class APIMethod {
 					statement.setExternDateCount(Integer.parseInt(buf));
 					statement.setReserved((Boolean)data.get("reserved"));
 					statement.setReservedUser((String)data.get("reservedUser"));
+					date = (String)data.get("returnDate");
 					if( date != null) statement.setReturnDate(format.parse(date));
 					else statement.setReturnDate(null);
 					
@@ -501,12 +502,14 @@ public class APIMethod {
 				
 				if(br_books != null) {
 					user.setBorrowedBook(new ArrayList<>(Arrays.asList(br_books)));
+					user.setMAX_borrowedCount(3 -user.getBorrowedBook().size());
 				}
 				
 				System.out.println(user.getId());
 				Book[] rr_books = getReservedBook(Integer.parseInt(user.getId()));
 				if(rr_books != null) {
 					user.setReservedBook(new ArrayList<>(Arrays.asList(rr_books)));
+					user.setMAX_reservedCount(3 -user.getReservedBook().size());
 				}
 				
 			}

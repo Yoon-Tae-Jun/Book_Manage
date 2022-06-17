@@ -24,7 +24,7 @@ public class TableToUserData extends MouseAdapter{
 		
 		// 선택된 사용자 출력
 		Users user = (Users)ld.getUserSelected();
-		
+		user.setOverdueBook();
 		// {"이름 :", "타입 :", "아이디 :", "비밀번호 :"};
 		if(ld.getSelect_screen() == 4) {
 			
