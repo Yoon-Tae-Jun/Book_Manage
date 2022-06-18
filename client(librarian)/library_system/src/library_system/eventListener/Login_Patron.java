@@ -39,7 +39,6 @@ public class Login_Patron implements ActionListener {
 				ld.btn2_enabled_loggedin();	
 				
 				ld.setBooks(APIMethod.getBorrowedBook(Integer.parseInt(user.getId())));
-
 				ld.updateJTableBooks();	// JTable 업데이트(books에 저장된 도서들 JTable에 띄우기)
 				JButton btn = ld.btn_1;
 				JPanel panel = (JPanel)btn.getParent().getParent();

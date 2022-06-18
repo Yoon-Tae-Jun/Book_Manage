@@ -174,7 +174,6 @@ public class APIMethod {
 					date = (String)data.get("returnDate");
 					if( date != null) statement.setReturnDate(format.parse(date));
 					else statement.setReturnDate(null);
-					
 					//infoBook 받아오기
 					infobook.setAuthor((String)data.get("bookAuthor"));
 					infobook.setGenre(String.valueOf("bookGenre"));

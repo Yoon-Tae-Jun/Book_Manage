@@ -47,13 +47,20 @@ public class deleteBookEventListener  extends MouseAdapter{
 				return;
 			}
 			else {
-				statuscode = APIMethod.deleteUser(Integer.parseInt(desk.getUserSelected().getId()));
-				if(statuscode >= 200 && statuscode <= 300) {
-					desk.la_userSearch.setText("삭제 성공");
-					desk.la_userSearch.setForeground(Color.BLACK);				
+				if(APIMethod.getBorrowedBook(Integer.parseInt(desk.getUserSelected().getId())) == null) {
+					statuscode = APIMethod.deleteUser(Integer.parseInt(desk.getUserSelected().getId()));
+					if(statuscode >= 200 && statuscode <= 300) {
+						desk.la_userSearch.setText("삭제 성공");
+						desk.la_userSearch.setForeground(Color.BLACK);				
+					}
+					else {
+						desk.la_userSearch.setText("삭제 실패");
+						desk.la_userSearch.setForeground(Color.RED);
+						return;
+					}					
 				}
 				else {
-					desk.la_userSearch.setText("삭제 실패");
+					desk.la_userSearch.setText("대출 중인 책이 있습니다.");
 					desk.la_userSearch.setForeground(Color.RED);
 					return;
 				}

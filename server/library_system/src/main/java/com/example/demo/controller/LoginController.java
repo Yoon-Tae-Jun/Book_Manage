@@ -119,10 +119,17 @@ public class LoginController {
 	@PostMapping("/user/put/{name}")
 	public BasicResponse putUser(@PathVariable("name") String name, @RequestParam("email") String email, @RequestParam("password") String password, @RequestParam("type") String type) {
 		BasicResponse resultcode = new BasicResponse();
-		mapper.insertUser(email, password, name, type);
-		resultcode.setMsg("추가 성공");
-		resultcode.setStatusCode(200);
-		return resultcode;	
+		if(mapper.emailCheck(email) == 0) {
+			mapper.insertUser(email, password, name, type);
+			resultcode.setMsg("추가 성공");
+			resultcode.setStatusCode(200);
+			return resultcode;				
+		}
+		else {
+			resultcode.setMsg("이메일이 이미 존재합니다.");
+			resultcode.setStatusCode(503);
+			return resultcode;
+		}
 	}
 	
 	//유저 수정

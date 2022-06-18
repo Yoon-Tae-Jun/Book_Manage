@@ -49,4 +49,8 @@ public interface UserMapper {
 	//유저 수정
 	@Update(Usersql.UPDATE_USER)
 	int updateUser(@Param("email") String email, @Param("password") String password, @Param("name") String name, @Param("id") String id);
+	
+
+	@Select(Usersql.EMAIL_CHECK)
+	int emailCheck(@Param("email") String email);
 	}
