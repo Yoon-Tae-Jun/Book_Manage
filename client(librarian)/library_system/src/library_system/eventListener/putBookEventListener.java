@@ -102,7 +102,7 @@ public class putBookEventListener extends MouseAdapter{
 				desk.la_bookSearch.setText("추가할 정보를 입력하세요.");
 				desk.la_bookSearch.setForeground(Color.BLUE);
 				desk.btn_cancel_add_save.setVisible(true);
-				
+				desk.btn_cancel_add_save.addMouseListener(new btn_cancel(desk));
 				desk.btn_add.setForeground(Color.BLUE);
 			}
 		}
@@ -149,6 +149,10 @@ public class putBookEventListener extends MouseAdapter{
 					desk.btn_cancel_add_save.setVisible(false);
 					return;
 				}
+				else if(statuscode == 503) {
+					desk.la_userSearch.setText("이미 이메일이 존재합니다.");
+					desk.la_bookSearch.setForeground(Color.RED);
+				}
 				else {
 					desk.la_userSearch.setText("변경 실패");
 					desk.la_bookSearch.setForeground(Color.RED);
@@ -164,7 +168,7 @@ public class putBookEventListener extends MouseAdapter{
 				desk.la_userSearch.setText("추가할 정보를 입력하세요.");
 				desk.la_userSearch.setForeground(Color.BLUE);
 				desk.btn_cancel_add_save.setVisible(true);
-	
+				desk.btn_cancel_add_save.addMouseListener(new btn_cancel(desk));
 				desk.btn_add.setForeground(Color.BLUE);
 			}
 		}

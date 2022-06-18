@@ -3,6 +3,7 @@ import java.awt.*;
 import javax.swing.*;
 
 import library_system.eventListener.Login_EventListener;
+import library_system.eventListener.login_focusEventListener;
 
 public class GuiLoginPage extends JFrame {
 	private String libraryName;
@@ -10,8 +11,10 @@ public class GuiLoginPage extends JFrame {
 	private int height = 650;
 	
 	//컨포넌트
+	private String email_hint = "전자메일";
+	private String password_hint = "비밀번호";
 	private JButton login_Button = new JButton("로그인");
-	private JTextField email_Text = new JTextField("전자메일 또는 휴대폰", 30);
+	private JTextField email_Text = new JTextField("전자메일", 30);
 	private JTextField password_Text = new JTextField("비밀번호", 20);
 	private JLabel error_Text =new JLabel("어서오세요");
 	
@@ -31,6 +34,9 @@ public class GuiLoginPage extends JFrame {
 		c.setBackground(new Color(239, 237, 239));
 		c.add( CenterBox_B(width, height));				// 패널 추가
 		setVisible(true);
+		email_Text.addFocusListener(new login_focusEventListener(email_Text, email_hint));
+		password_Text.addFocusListener(new login_focusEventListener(password_Text, password_hint));
+		
 	}
 	
 	private JPanel LeftBox_1() {
@@ -124,6 +130,22 @@ public class GuiLoginPage extends JFrame {
 	
 	public JButton getLogin_Button() {
 		return login_Button;
+	}
+
+	public String getEmail_hint() {
+		return email_hint;
+	}
+
+	public void setEmail_hint(String email_hint) {
+		this.email_hint = email_hint;
+	}
+
+	public String getPassword_hint() {
+		return password_hint;
+	}
+
+	public void setPassword_hint(String password_hint) {
+		this.password_hint = password_hint;
 	}
 
 

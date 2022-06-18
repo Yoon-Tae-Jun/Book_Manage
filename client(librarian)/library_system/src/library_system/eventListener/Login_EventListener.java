@@ -32,14 +32,18 @@ public class Login_EventListener implements ActionListener {
 	public void actionPerformed(ActionEvent e){
 		Users user = new Users();
 		user = APIMethod.getUserData(login_page.getEmail_Text().getText(),login_page.getPassword_Text().getText());
-		if(user.getId() != null) {
+		if(user.getId() == null) {
+			login_page.getError_Text().setText("아이디나 비밀번호가 틀렸습니다.");
+			login_page.getError_Text().setForeground(Color.RED);
+		}
+		else if(user.getUserType().equals("lbn") == false) {
+			login_page.getError_Text().setText("관리자 계정이 아닙니다.");
+			login_page.getError_Text().setForeground(Color.RED);			
+		}
+		else {
 			login_page.setVisible(false);
 			render.setDesk(new GuiLibraryDesk(user, login_page.getLibraryName()));
 			render.Change_screen();
-		}
-		else {
-			login_page.getError_Text().setText("아이디나 비밀번호가 틀렸습니다.");
-			login_page.getError_Text().setForeground(Color.RED);
 		}
 		
 	}

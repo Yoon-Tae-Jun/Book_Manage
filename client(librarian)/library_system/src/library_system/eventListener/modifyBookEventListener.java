@@ -83,6 +83,7 @@ public class modifyBookEventListener extends MouseAdapter{
 				desk.la_bookSearch.setForeground(Color.BLUE);
 				desk.btn_save.setText("저장");
 				desk.btn_cancel_add_save.setVisible(true);
+				desk.btn_cancel_add_save.addMouseListener(new btn_cancel(desk));
 			}
 		}
 		else if (desk.getSelect_screen() == 4) {
@@ -137,6 +138,7 @@ public class modifyBookEventListener extends MouseAdapter{
 				desk.la_userSearch.setForeground(Color.BLUE);
 				desk.btn_save.setText("저장");
 				desk.btn_cancel_add_save.setVisible(true);
+				desk.btn_cancel_add_save.addMouseListener(new btn_cancel(desk));
 			}
 		}
 		
