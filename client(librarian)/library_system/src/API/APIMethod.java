@@ -454,11 +454,16 @@ public class APIMethod {
 					buf = String.valueOf(data.get("maxReservedCount"));
 					users[i].setMAX_reservedCount(Integer.parseInt(buf));
 					Book[] books =getBorrowedBook(Integer.parseInt(users[i].getId()));
-					ArrayList<Book> arrayList = new ArrayList<>(Arrays.asList(books));
-					users[i].setBorrowedBook(arrayList);
-					books = getReservedBook(Integer.parseInt(users[i].getId()));
-					arrayList = new ArrayList<>(Arrays.asList(books));
-					users[i].setReservedBook(arrayList);
+					ArrayList<Book> arrayList = null;
+					if(books != null) {
+						arrayList = new ArrayList<>(Arrays.asList(books));
+						users[i].setBorrowedBook(arrayList);						
+					}
+					Book[] re_books = getReservedBook(Integer.parseInt(users[i].getId()));
+					if(re_books != null) {
+						arrayList = new ArrayList<>(Arrays.asList(re_books));
+						users[i].setReservedBook(arrayList);
+					}
 				}
 
 			}

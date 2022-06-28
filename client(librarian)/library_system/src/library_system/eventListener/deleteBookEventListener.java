@@ -41,8 +41,8 @@ public class deleteBookEventListener  extends MouseAdapter{
 				desk.la_userSearch.setForeground(Color.RED);
 				return;
 			}
-			if(desk.getUserSelected().getBorrowedCount() != 3 ) {
-				desk.la_userSearch.setText("사용자를 선택해주세요.");
+			if(desk.getUserSelected().getBorrowedCount() != 0 ) {
+				desk.la_userSearch.setText("대출 중인 도서가 있습니다.");
 				desk.la_userSearch.setForeground(Color.RED);
 				return;
 			}

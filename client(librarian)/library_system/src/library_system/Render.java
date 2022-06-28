@@ -28,7 +28,6 @@ public class Render {
 	public void Change_screen() {
 		// 창 전환
 		desk.btn_libraryName.addMouseListener(new GoToMain(desk));
-		desk.btn_myAccount.addMouseListener(new GoToMain2(desk));
 		// CenterBox 창 전환
 		desk.btn_1.addMouseListener(new ChangeCenterBox(desk));
 		desk.btn_2.addMouseListener(new ChangeCenterBox(desk));
@@ -54,7 +53,6 @@ public class Render {
 		desk.btn_del.addMouseListener(new deleteBookEventListener(desk));
 		desk.btn_save.addMouseListener(new modifyBookEventListener(desk));
 		desk.btn_add.addMouseListener(new putBookEventListener(desk));
-		
 	}
 	
 	//getter, setter
